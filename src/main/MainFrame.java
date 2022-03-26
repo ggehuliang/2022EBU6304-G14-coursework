@@ -47,6 +47,10 @@ public class MainFrame extends JFrame implements ActionListener {
         this.nowInfo = nowInfo;
     }
 
+    public void setTitle(String title) {
+        this.setTitle(title);
+    }
+
     public MainFrame getMainFrame() {
         return mainFrame;
     }
