@@ -14,6 +14,7 @@ import com.alibaba.fastjson.*;
 import main.ui.BasePanel;
 import main.ui.FirstPanel;
 import main.ui.SecondPanel;
+import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 public class MainFrame extends JFrame implements ActionListener {
@@ -47,10 +48,6 @@ public class MainFrame extends JFrame implements ActionListener {
         this.nowInfo = nowInfo;
     }
 
-    public void setTitle(String title) {
-        this.setTitle(title);
-    }
-
     public MainFrame getMainFrame() {
         return mainFrame;
     }
@@ -60,7 +57,9 @@ public class MainFrame extends JFrame implements ActionListener {
         panels[Panels.WELCOME.ordinal()] = new FirstPanel(mainFrame);
         panels[Panels.CODE_INPUT.ordinal()] = new SecondPanel(mainFrame);
 
-        panels[Panels.WELCOME.ordinal()].setBounds(0, 0, 400, 800);
+        // panels[Panels.WELCOME.ordinal()].setBounds(0, 0, 400, 800);
+        // TODO：背景图还有问题，与Layout冲突，去掉下面这页即可看到背景图
+        this.setLayout(new CardLayout());
         for (BasePanel p : panels) {
             if (p == null) {
                 continue;
@@ -75,14 +74,12 @@ public class MainFrame extends JFrame implements ActionListener {
         this.setTitle("G14's Kiosk Program");
         this.setSize(1024, 768);
         try {
-            this.bgPanel = new JPanelWithBackground(
-                    "resources/img/bg.jpeg");
+            this.bgPanel = new JPanelWithBackground("bg.jpeg");
         } catch (Exception ex) {
             System.out.println(ex);
         }
 
-        // TODO：背景图还有问题，解除注释可以看到图，但第二页会无法显示
-        // this.getContentPane().add(this.bgPanel);
+        this.getContentPane().add(this.bgPanel);
 
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -99,7 +96,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // Here, we use the constructor to load the image. This
         // can vary depending on the use case of the panel.
         public JPanelWithBackground(String fileName) throws IOException {
-            backgroundImage = ImageIO.read(MainFrame.class.getClassLoader().getResource(fileName));
+            backgroundImage = ImageIO.read(Resources.getImgByName(fileName));
         }
 
         public void paintComponent(Graphics g) {
