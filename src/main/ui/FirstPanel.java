@@ -37,7 +37,7 @@ public class FirstPanel extends BasePanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("go")) {
-            mainFrame.goPanel(Panels.WELCOME, Panels.CODE_INPUT);
+            mainFrame.goPanel(Panels.WELCOME, Panels.FEE_PAYMENT);
         }else if (e.getActionCommand().equals("back")) {
 
         }

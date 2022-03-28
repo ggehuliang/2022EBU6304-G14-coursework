@@ -14,6 +14,7 @@ import com.alibaba.fastjson.*;
 import main.ui.BasePanel;
 import main.ui.FirstPanel;
 import main.ui.SecondPanel;
+import main.ui.PaymentPanel;
 import main.utils.Typings.Panels;
 
 public class MainFrame extends JFrame implements ActionListener {
@@ -55,7 +56,7 @@ public class MainFrame extends JFrame implements ActionListener {
         mainFrame = this;
         panels[Panels.WELCOME.ordinal()] = new FirstPanel(mainFrame);
         panels[Panels.CODE_INPUT.ordinal()] = new SecondPanel(mainFrame);
-
+        panels[Panels.FEE_PAYMENT.ordinal()] = new PaymentPanel(mainFrame);
         panels[Panels.WELCOME.ordinal()].setBounds(0, 0, 400, 800);
         for (BasePanel p : panels) {
             if (p == null) {
