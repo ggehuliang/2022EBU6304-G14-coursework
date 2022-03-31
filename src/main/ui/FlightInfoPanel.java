@@ -71,8 +71,6 @@ public class FlightInfoPanel extends BasePanel implements ActionListener{
         jp2.setBounds(300, 180, 400, 400);
         jp3.setBounds(400, 600, 200, 50);
 
-        
-        
         jp1.setOpaque(false);
         jp2.setOpaque(false);
         jp3.setOpaque(false);
