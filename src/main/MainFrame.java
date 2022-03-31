@@ -13,6 +13,7 @@ import com.alibaba.fastjson.*;
 
 import main.ui.BasePanel;
 import main.ui.FifthPanel;
+import main.ui.FinishPanel;
 import main.ui.FirstPanel;
 import main.ui.FlightInfoPanel;
 import main.ui.FourthPanel;
@@ -66,6 +67,7 @@ public class MainFrame extends JFrame implements ActionListener {
         panels[Panels.CONFIRMING.ordinal()] = new ConfirmingPanel(mainFrame);
         panels[Panels.SEAT_PLAN.ordinal()] = new FourthPanel(mainFrame);
         panels[Panels.MEAL_PLAN.ordinal()] = new FifthPanel(mainFrame);
+        panels[Panels.FINISHED.ordinal()] = new FinishPanel(mainFrame);
 
         // panels[Panels.WELCOME.ordinal()].setBounds(0, 0, 400, 800);
         // TODO：背景图还有问题，与Layout冲突，去掉下面这页即可看到背景图
