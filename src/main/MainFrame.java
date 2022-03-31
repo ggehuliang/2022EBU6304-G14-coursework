@@ -56,7 +56,7 @@ public class MainFrame extends JFrame implements ActionListener {
         panels[Panels.WELCOME.ordinal()] = new FirstPanel(mainFrame);
         panels[Panels.CODE_INPUT.ordinal()] = new SecondPanel(mainFrame);
 
-        panels[Panels.WELCOME.ordinal()].setBounds(0, 0, 400, 800);
+        panels[Panels.WELCOME.ordinal()].setBounds(0, 0, 1024, 768);
         for (BasePanel p : panels) {
             if (p == null) {
                 continue;
