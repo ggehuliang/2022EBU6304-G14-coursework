@@ -20,7 +20,7 @@ public class FirstPanel extends BasePanel implements ActionListener{
         go = new JButton("前进");
         this.setLayout(null);
         this.add(back);
-
+        this.setOpaque(false); 
         back.addActionListener(this);
         back.setActionCommand("back");
         go.addActionListener(this);

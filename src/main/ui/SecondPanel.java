@@ -21,7 +21,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
         go = new JButton("second前进");
         this.setLayout(null);
         this.add(back);
-
+        this.setOpaque(false); 
         back.addActionListener(this);
         back.setActionCommand("back");
         go.addActionListener(this);
