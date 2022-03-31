@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,7 +24,6 @@ public class FourthPanel extends BasePanel implements ActionListener {
     private JLabel L2;
     private JLabel L3;
     private JLabel L4;
-    private JLabel L5;
     private JTextField F1;
     private JTextField F2;
     private MainFrame mainFrame;
@@ -66,12 +64,8 @@ public class FourthPanel extends BasePanel implements ActionListener {
         p4.setBounds(520, 100, 450, 525);
         p4.setBackground(Color.pink);
         p4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
-
-        L5 = new JLabel(new ImageIcon( "resources\\img\\flight.jpeg" ) );
-        L5.setBounds(520, 100, 100,100);
         this.add(p4);
-        p4.add(L5);
-
+        
         L1 = new JLabel("SEAT INFORMATION");
         L1.setFont(new java.awt.Font("Serif", 1, 40));
         L1.setBounds(50, 100, 700, 50);
