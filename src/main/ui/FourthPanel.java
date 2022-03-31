@@ -5,42 +5,24 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import main.MainFrame;
+import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 public class FourthPanel extends BasePanel implements ActionListener {
     private JButton back;
     private JButton go;
-    private JPanel P1;
-    private JPanel P2;
-    private JPanel P3;
-    private JPanel P4;
-    
-    private JPanel P5;
-    private JPanel P6;
-    private JPanel P7;
-    private JPanel P8;
-    private JPanel P9;
-    private JPanel P10;
-
-    private JLabel PL1;
-    private JLabel PL2;
-    private JLabel PL3;
-    private JLabel PL4;
-    private JLabel PLL;
-
-    private JLabel L1;
-    private JLabel L2;
-    private JLabel L3;
-    private JLabel L4;
-
-    private JTextField F1;
-    private JTextField F2;
+    private JPanel P1,P2,P3,P4;
+    private JPanel P5,P6,P7,P8,P9,P10;
+    private JLabel PL1,PL2,PL3,PL4,PLL;
+    private JLabel L1,L2,L3,L4,LP;
+    private JTextField F1,F2;
 
     private MainFrame mainFrame;
 
@@ -62,17 +44,17 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
         P1 = new JPanel();
         P1.setBounds(0, 70, 10000, 5);
-        P1.setBackground(Color.BLUE);
+        P1.setBackground(new Color(100,100,200));
         this.add(P1);
 
         P2 = new JPanel();
         P2.setBounds(0, 655, 10000, 5);
-        P2.setBackground(Color.BLUE);
+        P2.setBackground(new Color(100,100,200));
         this.add(P2);
 
         P3 = new JPanel();
         P3.setBounds(30, 355, 450, 270);
-        P3.setBackground(Color.YELLOW);
+        P3.setBackground(new Color(16,28,44));
         P3.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         this.add(P3);
 
@@ -80,8 +62,10 @@ public class FourthPanel extends BasePanel implements ActionListener {
         P4.setBounds(520, 100, 450, 525);
         P4.setBackground(Color.pink);
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        LP =new JLabel(new ImageIcon(Resources.getImgByName("flight.png")));
         this.add(P4);
-
+        P4.add(LP);
+//----------------------------------------------------------------------------------------------
         P9 = new JPanel();
         P9.setBounds(203, 716, 200, 4);
         P9.setBackground(Color.pink);
@@ -136,7 +120,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
         PL4.setForeground(Color.gray);;
         P8.add(PL4);
         this.add(P8);
-
+//----------------------------------------------------------------------------------------------
         
         
         

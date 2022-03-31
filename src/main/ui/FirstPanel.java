@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -24,7 +25,7 @@ import main.utils.Typings.Panels;
 
 public class FirstPanel extends BasePanel implements ActionListener{
     private MainFrame mainFrame;
-    private JPanel jp1,jp2;
+    private JPanel jp1,jp2,P1,P2;
 	private JButton jb1;
 	private JLabel title;
     //test
@@ -55,6 +56,17 @@ public class FirstPanel extends BasePanel implements ActionListener{
 		this.setLayout(null);
 		this.add(jp1);
 		this.add(jb1);
+
+        P1 = new JPanel();
+        P1.setBounds(0, 70, 10000, 5);
+        P1.setBackground(new Color(100,100,200));
+        this.add(P1);
+
+        P2 = new JPanel();
+        P2.setBounds(0, 655, 10000, 5);
+        P2.setBackground(new Color(100,100,200));
+        this.add(P2);
+        
     }
 
     public void onCalled(){
