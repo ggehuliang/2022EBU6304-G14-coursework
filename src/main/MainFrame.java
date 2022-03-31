@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 import com.alibaba.fastjson.*;
 
 import main.ui.BasePanel;
+import main.ui.FifthPanel;
 import main.ui.FirstPanel;
+import main.ui.FourthPanel;
 import main.ui.SecondPanel;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
@@ -56,6 +58,8 @@ public class MainFrame extends JFrame implements ActionListener {
         mainFrame = this;
         panels[Panels.WELCOME.ordinal()] = new FirstPanel(mainFrame);
         panels[Panels.CODE_INPUT.ordinal()] = new SecondPanel(mainFrame);
+        panels[Panels.SEAT_PLAN.ordinal()] = new FourthPanel(mainFrame);
+        panels[Panels.MEAL_PLAN.ordinal()] = new FifthPanel(mainFrame);
 
         // panels[Panels.WELCOME.ordinal()].setBounds(0, 0, 400, 800);
         // TODO：背景图还有问题，与Layout冲突，去掉下面这页即可看到背景图
