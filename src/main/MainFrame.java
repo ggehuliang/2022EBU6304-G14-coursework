@@ -14,6 +14,7 @@ import com.alibaba.fastjson.*;
 import main.ui.BasePanel;
 import main.ui.FifthPanel;
 import main.ui.FirstPanel;
+import main.ui.FlightInfoPanel;
 import main.ui.FourthPanel;
 import main.ui.SecondPanel;
 import main.ui.PaymentPanel;
@@ -60,6 +61,7 @@ public class MainFrame extends JFrame implements ActionListener {
         mainFrame = this;
         panels[Panels.WELCOME.ordinal()] = new FirstPanel(mainFrame);
         panels[Panels.CODE_INPUT.ordinal()] = new SecondPanel(mainFrame);
+        panels[Panels.FLIGHT_INFO.ordinal()] = new FlightInfoPanel(mainFrame);
         panels[Panels.FEE_PAYMENT.ordinal()] = new PaymentPanel(mainFrame);
         panels[Panels.CONFIRMING.ordinal()] = new ConfirmingPanel(mainFrame);
         panels[Panels.SEAT_PLAN.ordinal()] = new FourthPanel(mainFrame);
