@@ -143,6 +143,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Check In!")) {
             mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO);
+
         }
         if (e.getActionCommand().equals("back")) {
             mainFrame.goPanel(Panels.CODE_INPUT, Panels.WELCOME);
