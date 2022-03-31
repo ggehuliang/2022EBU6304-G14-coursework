@@ -21,7 +21,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
         go = new JButton("second前进");
         this.setLayout(null);
         this.add(back);
-
+        this.setOpaque(false); 
         back.addActionListener(this);
         back.setActionCommand("back");
         go.addActionListener(this);
@@ -38,7 +38,8 @@ public class SecondPanel extends BasePanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("go")) {
-            JOptionPane.showConfirmDialog(this, "测试点击");
+            //JOptionPane.showConfirmDialog(this, "测试点击");
+            mainFrame.goPanel(Panels.CODE_INPUT, Panels.SEAT_PLAN);
 
         }
         if (e.getActionCommand().equals("back")) {
