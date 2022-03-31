@@ -21,9 +21,10 @@ public class FlightInfoPanel extends BasePanel implements ActionListener{
     private JButton next;
     private MainFrame mainFrame;
     private JLabel title,jl1,jl2,jl3,jl4,jl5,jl6;
-    private JPanel jp1,jp2,jp3;
+    private JPanel jp1,jp2,jp3,P1,P2;
     
-
+    private JPanel P5,P6,P7,P8,P9,P10;
+    private JLabel PL1,PL2,PL3,PL4,PLL;
 
 
     public FlightInfoPanel(MainFrame mainFrame) {
@@ -79,6 +80,69 @@ public class FlightInfoPanel extends BasePanel implements ActionListener{
         this.add(jp1);
         this.add(jp2);
         this.add(jp3);
+        
+        P1 = new JPanel();
+        P1.setBounds(0, 70, 10000, 5);
+        P1.setBackground(new Color(100,100,200));
+        this.add(P1);
+
+        P2 = new JPanel();
+        P2.setBounds(0, 655, 10000, 5);
+        P2.setBackground(new Color(100,100,200));
+        this.add(P2);
+//----------------------------------------------------------------------------------------------
+        P9 = new JPanel();
+        P9.setBounds(203, 716, 30, 4);
+        P9.setBackground(Color.pink);
+        this.add(P9);
+
+        P10 = new JPanel();
+        P10.setBounds(203, 716, 567, 4);
+        P10.setBackground(Color.gray);
+        this.add(P10);
+
+        P5 = new JPanel();
+        P5.setBounds(200, 670, 150, 50);
+        P5.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+        PL1 = new JLabel("Step 01");
+        PL1.setBounds(230, 672, 450, 25);
+        PL1.setFont(new java.awt.Font("Dialog", 1, 16));
+        PL1.setForeground(Color.black);
+        this.add(PL1);
+        PLL = new JLabel("Log in");
+        PLL.setBounds(230, 693, 450, 25);
+        PLL.setFont(new java.awt.Font("Dialog", 0, 13));
+        PLL.setForeground(Color.black);
+        this.add(PLL);
+        this.add(P5);
+
+        P6 = new JPanel();
+        P6.setBounds(340, 670, 150, 50);
+        P6.setBorder(BorderFactory.createLoweredBevelBorder());
+        PL2 = new JLabel("Step 02");
+        PL2.setFont(new java.awt.Font("Dialog", 0, 18));
+        PL2.setForeground(Color.gray);;
+        P6.add(PL2);
+        this.add(P6);
+
+        P7 = new JPanel();
+        P7.setBounds(480, 670, 150, 50);
+        P7.setBorder(BorderFactory.createLoweredBevelBorder());
+        PL3 = new JLabel("Step 03");
+        PL3.setFont(new java.awt.Font("Dialog", 0, 18));
+        PL3.setForeground(Color.gray);;
+        P7.add(PL3);
+        this.add(P7);
+
+        P8 = new JPanel();
+        P8.setBounds(620, 670, 150, 50);
+        P8.setBorder(BorderFactory.createLoweredBevelBorder());
+        PL4 = new JLabel("Step 04");
+        PL4.setFont(new java.awt.Font("Dialog", 0, 18));
+        PL4.setForeground(Color.gray);;
+        P8.add(PL4);
+        this.add(P8);
+//----------------------------------------------------------------------------------------------
     }
 
     public void onCalled(){

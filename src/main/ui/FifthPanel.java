@@ -17,35 +17,11 @@ import main.utils.Typings.Panels;
 public class FifthPanel extends BasePanel implements ActionListener {
     private JButton back;
     private JButton go;
-    private JPanel P1;
-    private JPanel P2;
-    private JPanel P3;
-    private JPanel P4;
-    
-    private JPanel P5;
-    private JPanel P6;
-    private JPanel P7;
-    private JPanel P8;
-    private JPanel P9;
-    private JPanel P10;
-
-    private JLabel PL1;
-    private JLabel PL2;
-    private JLabel PL3;
-    private JLabel PL4;
-    private JLabel PLL;
-
-    private JLabel L1;
-    private JLabel L2;
-    private JLabel L3;
-
-
-    private JCheckBox C1;
-    private JCheckBox C2;
-    private JCheckBox C3;
-    private JCheckBox C4;
-    private JCheckBox C5;
-    private JCheckBox C6;
+    private JPanel P1,P2,P3,P4;
+    private JPanel P5,P6,P7,P8,P9,P10;
+    private JLabel PL1,PL2,PL3,PL4,PLL;
+    private JLabel L1,L2,L3;
+    private JCheckBox C1,C2,C3,C4,C5,C6;
 
     private MainFrame mainFrame;
 
@@ -67,28 +43,28 @@ public class FifthPanel extends BasePanel implements ActionListener {
 
         P1 = new JPanel();
         P1.setBounds(0, 70, 10000, 5);
-        P1.setBackground(Color.BLUE);
+        P1.setBackground(new Color(100,100,200));
         this.add(P1);
 
         P2 = new JPanel();
         P2.setBounds(0, 655, 10000, 5);
-        P2.setBackground(Color.blue);
+        P2.setBackground(new Color(100,100,200));
         this.add(P2);
 
         P3 = new JPanel();
         P3.setBounds(30, 355, 450, 270);
-        P3.setBackground(Color.blue);
+        P3.setBackground(new Color(16,28,44));
         P3.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         P3.setOpaque(false);
         this.add(P3);
 
         P4 = new JPanel();
         P4.setBounds(520, 100, 450, 525);
-        P4.setBackground(Color.pink);
+        P4.setBackground(new Color(16,28,44));
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         this.add(P4);
 
-
+//----------------------------------------------------------------------------------------------
         P9 = new JPanel();
         P9.setBounds(203, 716, 350, 4);
         P9.setBackground(Color.pink);
@@ -129,6 +105,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
         PL3.setFont(new java.awt.Font("Dialog", 1, 16));
         PL3.setForeground(Color.black);
         this.add(PL3);
+
         PLL = new JLabel("Make a meal plan");
         PLL.setBounds(510, 693, 450, 25);
         PLL.setFont(new java.awt.Font("Dialog", 0, 13));
@@ -189,7 +166,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
         C6.setFont(new java.awt.Font("Serif", 1, 25));
         C6.setBounds(50, 450, 300, 30);
         this.add(C6);
-
+//----------------------------------------------------------------------------------------------
 
     }
 

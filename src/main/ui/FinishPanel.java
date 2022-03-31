@@ -11,7 +11,7 @@ public class FinishPanel extends BasePanel implements ActionListener {
     private JButton back;
     private JButton finish;
     private MainFrame mainFrame;
-    private JPanel jp1,jp2;
+    private JPanel jp1,jp2,P1,P2;
     private JLabel jl1,jl2,jl3;
 
     public FinishPanel(MainFrame mainFrame) {
@@ -46,6 +46,16 @@ public class FinishPanel extends BasePanel implements ActionListener {
         this.setLayout(null);
         this.add(jp1);
         this.add(jp2);
+
+        P1 = new JPanel();
+        P1.setBounds(0, 70, 10000, 5);
+        P1.setBackground(new Color(100,100,200));
+        this.add(P1);
+
+        P2 = new JPanel();
+        P2.setBounds(0, 655, 10000, 5);
+        P2.setBackground(new Color(100,100,200));
+        this.add(P2);
 
 
     }
