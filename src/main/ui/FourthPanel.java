@@ -16,16 +16,32 @@ import main.utils.Typings.Panels;
 public class FourthPanel extends BasePanel implements ActionListener {
     private JButton back;
     private JButton go;
-    private JPanel p1;
-    private JPanel p2;
-    private JPanel p3;
-    private JPanel p4;
+    private JPanel P1;
+    private JPanel P2;
+    private JPanel P3;
+    private JPanel P4;
+    
+    private JPanel P5;
+    private JPanel P6;
+    private JPanel P7;
+    private JPanel P8;
+    private JPanel P9;
+    private JPanel P10;
+
+    private JLabel PL1;
+    private JLabel PL2;
+    private JLabel PL3;
+    private JLabel PL4;
+    private JLabel PLL;
+
     private JLabel L1;
     private JLabel L2;
     private JLabel L3;
     private JLabel L4;
+
     private JTextField F1;
     private JTextField F2;
+
     private MainFrame mainFrame;
 
     public FourthPanel(MainFrame mainFrame) {
@@ -44,27 +60,85 @@ public class FourthPanel extends BasePanel implements ActionListener {
         this.add(go);
         go.setBounds(900, 675, 100, 40);
 
-        p1 = new JPanel();
-        p1.setBounds(0, 70, 10000, 5);
-        p1.setBackground(Color.BLUE);
-        this.add(p1);
+        P1 = new JPanel();
+        P1.setBounds(0, 70, 10000, 5);
+        P1.setBackground(Color.BLUE);
+        this.add(P1);
 
-        p2 = new JPanel();
-        p2.setBounds(0, 655, 10000, 5);
-        p2.setBackground(Color.BLUE);
-        this.add(p2);
+        P2 = new JPanel();
+        P2.setBounds(0, 655, 10000, 5);
+        P2.setBackground(Color.BLUE);
+        this.add(P2);
 
-        p3 = new JPanel();
-        p3.setBounds(30, 355, 450, 270);
-        p3.setBackground(Color.YELLOW);
-        p3.setBorder(BorderFactory.createLineBorder(Color.black, 3));
-        this.add(p3);
+        P3 = new JPanel();
+        P3.setBounds(30, 355, 450, 270);
+        P3.setBackground(Color.YELLOW);
+        P3.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        this.add(P3);
 
-        p4 = new JPanel();
-        p4.setBounds(520, 100, 450, 525);
-        p4.setBackground(Color.pink);
-        p4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
-        this.add(p4);
+        P4 = new JPanel();
+        P4.setBounds(520, 100, 450, 525);
+        P4.setBackground(Color.pink);
+        P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        this.add(P4);
+
+        P9 = new JPanel();
+        P9.setBounds(203, 716, 200, 4);
+        P9.setBackground(Color.pink);
+        
+        this.add(P9);
+
+        P10 = new JPanel();
+        P10.setBounds(203, 716, 567, 4);
+        P10.setBackground(Color.gray);
+        
+        this.add(P10);
+
+        P5 = new JPanel();
+        P5.setBounds(200, 670, 150, 50);
+        P5.setBackground(Color.pink);
+        P5.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+        PL1 = new JLabel("√ Step 01");
+        PL1.setFont(new java.awt.Font("Dialog", 1, 20));
+        PL1.setForeground(Color.white);
+        P5.add(PL1);
+        this.add(P5);
+
+        P6 = new JPanel();
+        P6.setBounds(340, 670, 150, 50);
+        P6.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+        PL2 = new JLabel("Step 02");
+        PL2.setBounds(370, 672, 450, 25);
+        PL2.setFont(new java.awt.Font("Dialog", 1, 16));
+        PL2.setForeground(Color.black);
+        this.add(PL2);
+        PLL = new JLabel("Make a seating plan");
+        PLL.setBounds(370, 693, 450, 25);
+        PLL.setFont(new java.awt.Font("Dialog", 0, 13));
+        PLL.setForeground(Color.black);
+        this.add(PLL);
+        this.add(P6);
+
+        P7 = new JPanel();
+        P7.setBounds(480, 670, 150, 50);
+        P7.setBorder(BorderFactory.createLoweredBevelBorder());
+        PL3 = new JLabel("Step 03");
+        PL3.setFont(new java.awt.Font("Dialog", 0, 18));
+        PL3.setForeground(Color.gray);;
+        P7.add(PL3);
+        this.add(P7);
+
+        P8 = new JPanel();
+        P8.setBounds(620, 670, 150, 50);
+        P8.setBorder(BorderFactory.createLoweredBevelBorder());
+        PL4 = new JLabel("Step 04");
+        PL4.setFont(new java.awt.Font("Dialog", 0, 18));
+        PL4.setForeground(Color.gray);;
+        P8.add(PL4);
+        this.add(P8);
+
+        
+        
         
         L1 = new JLabel("SEAT INFORMATION");
         L1.setFont(new java.awt.Font("Serif", 1, 40));
