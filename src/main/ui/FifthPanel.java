@@ -162,7 +162,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
         C5.setBounds(50, 410, 300, 30);
         this.add(C5);
 
-        C6 = new JCheckBox("Ass hole set meal");
+        C6 = new JCheckBox("peach set meal");
         C6.setFont(new java.awt.Font("Serif", 1, 25));
         C6.setBounds(50, 450, 300, 30);
         this.add(C6);
