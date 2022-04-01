@@ -29,8 +29,8 @@ public class FourthPanel extends BasePanel implements ActionListener {
     public FourthPanel(MainFrame mainFrame) {
         super(mainFrame);
         this.mainFrame = mainFrame;
-        back = new JButton("滚回去");
-        go = new JButton("向前爬");
+        back = new JButton("back");
+        go = new JButton("next");
         this.setLayout(null);
         this.add(back);
         this.setOpaque(false); 

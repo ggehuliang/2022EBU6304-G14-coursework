@@ -28,8 +28,8 @@ public class FifthPanel extends BasePanel implements ActionListener {
     public FifthPanel(MainFrame mainFrame) {
         super(mainFrame);
         this.mainFrame = mainFrame;
-        back = new JButton("滚回去");
-        go = new JButton("向前爬");
+        back = new JButton("back");
+        go = new JButton("next");
         this.setLayout(null);
         this.add(back);
         this.setOpaque(false); 
@@ -147,17 +147,17 @@ public class FifthPanel extends BasePanel implements ActionListener {
         C2.setBounds(200, 230, 150, 30);
         this.add(C2);
 
-        C3 = new JCheckBox("Shit");
+        C3 = new JCheckBox("fish");
         C3.setFont(new java.awt.Font("Serif", 1, 25));
         C3.setBounds(350, 230, 150, 30);
         this.add(C3);
 
-        C4 = new JCheckBox("Yami Shit set meal");
+        C4 = new JCheckBox("Yami fish set meal");
         C4.setFont(new java.awt.Font("Serif", 1, 25));
         C4.setBounds(50, 370, 300, 30);
         this.add(C4);
 
-        C5 = new JCheckBox("Holy Shit set meal");
+        C5 = new JCheckBox("Holy fish set meal");
         C5.setFont(new java.awt.Font("Serif", 1, 25));
         C5.setBounds(50, 410, 300, 30);
         this.add(C5);
