@@ -1,0 +1,33 @@
+[
+  {
+    "baseInfo": {
+      "id": "114514",
+      "surName": "田所",
+      "firstName": "浩二"
+    },
+    "checkinInfo": [
+      {
+        "bookingNo": "1919810",
+        "flightNo": "AB1234",
+        "date": "2021-1-11",
+        "seatPlan": { "class": "头等舱", "seatNo": "5A", "extraService": ["大座位"] },
+        "mealPlan": { "classify": "清真", "extraService": ["鸡汤来咯"] },
+        "payment": { "creditCardNo": "1145141919810", "password": "114514" }
+      }
+    ]
+  },
+  {
+    "baseInfo": {
+      "id": "114515",
+      "surName": "田所",
+      "firstName": "浩三"
+    },
+    "checkinInfo": [
+      {
+        "bookingNo": "1919811",
+        "flightNo": "AB1234",
+        "date": "2021-1-11"
+      }
+    ]
+  }
+]

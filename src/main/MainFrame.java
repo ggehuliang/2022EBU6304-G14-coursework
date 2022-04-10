@@ -20,6 +20,7 @@ import main.ui.FourthPanel;
 import main.ui.SecondPanel;
 import main.ui.PaymentPanel;
 import main.ui.ConfirmingPanel;
+import main.utils.DataService;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
 
@@ -27,7 +28,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private MainFrame mainFrame;
     private BasePanel panels[] = new BasePanel[Panels.values().length];
-    private JSONObject nowInfo;
+    private String operatingBookingNo;
+    private DataService dataService = new DataService();
     private JPanelWithBackground bgPanel;
 
     public void goPanel(Panels nowPanel, Panels targetPanel) {
@@ -46,16 +48,20 @@ public class MainFrame extends JFrame implements ActionListener {
         this.repaint();
     }
 
-    public JSONObject getNowInfo() {
-        return nowInfo;
-    }
-
-    public void setNowInfo(JSONObject nowInfo) {
-        this.nowInfo = nowInfo;
-    }
-
     public MainFrame getMainFrame() {
         return mainFrame;
+    }
+
+    public String getOperatingBookingNo() {
+        return operatingBookingNo;
+    }
+
+    public void setOperatingBookingNo(String operatingBookingNo) {
+        this.operatingBookingNo = operatingBookingNo;
+    }
+
+    public DataService getDataService() {
+        return dataService;
     }
 
     public MainFrame() {
@@ -97,7 +103,6 @@ public class MainFrame extends JFrame implements ActionListener {
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
-
     }
 
     public class JPanelWithBackground extends JPanel {
