@@ -43,8 +43,8 @@ public class DataService {
             JSONObject person = this.allPerson.getJSONObject(i);
             JSONArray checkinInfos = person.getJSONArray("checkinInfo");
             for (int j = 0; j < checkinInfos.size(); j++) {
-                JSONObject checkin = checkinInfos.getJSONObject(i);
-                if (checkin.getJSONObject("bookingNo").getString("bookingNo").equals(no)) {
+                JSONObject checkin = checkinInfos.getJSONObject(j);
+                if (checkin.getString("bookingNo").equals(no)) {
                     return person;
                 }
             }
@@ -57,8 +57,8 @@ public class DataService {
             JSONObject person = this.allPerson.getJSONObject(i);
             JSONArray checkinInfos = person.getJSONArray("checkinInfo");
             for (int j = 0; j < checkinInfos.size(); j++) {
-                JSONObject checkin = checkinInfos.getJSONObject(i);
-                if (checkin.getJSONObject("bookingNo").getString("bookingNo").equals(no)) {
+                JSONObject checkin = checkinInfos.getJSONObject(j);
+                if (checkin.getString("bookingNo").equals(no)) {
                     return checkin;
                 }
             }
