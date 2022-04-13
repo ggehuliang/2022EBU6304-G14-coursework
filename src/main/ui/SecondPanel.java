@@ -7,7 +7,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
-
+import com.alibaba.fastjson.*;
 import main.MainFrame;
 import main.utils.Typings.Panels;
 
@@ -210,7 +210,20 @@ public class SecondPanel extends BasePanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Check In!")) {
-            mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO);
+			String bn=jtf.getText();
+			String surname=jtf5.getText();
+			String id=jtf6.getText();
+			if(jtf.getText().equals("")) bn="None";
+			if(jtf5.getText().equals("")) surname="None";
+			if(jtf6.getText().equals("")) id="None";
+			JSONObject mealSelected=JSON.parseObject("{\"booking_num\":\""+bn+"\",\"surname\":\""+surname+"\",\"id\":\""+id+"\"}");
+			String s1 = mealSelected.getString("booking_num");
+			String s2 = mealSelected.getString("surname");
+			String s3 = mealSelected.getString("id");
+			System.out.println(s1+s2+s3);
+			mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO,mealSelected);
+        
+            // mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO);
 
         }
         if (e.getActionCommand().equals("back")) {
