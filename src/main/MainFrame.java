@@ -33,6 +33,10 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanelWithBackground bgPanel;
 
     public void goPanel(Panels nowPanel, Panels targetPanel) {
+        goPanel(nowPanel, targetPanel, new JSONObject());
+    }
+
+    public void goPanel(Panels nowPanel, Panels targetPanel, JSONObject param) {
         // TODO: 如果有可能的话做成滑动的切换效果？
         // set now panel invisible
 
@@ -40,8 +44,15 @@ public class MainFrame extends JFrame implements ActionListener {
         panels[nowPanel.ordinal()].setEnabled(false);
         panels[nowPanel.ordinal()].setVisible(false);
 
+        // call onCall with or without param
+        if (param.size() < 1) {
+            panels[targetPanel.ordinal()].onCalled();
+
+        } else {
+            panels[targetPanel.ordinal()].onCalled(param);
+
+        }
         // set target visible
-        panels[targetPanel.ordinal()].onCalled();
         panels[targetPanel.ordinal()].setEnabled(true);
         panels[targetPanel.ordinal()].setVisible(true);
 
