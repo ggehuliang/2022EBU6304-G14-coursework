@@ -164,7 +164,7 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
             inforArea.append("\n"+"classify:"+" "+classify);
             inforArea.append("\n"+"extraService:");
             for(int i=0;i<extraService2.length;i++){
-                inforArea.append("\n"+extraService1[i]);
+                inforArea.append("\n"+extraService2[i]);
             }
             inforArea.setFont(new java.awt.Font("Dialog", 1, 15));
             inforArea.setForeground(Color.black);
