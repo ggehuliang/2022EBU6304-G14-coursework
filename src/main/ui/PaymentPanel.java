@@ -164,7 +164,7 @@ public class PaymentPanel extends BasePanel implements ActionListener {
     public void onCalled(){
 
         System.out.println("来到了付款信息页面");
-        JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo("1919810");
+        JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
         JSONObject seatPlan = checkinInfo.getJSONObject("seatPlan");
         String[] extraService1=seatPlan.getJSONArray("extraService").toArray(String[]::new);
         feeArea.setText("\n" + "Seat-Plan extra service");

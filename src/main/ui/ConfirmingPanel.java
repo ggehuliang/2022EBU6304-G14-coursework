@@ -134,8 +134,9 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
     }
 
         public void onCalled(){
+
             System.out.println("来到了值机信息页面");
-            JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo("1919810");
+            JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
             String bookingNo = checkinInfo.getString("bookingNo");
             String flightNo = checkinInfo.getString("flightNo");
             String date = checkinInfo.getString("date");
