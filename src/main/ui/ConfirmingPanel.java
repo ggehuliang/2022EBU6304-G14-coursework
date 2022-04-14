@@ -143,22 +143,31 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
             JSONObject seatPlan = checkinInfo.getJSONObject("seatPlan");
             String class1 = seatPlan.getString("class");
             String seatNo = seatPlan.getString("seatNo");
-            String extraService1 = seatPlan.getString("extraService");
+            String[] extraService1=seatPlan.getJSONArray("extraService").toArray(String[]::new);
+
     
             JSONObject mealPlan = checkinInfo.getJSONObject("mealPlan");
             String classify = mealPlan.getString("classify");
-            String extraService2 = mealPlan.getString("extraService");
+            String[] extraService2 =mealPlan.getJSONArray("extraService").toArray(String[]::new);
     
-            inforArea.setText("bookingNo:"+" "+bookingNo);
-            inforArea.append("\n"+"flightNo:"+" "+flightNo);
-            inforArea.append("\n"+"date:"+" "+date);
-            inforArea.append("\n\n\n"+"seatPlan");
+            inforArea.setText("BookingNo:"+" "+bookingNo);
+            inforArea.append("\n"+"FlightNo:"+" "+flightNo);
+            inforArea.append("\n"+"Date:"+" "+date);
+            inforArea.append("\n\n\n"+"SeatPlan");
             inforArea.append("\n"+"class:"+" "+class1);
             inforArea.append("\n"+"seatNo:"+" "+seatNo);
-            inforArea.append("\n"+"extraService:"+" "+extraService1);
-            inforArea.append("\n\n\n"+"mealPlan");
+            inforArea.append("\n"+"extraService:");
+            for(int i=0;i<extraService1.length;i++){
+                inforArea.append("\n"+extraService1[i]);
+            }
+            inforArea.append("\n\n\n"+"MealPlan");
             inforArea.append("\n"+"classify:"+" "+classify);
-            inforArea.append("\n"+"extraService:"+" "+extraService2);
+            inforArea.append("\n"+"extraService:");
+            for(int i=0;i<extraService2.length;i++){
+                inforArea.append("\n"+extraService1[i]);
+            }
+            inforArea.setFont(new java.awt.Font("Dialog", 1, 15));
+            inforArea.setForeground(Color.black);
         }
     
         public void actionPerformed(ActionEvent e) {
