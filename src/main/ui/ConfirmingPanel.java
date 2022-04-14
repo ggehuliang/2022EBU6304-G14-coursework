@@ -12,6 +12,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import com.alibaba.fastjson.JSONObject;
+
 import main.MainFrame;
 import main.utils.Typings.Panels;
 
@@ -128,12 +130,35 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         this.add(PLL);
         this.add(P8);
 //----------------------------------------------------------------------------------------------
-
-
+      
     }
 
         public void onCalled(){
             System.out.println("来到了值机信息页面");
+            JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo("1919810");
+            String bookingNo = checkinInfo.getString("bookingNo");
+            String flightNo = checkinInfo.getString("flightNo");
+            String date = checkinInfo.getString("date");
+    
+            JSONObject seatPlan = checkinInfo.getJSONObject("seatPlan");
+            String class1 = seatPlan.getString("class");
+            String seatNo = seatPlan.getString("seatNo");
+            String extraService1 = seatPlan.getString("extraService");
+    
+            JSONObject mealPlan = checkinInfo.getJSONObject("mealPlan");
+            String classify = mealPlan.getString("classify");
+            String extraService2 = mealPlan.getString("extraService");
+    
+            inforArea.setText("bookingNo:"+" "+bookingNo);
+            inforArea.append("\n"+"flightNo:"+" "+flightNo);
+            inforArea.append("\n"+"date:"+" "+date);
+            inforArea.append("\n\n\n"+"seatPlan");
+            inforArea.append("\n"+"class:"+" "+class1);
+            inforArea.append("\n"+"seatNo:"+" "+seatNo);
+            inforArea.append("\n"+"extraService:"+" "+extraService1);
+            inforArea.append("\n\n\n"+"mealPlan");
+            inforArea.append("\n"+"classify:"+" "+classify);
+            inforArea.append("\n"+"extraService:"+" "+extraService2);
         }
     
         public void actionPerformed(ActionEvent e) {

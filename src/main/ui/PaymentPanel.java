@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.alibaba.fastjson.JSONObject;
+
 import main.MainFrame;
 import main.utils.Typings.Panels;
 
@@ -24,9 +26,10 @@ public class PaymentPanel extends BasePanel implements ActionListener {
     private JTextField cardId;
     private JTextField cardPassword;
     private JPanel creditPanel,panel1,panel2,picPanel;
-
+    private JSONObject param;
     private JPanel P5,P6,P7,P8,P9,P10;
     private JLabel PL1,PL2,PL3,PL4,PLL;
+    private String card,password;
     
 
     public PaymentPanel(MainFrame mainFrame) {
@@ -147,16 +150,40 @@ public class PaymentPanel extends BasePanel implements ActionListener {
         PLL.setForeground(Color.black);
         this.add(PLL);
         this.add(P8);
-  //----------------------------------------------------------------------------------------------             
+  //----------------------------------------------------------------------------------------------  
+  
+        
+        //JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+        
+
     }
     public void onCalled(){
         System.out.println("来到了付款信息页面");
+        JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo("1919810");
+        String extraService1 = checkinInfo.getJSONObject("seatPlan").getString("extraService");
+        String extraService2 = checkinInfo.getJSONObject("mealPlan").getString("extraService");
+        feeArea.setText("\n"+extraService1 +":50 dollars");
+        feeArea.append("\n\n\n"+extraService2 +":50 dollars");
+        feeArea.setFont(new java.awt.Font("Dialog", 1, 40));
+        feeArea.setForeground(Color.black);
+        
+        card = checkinInfo.getJSONObject("payment").getString("creditCardNo");
+        password = checkinInfo.getJSONObject("payment").getString("password");
+      
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("go")) {
+            if(cardId.getText().equals(card)&&cardPassword.getText().equals(password)){
+                int i =JOptionPane.showConfirmDialog(null,
+                        "Have you checked the additional fee payment information is correct? You can't change the information once confirming",
+                        "Pay or not? ", JOptionPane.YES_NO_OPTION);
+                        if (i == 0){mainFrame.goPanel(Panels.FEE_PAYMENT, Panels.CONFIRMING);}
+            }
+            else JOptionPane.showMessageDialog(null,
+            "Your CardID or password is wrong , Please input it again!!! ","Wrong card information",
+            JOptionPane.ERROR_MESSAGE);
             //如果确认付款，扫描信用卡
-            mainFrame.goPanel(Panels.FEE_PAYMENT, Panels.CONFIRMING);
         }else if (e.getActionCommand().equals("back")) {
             //
             mainFrame.goPanel(Panels.FEE_PAYMENT, Panels.MEAL_PLAN);
