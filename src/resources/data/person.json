@@ -11,7 +11,7 @@
         "flightNo": "AB1234",
         "date": "2022-1-11",
         "checkinFinished": true,
-        "seatPlan": { "class": "头等舱", "seatNo": "5A", "extraService": ["按摩座位"] },
+        "seatPlan": { "class": "头等舱", "seatNo": "5A", "extraService": ["按摩座位"]},
         "mealPlan": { "classify": "清真", "extraService": ["快乐水"] },
         "payment": { "creditCardNo": "1145141919810", "password": "114514" }
       }
