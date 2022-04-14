@@ -1,0 +1,7 @@
+[
+  { "type": 0, "label": "至尊大座位", "price": 233 },
+  { "type": 1, "label": "鸡汤来咯", "price": 20, "imgName": "chicken.jpg" },
+  { "type": 0, "label": "按摩座位", "price": 188 },
+  { "type": 1, "label": "火鸡面", "price": 10 },
+  { "type": 1, "label": "快乐水", "price": 5 }
+]
