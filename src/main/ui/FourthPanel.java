@@ -282,14 +282,16 @@ public class FourthPanel extends BasePanel implements ActionListener {
             for(Component box:this.getComponents()){
                 if(box instanceof JCheckBox){
                     if(((JCheckBox) box).isSelected()){
-                        info += ((JCheckBox)box).getText();
+                        info += ("\""+((JCheckBox)box).getText()+"\"");
                     }
                 }
             }  
             System.out.println(info);
-
+            if(info == ""){
+                info = ("\"No need\"");
+            }
              JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-             JSONObject seatSelected=JSON.parseObject("{\"class\": \"头等舱\",\"seatNo\":\""+seatTName+"\",\"extraService\":[\""+info+"\"]}");
+             JSONObject seatSelected=JSON.parseObject("{\"class\": \"头等舱\",\"seatNo\":\""+seatTName+"\",\"extraService\":["+info+"]}");
              
             booking.put("seatPlan",seatSelected);
             System.out.println(booking);
