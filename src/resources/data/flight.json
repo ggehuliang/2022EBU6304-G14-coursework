@@ -7,7 +7,9 @@
     "departureTime": "0:00",
     "arrivalTime": "23:33",
     "time": "0:00-23:33",
-    "occupiedSeat": ["5A", "5B"]
+    "occupiedSeat": ["5A", "5B"],
+    "availableExtraSeat": ["按摩座位"],
+    "availableMeal": ["快乐水", "火鸡面"]
   },
   {
     "flightNo": "AB1235",
@@ -17,7 +19,9 @@
     "departureTime": "6:00",
     "arrivalTime": "15:33",
     "time": "6:00-15:33",
-    "occupiedSeat": ["5A", "5B"]
+    "occupiedSeat": ["5A", "5B"],
+    "availableExtraSeat": ["按摩座位"],
+    "availableMeal": ["快乐水", "火鸡面"]
   },
   {
     "flightNo": "AB1236",
@@ -27,6 +31,8 @@
     "departureTime": "11:30",
     "arrivalTime": "14:33",
     "time": "11:30-14:33",
-    "occupiedSeat": ["5A", "5B"]
+    "occupiedSeat": ["5A", "5B"],
+    "availableExtraSeat": ["按摩座位"],
+    "availableMeal": ["快乐水", "火鸡面"]
   }
 ]

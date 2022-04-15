@@ -1,10 +1,13 @@
 package main.utils;
 
+import java.util.HashSet;
+
 import com.alibaba.fastjson.*;
 
 public class DataService {
     private JSONArray allPerson;
     private JSONArray allFlight;
+    private JSONArray allExtraService;
 
     public DataService() {
         refreshData();
@@ -16,6 +19,10 @@ public class DataService {
 
     public JSONArray getAllFlight() {
         return allFlight;
+    }
+
+    public JSONArray getAllExtraService() {
+        return allExtraService;
     }
 
     public JSONObject getFlightById(String id) {
@@ -52,6 +59,48 @@ public class DataService {
         return null;
     }
 
+    public JSONObject getServiceByLabel(String label) {
+        for (int i = 0; i < this.allExtraService.size(); i++) {
+            JSONObject service = this.allExtraService.getJSONObject(i);
+            if (service.getString("label").equals(label)) {
+                return service;
+            }
+        }
+        return null;
+    }
+
+    public JSONArray getSeatServicesByFlightId(String id) {
+        JSONArray result = new JSONArray();
+        HashSet<String> serviceLabels = new HashSet<String>();
+        getFlightById(id).getJSONArray("availableExtraSeat").forEach(
+                it -> {
+                    serviceLabels.add(it.toString());
+                });// .toArray(String[]::new)
+        for (int i = 0; i < this.allExtraService.size(); i++) {
+            JSONObject service = this.allExtraService.getJSONObject(i);
+            if (serviceLabels.contains(service.getString("label"))) {
+                result.add(service);
+            }
+        }
+        return result;
+    }
+
+    public JSONArray getMealServicesByFlightId(String id) {
+        JSONArray result = new JSONArray();
+        HashSet<String> serviceLabels = new HashSet<String>();
+        getFlightById(id).getJSONArray("availableMeal").forEach(
+                it -> {
+                    serviceLabels.add(it.toString());
+                });
+        for (int i = 0; i < this.allExtraService.size(); i++) {
+            JSONObject service = this.allExtraService.getJSONObject(i);
+            if (serviceLabels.contains(service.getString("label"))) {
+                result.add(service);
+            }
+        }
+        return result;
+    }
+
     public JSONObject getBookingByBookingNo(String no) {
         for (int i = 0; i < this.allPerson.size(); i++) {
             JSONObject person = this.allPerson.getJSONObject(i);
@@ -76,5 +125,6 @@ public class DataService {
     public void refreshData() {
         this.allPerson = JSON.parseArray(Resources.readDataToString("person.json"));
         this.allFlight = JSON.parseArray(Resources.readDataToString("flight.json"));
+        this.allExtraService = JSON.parseArray(Resources.readDataToString("service.json"));
     }
 }

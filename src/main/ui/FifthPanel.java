@@ -2,14 +2,24 @@ package main.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.asm.Label;
+import com.formdev.flatlaf.json.Json;
 
 import main.MainFrame;
 import main.utils.Typings.Panels;
@@ -17,11 +27,20 @@ import main.utils.Typings.Panels;
 public class FifthPanel extends BasePanel implements ActionListener {
     private JButton back;
     private JButton go;
+    private JButton start;
     private JPanel P1,P2,P3,P4;
     private JPanel P5,P6,P7,P8,P9,P10;
     private JLabel PL1,PL2,PL3,PL4,PLL;
-    private JLabel L1,L2,L3;
-    private JCheckBox C1,C2,C3,C4,C5,C6;
+    private JLabel L1,L2,L3,box1;
+    private JRadioButton C1,C2,C3;
+    private JCheckBox box;
+    private JSONObject JJ,mealname0,mealname1,mealname2;
+
+    private int y1 = 370;
+    private String classify = "233"; 
+    
+    private ArrayList<String> Mealcheckbox = new ArrayList<String>();
+    private ArrayList<String> Mealprice = new ArrayList<String>();
 
     private MainFrame mainFrame;
 
@@ -40,6 +59,9 @@ public class FifthPanel extends BasePanel implements ActionListener {
         back.setBounds(10, 15, 100, 40);
         this.add(go);
         go.setBounds(900, 675, 100, 40);
+
+       
+
 
         P1 = new JPanel();
         P1.setBounds(0, 70, 10000, 5);
@@ -137,36 +159,32 @@ public class FifthPanel extends BasePanel implements ActionListener {
         L3.setBounds(50, 300, 700, 50);
         this.add(L3);
 
-        C1 = new JCheckBox("Standard");
+        C1 = new JRadioButton("Standard",true);
         C1.setFont(new java.awt.Font("Serif", 1, 25));
         C1.setBounds(50, 230, 150, 30);
         this.add(C1);
 
-        C2 = new JCheckBox("Vegetarian");
+        C2 = new JRadioButton("Vegetarian");
         C2.setFont(new java.awt.Font("Serif", 1, 25));
         C2.setBounds(200, 230, 150, 30);
         this.add(C2);
 
-        C3 = new JCheckBox("fish");
+        C3 = new JRadioButton("Halal");
         C3.setFont(new java.awt.Font("Serif", 1, 25));
         C3.setBounds(350, 230, 150, 30);
         this.add(C3);
 
-        C4 = new JCheckBox("Yami fish set meal");
-        C4.setFont(new java.awt.Font("Serif", 1, 25));
-        C4.setBounds(50, 370, 300, 30);
-        this.add(C4);
+        ButtonGroup group = new ButtonGroup();
+		group.add(C1);
+		group.add(C2);
+		group.add(C3);
 
-        C5 = new JCheckBox("Holy fish set meal");
-        C5.setFont(new java.awt.Font("Serif", 1, 25));
-        C5.setBounds(50, 410, 300, 30);
-        this.add(C5);
 
-        C6 = new JCheckBox("peach set meal");
-        C6.setFont(new java.awt.Font("Serif", 1, 25));
-        C6.setBounds(50, 450, 300, 30);
-        this.add(C6);
-//----------------------------------------------------------------------------------------------
+        start = new JButton("start select");
+        this.add(start);
+        start.setBounds(300, 310, 100, 30);
+        start.addActionListener(this);
+        start.setActionCommand("start");
 
     }
 
@@ -178,13 +196,115 @@ public class FifthPanel extends BasePanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("go")) {
             //mainFrame.goPanel(Panels.MEAL_PLAN, Panels.WELCOME);//test
-            mainFrame.goPanel(Panels.MEAL_PLAN, Panels.FEE_PAYMENT);
+            
 
+            String info ="";
+                System.out.println(info);
+                for(Component box:this.getComponents()){
+                    if(box instanceof JCheckBox){
+                        if(((JCheckBox) box).isSelected()){
+                            info += ((JCheckBox)box).getText();
+                        }
+                    }
+                }  
+                System.out.println(info);
+                System.out.println(classify);
+
+                // JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+                // JSONObject mealSelected=JSON.parseObject("{\"mealPlan\":{\"classify\":\""+classify+"\",\"extraService\":[\""+info+"\"]}}");
+                // booking.put("mealPlan",mealSelected);
+
+
+                mainFrame.goPanel(Panels.MEAL_PLAN, Panels.FEE_PAYMENT);
         }
         if (e.getActionCommand().equals("back")) {
+
+
             mainFrame.goPanel(Panels.MEAL_PLAN, Panels.SEAT_PLAN);
 
             System.out.println("回");
         }
+
+        if (e.getActionCommand().equals("start")) {
+
+                Mealcheckbox.clear();
+
+                String info ="";
+                System.out.println(info);
+                for(Component C:this.getComponents()){
+                    if(C instanceof JRadioButton){
+                        if(((JRadioButton) C).isSelected()){
+                            info += ((JRadioButton)C).getText();
+                        }
+                    }
+                }  
+                
+                System.out.println(info);
+                System.out.println(info.equals( "Standard") );
+
+                JSONArray meallist = mainFrame.getDataService().getMealServicesByFlightId("AB1234");
+
+                 
+
+                for (int i = 0; i < meallist.size(); i++) { 
+
+                    JJ = meallist.getJSONObject(i);
+                    
+                    if(info.equals( "Standard")){
+                        
+                    }else{
+                        if(JJ.getString("classify").equals(info) == false ){
+
+                            meallist.remove(i);
+                        }
+                    }
+                    
+                }
+                
+
+                for (int i = 0; i < meallist.size(); i++) { 
+                    JJ = meallist.getJSONObject(i);
+                    Mealcheckbox.add(JJ.getString("label") + " "); 
+                    Mealprice.add("price: "+JJ.getString("price"));
+                   }
+
+                classify = info;
+
+        }
+
+        for(int i = 0; i < Mealcheckbox.size();i ++ ) 
+        {   String element = Mealcheckbox.get(i);
+            
+            box = new JCheckBox(element); 
+            box.setFont(new java.awt.Font("Serif", 1, 25));
+            box.setBounds(50, y1 + 40*i, 300, 30);
+            this.add(box); 
+            box.addActionListener(this);
+            box.setActionCommand("box"+i);
+        }   
+
+        for(int i = 0; i < Mealprice.size();i ++ ) 
+        {   String element1 = Mealprice.get(i);            
+            box1 = new JLabel(element1); 
+            box1.setFont(new java.awt.Font("Serif", 1, 25));
+            box1.setBounds(200, y1 + 40*i, 300, 30);
+            this.add(box1); 
+        }
+               
+    
+        // if (e.getActionCommand().equals("box"+ 0)) {
+
+        //     String str="";
+		// 	Component[] jcbs = this.getComponents();//将勾选的内容存入数组
+		// 	for(Component component : jcbs) {
+		// 		JCheckBox jcb = (JCheckBox) component;
+		// 		if(jcb.isSelected()) {
+		// 			str+=jcb.getText()+"  ";
+		// 		}
+		// 	}
+        //     System.out.println(str);
+        
     }
+
+    
 }

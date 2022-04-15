@@ -2,14 +2,21 @@ package main.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
 import main.utils.Resources;
@@ -21,8 +28,18 @@ public class FourthPanel extends BasePanel implements ActionListener {
     private JPanel P1,P2,P3,P4;
     private JPanel P5,P6,P7,P8,P9,P10;
     private JLabel PL1,PL2,PL3,PL4,PLL;
-    private JLabel L1,L2,L3,L4,LP;
+    private JLabel L1,L2,L3,L4,LP,box1;
     private JTextField F1,F2;
+    private JCheckBox box;
+    private int y1 = 370;
+
+
+    private ArrayList<String> seatcheckbox = new ArrayList<String>();
+    private ArrayList<String> seatprice = new ArrayList<String>();
+    private ArrayList<String> seatlineA = new ArrayList<String>();
+    private ArrayList<String> seatlineB = new ArrayList<String>();
+    private ArrayList<String> seatlineC = new ArrayList<String>();
+
 
     private MainFrame mainFrame;
 
@@ -55,16 +72,18 @@ public class FourthPanel extends BasePanel implements ActionListener {
         P3 = new JPanel();
         P3.setBounds(30, 355, 450, 270);
         P3.setBackground(new Color(16,28,44));
+        P3.setOpaque(false);
         P3.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         this.add(P3);
 
         P4 = new JPanel();
         P4.setBounds(520, 100, 450, 525);
         P4.setBackground(Color.pink);
+        P4.setOpaque(false);
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         LP =new JLabel(new ImageIcon(Resources.getImgByName("flight.png")));
         this.add(P4);
-        P4.add(LP);
+        // P4.add(LP);
 //----------------------------------------------------------------------------------------------
         P9 = new JPanel();
         P9.setBounds(203, 716, 200, 4);
@@ -120,6 +139,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
         PL4.setForeground(Color.gray);;
         P8.add(PL4);
         this.add(P8);
+
 //----------------------------------------------------------------------------------------------
         
         
@@ -155,6 +175,38 @@ public class FourthPanel extends BasePanel implements ActionListener {
         F2.setFont(new java.awt.Font("Dialog", 1, 25));
         F2.setBounds(150, 250, 100, 35);
         this.add(F2);
+
+        //----------------------------------------------
+
+        JSONArray seatlist = mainFrame.getDataService().getSeatServicesByFlightId("AB1234");
+        for (int i = 0; i < seatlist.size(); i++) { 
+
+            JSONObject tool = seatlist.getJSONObject(i);
+            seatcheckbox.add(tool.getString("label") + " "); 
+            seatprice.add("price: "+ tool.getString("price"));
+           }
+
+           for(int i = 0; i < seatcheckbox.size();i ++ ) 
+           {   String element = seatcheckbox.get(i);
+               
+               box = new JCheckBox(element); 
+               box.setFont(new java.awt.Font("Serif", 1, 25));
+               box.setBounds(50, y1 + 40*i, 300, 30);
+               this.add(box); 
+               box.addActionListener(this);
+               box.setActionCommand("box"+i);
+           }   
+   
+           for(int i = 0; i < seatprice.size();i ++ ) 
+           {   String element1 = seatprice.get(i);            
+               box1 = new JLabel(element1); 
+               box1.setFont(new java.awt.Font("Serif", 1, 25));
+               box1.setBounds(200, y1 + 40*i, 300, 30);
+               this.add(box1); 
+           }
+
+
+
     }
 
     public void onCalled(){
@@ -164,6 +216,22 @@ public class FourthPanel extends BasePanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("go")) {
+
+            String info ="";
+            System.out.println(info);
+            for(Component box:this.getComponents()){
+                if(box instanceof JCheckBox){
+                    if(((JCheckBox) box).isSelected()){
+                        info += ((JCheckBox)box).getText();
+                    }
+                }
+            }  
+            System.out.println(info);
+
+            // JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+                //JSONObject seatSelected=JSON.parseObject("{\"mealPlan\":{\"seatNo\":\""+info+"\",\"extraService\":[\""+info+"\"]}}");
+                // booking.put("seatPlan",seatSelected);
+
             mainFrame.goPanel(Panels.SEAT_PLAN, Panels.MEAL_PLAN);
 
         }
