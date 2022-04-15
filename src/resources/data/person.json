@@ -14,8 +14,26 @@
         "seatPlan": { "class": "头等舱", "seatNo": "5A", "extraService": ["按摩座位"]},
         "mealPlan": { "classify": "清真", "extraService": ["快乐水"] },
         "payment": { "creditCardNo": "1145141919810", "password": "114514" }
+      },
+      {
+        "bookingNo": "1919811",
+        "flightNo": "AB1235",
+        "date": "2021-1-15",
+        "seatPlan": { "class": "头等舱", "seatNo": "5A", "extraService": ["大座位"] },
+        "mealPlan": { "classify": "清真", "extraService": ["鸡汤来咯"] },
+        "payment": { "creditCardNo": "1145141919810", "password": "114514" }
+      },
+      {
+        "bookingNo": "1919812",
+        "flightNo": "AB1236",
+        "date": "2021-1-21",
+        "seatPlan": { "class": "头等舱", "seatNo": "5A", "extraService": ["大座位"] },
+        "mealPlan": { "classify": "清真", "extraService": ["鸡汤来咯"] },
+        "payment": { "creditCardNo": "1145141919810", "password": "114514" }
       }
+      
     ]
+    
   },
   {
     "baseInfo": {
