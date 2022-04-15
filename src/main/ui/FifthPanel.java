@@ -213,9 +213,11 @@ public class FifthPanel extends BasePanel implements ActionListener {
                 System.out.println(info);
                 System.out.println(classify);
 
-                // JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-                // JSONObject mealSelected=JSON.parseObject("{\"mealPlan\":{\"classify\":\""+classify+"\",\"extraService\":[\""+info+"\"]}}");
-                // booking.put("mealPlan",mealSelected);
+                JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+                JSONObject mealSelected=JSON.parseObject("{\"classify\":\""+classify+"\",\"extraService\":[\""+info+"\"]}");
+                
+                booking.put("mealPlan",mealSelected);
+                System.out.println(booking);
 
 
                 mainFrame.goPanel(Panels.MEAL_PLAN, Panels.FEE_PAYMENT);
@@ -267,7 +269,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
 
                 for (int i = 0; i < meallist.size(); i++) { 
                     JJ = meallist.getJSONObject(i);
-                    Mealcheckbox.add(JJ.getString("label") + " "); 
+                    Mealcheckbox.add(JJ.getString("label")); 
                     Mealprice.add("price: "+JJ.getString("price"));
                     Mealimag.add(JJ.getString("imgName"));
                    }

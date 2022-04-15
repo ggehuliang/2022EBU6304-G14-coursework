@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -34,7 +35,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
     private JTextField F1,F2;
     private JCheckBox box;
     private int y1 = 370,chooseno = 5;
-    private String str;
+    private String str,seatTName;
 
 
     private ArrayList<String> seatcheckbox = new ArrayList<String>();
@@ -200,7 +201,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
         for (int i = 0; i < seatlist.size(); i++) { 
 
             JSONObject tool = seatlist.getJSONObject(i);
-            seatcheckbox.add(tool.getString("label") + " "); 
+            seatcheckbox.add(tool.getString("label")); 
             seatprice.add("price: "+ tool.getString("price"));
            }
 
@@ -269,9 +270,13 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+       
         if (e.getActionCommand().equals("go")) {
-
+            if(seatTName == null){
+            JOptionPane.showMessageDialog(null,
+            "You haven't chosen your seat yet.","Please select your seat",
+            JOptionPane.ERROR_MESSAGE);
+            }else{
             String info ="";
             System.out.println(info);
             for(Component box:this.getComponents()){
@@ -283,13 +288,16 @@ public class FourthPanel extends BasePanel implements ActionListener {
             }  
             System.out.println(info);
 
-            // JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-            // JSONObject seatSelected=JSON.parseObject("{\"mealPlan\":{\"seatNo\":\""+chooseno+"\",\"extraService\":[\""+info+"\"]}}");
-            // booking.put("seatPlan",seatSelected);
+             JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+             JSONObject seatSelected=JSON.parseObject("{\"class\": \"头等舱\",\"seatNo\":\""+seatTName+"\",\"extraService\":[\""+info+"\"]}");
+             
+            booking.put("seatPlan",seatSelected);
+            System.out.println(booking);
 
             mainFrame.goPanel(Panels.SEAT_PLAN, Panels.MEAL_PLAN);
 
         }
+    }
         if (e.getActionCommand().equals("back")) {
             //mainFrame.goPanel(Panels.SEAT_PLAN, Panels.CODE_INPUT);//test
             mainFrame.goPanel(Panels.SEAT_PLAN, Panels.FLIGHT_INFO);
@@ -311,6 +319,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
             int i = chooseno;
             // System.out.println(seatName1[i]);           
             seatbutton1[i].setIcon(new ImageIcon(Resources.getImgByName("green.png")));
+            seatTName = seatName1[i];
 
         }else {
             if(e.getActionCommand().substring(2,3).equals("1")||e.getActionCommand().substring(2,3).equals("2")){
@@ -322,8 +331,9 @@ public class FourthPanel extends BasePanel implements ActionListener {
             int i = chooseno;
             // System.out.println(seatName1[i]);           
             seatbutton2[i].setIcon(new ImageIcon(Resources.getImgByName("green.png")));
+            seatTName = seatName2[i];
         }
-
+         
         }
         
     }
