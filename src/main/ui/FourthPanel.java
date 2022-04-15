@@ -289,7 +289,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
             System.out.println(info);
 
              JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-             JSONObject seatSelected=JSON.parseObject("{\"mealPlan\":{\"seatNo\":\""+seatTName+"\",\"extraService\":[\""+info+"\"]}}");
+             JSONObject seatSelected=JSON.parseObject("{\"class\": \"头等舱\",\"seatNo\":\""+seatTName+"\",\"extraService\":[\""+info+"\"]}");
              
             booking.put("seatPlan",seatSelected);
             System.out.println(booking);
