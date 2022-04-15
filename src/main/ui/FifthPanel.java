@@ -206,15 +206,18 @@ public class FifthPanel extends BasePanel implements ActionListener {
                 for(Component box:this.getComponents()){
                     if(box instanceof JCheckBox){
                         if(((JCheckBox) box).isSelected()){
-                            info += ((JCheckBox)box).getText();
+                            info += ("\""+((JCheckBox)box).getText()+"\"");
                         }
                     }
                 }  
                 System.out.println(info);
                 System.out.println(classify);
 
+                if(info == ""){
+                    info = ("\"No need\"");
+                }
                 JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-                JSONObject mealSelected=JSON.parseObject("{\"classify\":\""+classify+"\",\"extraService\":[\""+info+"\"]}");
+                JSONObject mealSelected=JSON.parseObject("{\"classify\":\""+classify+"\",\"extraService\":["+info+"]}");
                 
                 booking.put("mealPlan",mealSelected);
                 System.out.println(booking);
