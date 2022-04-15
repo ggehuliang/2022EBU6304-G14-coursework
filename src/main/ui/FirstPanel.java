@@ -76,6 +76,7 @@ public class FirstPanel extends BasePanel implements ActionListener{
 
     public void onCalled(){
         System.out.println("来到了初始界面");
+        
     }
 
     @Override
