@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,10 +27,10 @@ import main.utils.Typings.Panels;
 public class FourthPanel extends BasePanel implements ActionListener {
     private JButton back;
     private JButton go;
-    private JPanel P1,P2,P3,P4;
+    private JPanel P1,P2,P3,P4,P41,P42;
     private JPanel P5,P6,P7,P8,P9,P10;
     private JLabel PL1,PL2,PL3,PL4,PLL;
-    private JLabel L1,L2,L3,L4,LP,box1;
+    private JLabel L1,L2,L3,L4,LP,box1,box2;
     private JTextField F1,F2;
     private JCheckBox box;
     private int y1 = 370;
@@ -36,9 +38,15 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
     private ArrayList<String> seatcheckbox = new ArrayList<String>();
     private ArrayList<String> seatprice = new ArrayList<String>();
-    private ArrayList<String> seatlineA = new ArrayList<String>();
-    private ArrayList<String> seatlineB = new ArrayList<String>();
-    private ArrayList<String> seatlineC = new ArrayList<String>();
+    
+    private JButton[] seatbutton1 = new JButton[24];
+    private String[] seatName1 = {"1A","1B","1C","2A","2B","2C","3A","3B","3C","4A","4B","4C","5A","5B","5C","6A","6B","6C","7A","7B","7C","8A","8B","8C"};
+    private JButton[] seatbutton2 = new JButton[24];
+    private String[] seatName2 = {"1E","1F","1G","2E","2F","2G","3E","3F","3G","4E","4F","4G","5E","5F","5G","6E","6F","6G","7E","7F","7G","8E","8F","8G"};
+
+    private ArrayList<String> seatline1 = new ArrayList<String>();
+    // private ArrayList<String> seatName1 = new ArrayList<String>();
+    
 
 
     private MainFrame mainFrame;
@@ -83,7 +91,20 @@ public class FourthPanel extends BasePanel implements ActionListener {
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         LP =new JLabel(new ImageIcon(Resources.getImgByName("flight.png")));
         this.add(P4);
+
+        P41 = new JPanel();
+        P41.setBounds(520, 100, 225, 525);
+        P41.setBackground(Color.pink);
+        P41.setOpaque(false);
+        this.add(P41);
+
+
         // P4.add(LP);
+        P42 = new JPanel();
+        P42.setBounds(745, 100, 225, 525);
+        P42.setBackground(Color.pink);
+        P42.setOpaque(false);
+        this.add(P42);
 //----------------------------------------------------------------------------------------------
         P9 = new JPanel();
         P9.setBounds(203, 716, 200, 4);
@@ -205,6 +226,33 @@ public class FourthPanel extends BasePanel implements ActionListener {
                this.add(box1); 
            }
 
+//------------------------------------------------------------------------------------
+                int index = 0;
+            for (JButton btn : seatbutton1)
+            {
+                btn = new JButton(seatName1[index],new ImageIcon(Resources.getImgByName("blue.png")));
+                btn.setPreferredSize(new Dimension(55,55));
+                btn.setHorizontalTextPosition(JButton.CENTER);
+                btn.setFont(new Font("Times New Roman",Font.BOLD,10));
+                btn.addActionListener(this);
+                btn.setActionCommand("select"+ index);
+                P41.add(btn);
+                index++;
+            }
+
+            int index1 = 0;
+            for (JButton btn : seatbutton2)
+            {
+                btn = new JButton(seatName2[index1],new ImageIcon(Resources.getImgByName("red.png")));
+                btn.setPreferredSize(new Dimension(55,55));
+                btn.setHorizontalTextPosition(JButton.CENTER);
+                btn.setFont(new Font("Times New Roman",Font.BOLD,10));
+                btn.addActionListener(this);
+                P42.add(btn);
+                btn.setActionCommand("select" + index1);
+                index1++;
+            }
+
 
 
     }
@@ -240,6 +288,15 @@ public class FourthPanel extends BasePanel implements ActionListener {
             mainFrame.goPanel(Panels.SEAT_PLAN, Panels.FLIGHT_INFO);
 
             System.out.println("回");
+
+        if (e.getActionCommand().substring(0,6).equals("select")) {
+            //mainFrame.goPanel(Panels.SEAT_PLAN, Panels.CODE_INPUT);//test
+            String i = e.getActionCommand().substring(5,5);
+            
+            mainFrame.goPanel(Panels.SEAT_PLAN, Panels.FLIGHT_INFO);
+
+            System.out.println("回");
+        }
         }
     }
 }
