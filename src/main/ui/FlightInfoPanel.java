@@ -22,6 +22,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
     private String SurName;
     private String BookingNum;
     private String IDNum;
+    private int i = 0;
 
     private String FlightNum;
     private String DepartureTime;
@@ -214,16 +215,17 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
             ArrivalTime = flight.getString("arrivalTime");
             SurName = person.getJSONObject("baseInfo").getString("surName");
 
-            System.out.println("--------------------------------");
-            System.out.println(Array.getJSONObject(1).getString("bookingNo"));
-            System.out.println("--------------------------------");
+            // System.out.println("--------------------------------");
+            // System.out.println(Array.getJSONObject(1).getString("bookingNo"));
+            // System.out.println("--------------------------------");
             JButton[] jb = new JButton[Array.size()];
             JPanel[] jp = new JPanel[Array.size()];
             // jp = new JPanel[Array.size()];
             // jb = new JButton[Array.size()];
             // jb[Array.size()] = new JButton();
-            for (int i = 0; i < Array.size(); i++) {
+            for (i = 0; i < Array.size(); i++) {
                 String BNS = Array.getJSONObject(i).getString("bookingNo");
+                String FNS = Array.getJSONObject(i).getString("flightNo");
                 jb[i] = new JButton(String.valueOf(i));
                 jp[i] = new JPanel();
                 jp[i].setBounds(40, 100 + 120 * i, 200, 100);
@@ -231,14 +233,16 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jp[i].add(jb[i]);
                 this.add(jp[i]);
                 jb[i].setText(
-                        "<html>" + "BookingNum: " + "<br>" + BNS + "</html>");
+                        "<html>" + "BookingNum: " + "<br>" + BNS + "<br>" + "FlightNo: " + "<br>"+ FNS + "</html>");
                 jb[i].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         JSONObject mealSelected=JSON.parseObject("{\"booking_num\":\""+BNS+"\",\"surname\":\""+SurName+"\",\"id\":\""+IDNum+"\"}");
                         onCalled(mealSelected);
+
                     }
                 });
+                
             }
 
             // jb1.setText("<html>" + "BookingNum: " + "<br>" + BookingNum + "</html>");
@@ -340,8 +344,9 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
             Array = person.getJSONArray("checkinInfo");
             JButton[] jb = new JButton[Array.size()];
             JPanel[] jp = new JPanel[Array.size()];
-            for (int i = 0; i < Array.size(); i++) {
+            for (i = 0; i < Array.size(); i++) {
                 String BNS = Array.getJSONObject(i).getString("bookingNo");
+                String FNS = Array.getJSONObject(i).getString("flightNo");
                 jb[i] = new JButton(String.valueOf(i));
                 jp[i] = new JPanel();
                 jp[i].setBounds(40, 100 + 120 * i, 200, 100);
@@ -349,7 +354,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jp[i].add(jb[i]);
                 this.add(jp[i]);
                 jb[i].setText(
-                        "<html>" + "BookingNum: " + "<br>" + BNS + "</html>");
+                    "<html>" + "BookingNum: " + "<br>" + BNS + "<br>" + "FlightNo: " + "<br>"+ FNS + "</html>");
                 jb[i].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -389,6 +394,11 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Next")) {
             mainFrame.goPanel(Panels.FLIGHT_INFO, Panels.SEAT_PLAN);
+            System.out.println("--------------------------------");
+            System.out.println(BookingNum);
+            System.out.println("--------------------------------");
+            mainFrame.setOperatingBookingNo(BookingNum);
+
         }
         if (e.getActionCommand().equals("Back")) {
             mainFrame.goPanel(Panels.FLIGHT_INFO, Panels.CODE_INPUT);
