@@ -213,9 +213,11 @@ public class FifthPanel extends BasePanel implements ActionListener {
                 System.out.println(info);
                 System.out.println(classify);
 
-                // JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-                // JSONObject mealSelected=JSON.parseObject("{\"mealPlan\":{\"classify\":\""+classify+"\",\"extraService\":[\""+info+"\"]}}");
-                // booking.put("mealPlan",mealSelected);
+                JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+                JSONObject mealSelected=JSON.parseObject("{\"mealPlan\":{\"classify\":\""+classify+"\",\"extraService\":[\""+info+"\"]}}");
+                
+                booking.put("mealPlan",mealSelected);
+                System.out.println(booking);
 
 
                 mainFrame.goPanel(Panels.MEAL_PLAN, Panels.FEE_PAYMENT);
