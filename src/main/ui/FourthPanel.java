@@ -201,7 +201,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
         for (int i = 0; i < seatlist.size(); i++) { 
 
             JSONObject tool = seatlist.getJSONObject(i);
-            seatcheckbox.add(tool.getString("label") + " "); 
+            seatcheckbox.add(tool.getString("label")); 
             seatprice.add("price: "+ tool.getString("price"));
            }
 

@@ -269,7 +269,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
 
                 for (int i = 0; i < meallist.size(); i++) { 
                     JJ = meallist.getJSONObject(i);
-                    Mealcheckbox.add(JJ.getString("label") + " "); 
+                    Mealcheckbox.add(JJ.getString("label")); 
                     Mealprice.add("price: "+JJ.getString("price"));
                     Mealimag.add(JJ.getString("imgName"));
                    }
