@@ -62,6 +62,10 @@ public class FinishPanel extends BasePanel implements ActionListener {
 
     public void onCalled(){
         System.out.println("来到结束页面");
+        System.out.println(mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()));
+        mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()).put("checkinFinished",true);
+        mainFrame.getDataService().saveData();
+        System.out.println(mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()));
     }
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -26,7 +26,7 @@ import main.utils.Typings.Panels;
 public class FirstPanel extends BasePanel implements ActionListener{
     private MainFrame mainFrame;
     private JPanel jp1,jp2,P1,P2;
-	private JButton jb1;
+	private JButton jb1,jb2;
 	private JLabel title;
     //test
     //test
@@ -45,18 +45,23 @@ public class FirstPanel extends BasePanel implements ActionListener{
         jb1.setFont(new Font("",Font.BOLD, 25));
 		jb1.addActionListener(this);
 		jb1.setActionCommand("Check In!");
-		
+		jb2=new JButton("Admin login");
+
+		jb2.addActionListener(this);
+		jb2.setActionCommand("Admin login");
+
 		jp1.add(title,BorderLayout.CENTER);
 		jp2.add(jb1);
         jp1.setBounds(0,80,1024,200);
         jb1.setBounds(390,400,240,50);
+        jb2.setBounds(900,20,100,20);
         // jp1.setBorder(BorderFactory.createTitledBorder(etchedBorder));
         // jb1.setBorder(BorderFactory.createTitledBorder(etchedBorder));
 		// this.setSize(1024,768);
 		this.setLayout(null);
 		this.add(jp1);
 		this.add(jb1);
-
+        this.add(jb2);
         P1 = new JPanel();
         P1.setBounds(0, 70, 10000, 5);
         P1.setBackground(new Color(100,100,200));
