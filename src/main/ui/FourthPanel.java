@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,20 +27,23 @@ import main.utils.Typings.Panels;
 public class FourthPanel extends BasePanel implements ActionListener {
     private JButton back;
     private JButton go;
-    private JPanel P1,P2,P3,P4;
+    private JPanel P1,P2,P3,P4,P41,P42;
     private JPanel P5,P6,P7,P8,P9,P10;
     private JLabel PL1,PL2,PL3,PL4,PLL;
-    private JLabel L1,L2,L3,L4,LP,box1;
+    private JLabel L1,L2,L3,L4,LP,box1,box2;
     private JTextField F1,F2;
     private JCheckBox box;
-    private int y1 = 370;
+    private int y1 = 370,chooseno = 5;
+    private String str;
 
 
     private ArrayList<String> seatcheckbox = new ArrayList<String>();
     private ArrayList<String> seatprice = new ArrayList<String>();
-    private ArrayList<String> seatlineA = new ArrayList<String>();
-    private ArrayList<String> seatlineB = new ArrayList<String>();
-    private ArrayList<String> seatlineC = new ArrayList<String>();
+    
+    private JButton[] seatbutton1 = new JButton[24];
+    private String[] seatName1 = {"1A","1B","1C","2A","2B","2C","3A","3B","3C","4A","4B","4C","5A","5B","5C","6A","6B","6C","7A","7B","7C","8A","8B","8C"};
+    private JButton[] seatbutton2 = new JButton[24];
+    private String[] seatName2 = {"1E","1F","1G","2E","2F","2G","3E","3F","3G","4E","4F","4G","5E","5F","5G","6E","6F","6G","7E","7F","7G","8E","8F","8G"};
 
 
     private MainFrame mainFrame;
@@ -83,7 +88,20 @@ public class FourthPanel extends BasePanel implements ActionListener {
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         LP =new JLabel(new ImageIcon(Resources.getImgByName("flight.png")));
         this.add(P4);
+
+        P41 = new JPanel();
+        P41.setBounds(520, 100, 225, 525);
+        P41.setBackground(Color.pink);
+        P41.setOpaque(false);
+        this.add(P41);
+
+
         // P4.add(LP);
+        P42 = new JPanel();
+        P42.setBounds(745, 100, 225, 525);
+        P42.setBackground(Color.pink);
+        P42.setOpaque(false);
+        this.add(P42);
 //----------------------------------------------------------------------------------------------
         P9 = new JPanel();
         P9.setBounds(203, 716, 200, 4);
@@ -205,6 +223,42 @@ public class FourthPanel extends BasePanel implements ActionListener {
                this.add(box1); 
            }
 
+//------------------------------------------------------------------------------------
+            for (int i = 0;i < seatbutton1.length;i ++)
+            {
+                if(i<3){
+                    seatbutton1[i] = new JButton(seatName1[i],new ImageIcon(Resources.getImgByName("red.png")));
+                }else{
+                    seatbutton1[i] = new JButton(seatName1[i],new ImageIcon(Resources.getImgByName("blue.png")));
+                }
+                seatbutton1[i].setPreferredSize(new Dimension(55,55));
+                seatbutton1[i].setHorizontalTextPosition(JButton.CENTER);
+                seatbutton1[i].setFont(new Font("Times New Roman",Font.BOLD,10));
+
+                seatbutton1[i].addActionListener(this);
+                seatbutton1[i].setActionCommand("#1"+ i);
+
+                P41.add(seatbutton1[i]);
+            }
+
+
+            for (int i = 0;i < seatbutton1.length;i ++)
+            {
+                if(i<3){
+                    seatbutton2[i] = new JButton(seatName2[i],new ImageIcon(Resources.getImgByName("red.png")));
+                }else{
+                    seatbutton2[i] = new JButton(seatName2[i],new ImageIcon(Resources.getImgByName("blue.png")));
+                }
+                seatbutton2[i].setPreferredSize(new Dimension(55,55));
+                seatbutton2[i].setHorizontalTextPosition(JButton.CENTER);
+                seatbutton2[i].setFont(new Font("Times New Roman",Font.BOLD,10));
+
+                seatbutton2[i].addActionListener(this);
+                seatbutton2[i].setActionCommand("#2"+ i);
+
+                P42.add(seatbutton2[i]);
+            }
+
 
 
     }
@@ -215,6 +269,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (e.getActionCommand().equals("go")) {
 
             String info ="";
@@ -229,8 +284,8 @@ public class FourthPanel extends BasePanel implements ActionListener {
             System.out.println(info);
 
             // JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-                //JSONObject seatSelected=JSON.parseObject("{\"mealPlan\":{\"seatNo\":\""+info+"\",\"extraService\":[\""+info+"\"]}}");
-                // booking.put("seatPlan",seatSelected);
+            // JSONObject seatSelected=JSON.parseObject("{\"mealPlan\":{\"seatNo\":\""+chooseno+"\",\"extraService\":[\""+info+"\"]}}");
+            // booking.put("seatPlan",seatSelected);
 
             mainFrame.goPanel(Panels.SEAT_PLAN, Panels.MEAL_PLAN);
 
@@ -241,5 +296,35 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
             System.out.println("回");
         }
+
+        if (e.getActionCommand().substring(0,1).equals("#")) {
+            seatbutton1[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
+            seatbutton2[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
+
+            if(e.getActionCommand().substring(1,2).equals("1")){          
+            if(e.getActionCommand().substring(2,3).equals("1")||e.getActionCommand().substring(2,3).equals("2")){
+            str = e.getActionCommand().substring(2,4);
+            }else{
+            str = e.getActionCommand().substring(2,3);
+            }
+            chooseno = Integer.parseInt(str);
+            int i = chooseno;
+            // System.out.println(seatName1[i]);           
+            seatbutton1[i].setIcon(new ImageIcon(Resources.getImgByName("green.png")));
+
+        }else {
+            if(e.getActionCommand().substring(2,3).equals("1")||e.getActionCommand().substring(2,3).equals("2")){
+            str = e.getActionCommand().substring(2,4);
+            }else{
+            str = e.getActionCommand().substring(2,3);
+            }
+            chooseno = Integer.parseInt(str);
+            int i = chooseno;
+            // System.out.println(seatName1[i]);           
+            seatbutton2[i].setIcon(new ImageIcon(Resources.getImgByName("green.png")));
+        }
+
+        }
+        
     }
 }

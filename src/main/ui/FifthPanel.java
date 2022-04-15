@@ -8,6 +8,7 @@ import java.awt.Component;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ import com.alibaba.fastjson.asm.Label;
 import com.formdev.flatlaf.json.Json;
 
 import main.MainFrame;
+import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 public class FifthPanel extends BasePanel implements ActionListener {
@@ -31,7 +33,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
     private JPanel P1,P2,P3,P4;
     private JPanel P5,P6,P7,P8,P9,P10;
     private JLabel PL1,PL2,PL3,PL4,PLL;
-    private JLabel L1,L2,L3,box1;
+    private JLabel L1,L2,L3,box1,box2;
     private JRadioButton C1,C2,C3;
     private JCheckBox box;
     private JSONObject JJ,mealname0,mealname1,mealname2;
@@ -41,6 +43,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
     
     private ArrayList<String> Mealcheckbox = new ArrayList<String>();
     private ArrayList<String> Mealprice = new ArrayList<String>();
+    private ArrayList<String> Mealimag = new ArrayList<String>();
 
     private MainFrame mainFrame;
 
@@ -82,7 +85,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
 
         P4 = new JPanel();
         P4.setBounds(520, 100, 450, 525);
-        P4.setBackground(new Color(16,28,44));
+        P4.setBackground(Color.pink);
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         this.add(P4);
 
@@ -266,6 +269,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
                     JJ = meallist.getJSONObject(i);
                     Mealcheckbox.add(JJ.getString("label") + " "); 
                     Mealprice.add("price: "+JJ.getString("price"));
+                    Mealimag.add(JJ.getString("imgName"));
                    }
 
                 classify = info;
@@ -290,6 +294,12 @@ public class FifthPanel extends BasePanel implements ActionListener {
             box1.setBounds(200, y1 + 40*i, 300, 30);
             this.add(box1); 
         }
+
+        // for(int i = 0; i < Mealimag.size();i ++ ) 
+        // {   String element2 = Mealimag.get(i);            
+        //     box2 = new JLabel(new ImageIcon(Resources.getImgByName("chickenM.png"))); 
+        //     P4.add(box2); 
+        // }
                
     
         // if (e.getActionCommand().equals("box"+ 0)) {
