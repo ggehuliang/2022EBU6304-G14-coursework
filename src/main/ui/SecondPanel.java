@@ -224,7 +224,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
 			mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO,mealSelected);
         
             // mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO);
-
+            
         }
         if (e.getActionCommand().equals("back")) {
             mainFrame.goPanel(Panels.CODE_INPUT, Panels.WELCOME);

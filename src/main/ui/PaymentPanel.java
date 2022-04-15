@@ -34,6 +34,7 @@ public class PaymentPanel extends BasePanel implements ActionListener {
     private JLabel PL1,PL2,PL3,PL4,PLL;
     private String card,password;
     private String[] seatService;
+    private JSONObject checkinInfo;
     
 
     public PaymentPanel(MainFrame mainFrame) {
@@ -164,7 +165,7 @@ public class PaymentPanel extends BasePanel implements ActionListener {
     public void onCalled(){
 
         System.out.println("来到了付款信息页面");
-        JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+        checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
         JSONObject seatPlan = checkinInfo.getJSONObject("seatPlan");
         String[] extraService1=seatPlan.getJSONArray("extraService").toArray(String[]::new);
         feeArea.setText("\n" + "Seat-Plan extra service");
@@ -193,30 +194,31 @@ public class PaymentPanel extends BasePanel implements ActionListener {
         feeArea.append("\n\n\n"+extraService2 +":50 dollars");*/
         /*card = checkinInfo.getJSONObject("payment").getString("creditCardNo");
         password = checkinInfo.getJSONObject("payment").getString("password");*/
-        card = cardId.getText();
-        password = cardPassword.getText();
-        JSONObject payment=JSON.parseObject("{\"creditCardNo\":\""+card+"\",\"password\":\""+password+"\"}");
-        checkinInfo.put("payment",payment);
+       
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("go")) {
-             if(!(card.equals("")||password.equals(""))){
-                 int i =JOptionPane.showConfirmDialog(null,
-                "Have you checked the additional fee payment information is correct? You can't change the information once confirming",
-                "Pay or not? ", JOptionPane.YES_NO_OPTION);
-                if(i==0){mainFrame.goPanel(Panels.FEE_PAYMENT, Panels.CONFIRMING);}
+            card = cardId.getText();
+            password = cardPassword.getText();
+            JSONObject payment=JSON.parseObject("{\"creditCardNo\":\""+card+"\",\"password\":\""+password+"\"}");
+            checkinInfo.put("payment",payment);
+             if(card.equals("")||password.equals("")){
+                JOptionPane.showMessageDialog(null,
+                "Please fill in the missing information.","Missing information",
+                JOptionPane.ERROR_MESSAGE);}
+                else {int i =JOptionPane.showConfirmDialog(null,
+                    "Have you checked the additional fee payment information is correct? You can't change the information once confirming",
+                    "Pay or not? ", JOptionPane.YES_NO_OPTION);
+                    if(i==0){mainFrame.goPanel(Panels.FEE_PAYMENT, Panels.CONFIRMING);
+                 }
             }
-            else JOptionPane.showMessageDialog(null,
-            "Please fill in the missing information.","Missing information",
-            JOptionPane.ERROR_MESSAGE);
+            
         }
         else if (e.getActionCommand().equals("back")) {
             mainFrame.goPanel(Panels.FEE_PAYMENT, Panels.MEAL_PLAN);
         }
 
-        }
-    
-
-    
+    }
+       
 }
