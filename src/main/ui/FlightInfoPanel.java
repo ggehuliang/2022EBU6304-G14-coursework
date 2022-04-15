@@ -227,7 +227,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jb[i] = new JButton(String.valueOf(i));
                 jp[i] = new JPanel();
                 jp[i].setBounds(40, 100 + 120 * i, 200, 100);
-                jp[i].setBackground(Color.gray);
+                // jp[i].setBackground(Color.gray);
                 jp[i].add(jb[i]);
                 this.add(jp[i]);
                 jb[i].setText(
@@ -345,7 +345,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jb[i] = new JButton(String.valueOf(i));
                 jp[i] = new JPanel();
                 jp[i].setBounds(40, 100 + 120 * i, 200, 100);
-                jp[i].setBackground(Color.gray);
+                // jp[i].setBackground(Color.gray);
                 jp[i].add(jb[i]);
                 this.add(jp[i]);
                 jb[i].setText(
