@@ -210,7 +210,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Check In!")) {
-			
+
 			String bn=jtf.getText();
 			String surname=jtf5.getText();
 			String id=jtf6.getText();
@@ -245,6 +245,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
 				String s3 = info.getString("id");
 				System.out.println(s1+s2+s3);
 				mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO,info);
+				
 			}
 			
         

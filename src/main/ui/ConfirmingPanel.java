@@ -140,6 +140,12 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
             String bookingNo = checkinInfo.getString("bookingNo");
             String flightNo = checkinInfo.getString("flightNo");
             String date = checkinInfo.getString("date");
+
+            JSONObject filghObject = mainFrame.getDataService().getFlightById(flightNo);
+            String from = filghObject.getString("from");
+            String to = filghObject.getString("to");
+            String departureTime = filghObject.getString("departureTime");
+            String arrivalTime =filghObject.getString("arrivalTime");
     
             JSONObject seatPlan = checkinInfo.getJSONObject("seatPlan");
             String class1 = seatPlan.getString("class");
@@ -154,6 +160,10 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
             inforArea.setText("BookingNo:"+" "+bookingNo);
             inforArea.append("\n"+"FlightNo:"+" "+flightNo);
             inforArea.append("\n"+"Date:"+" "+date);
+            inforArea.append("\n"+"From "+from+" to "+to);
+            inforArea.append("\n"+"DepartureTime: "+departureTime);
+            inforArea.append("\n"+"ArrivalTime: "+arrivalTime);
+
             inforArea.append("\n\n\n"+"SeatPlan");
             inforArea.append("\n"+"class:"+" "+class1);
             inforArea.append("\n"+"seatNo:"+" "+seatNo);
