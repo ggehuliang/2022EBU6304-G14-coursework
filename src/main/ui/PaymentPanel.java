@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
+import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 public class PaymentPanel extends BasePanel implements ActionListener {
@@ -87,7 +88,11 @@ public class PaymentPanel extends BasePanel implements ActionListener {
 
         picPanel = new JPanel();
         picPanel.setBounds(630, 180, 300, 200);
-        picPanel.setBackground(Color.green);
+        JLabel jl3=new JLabel(new ImageIcon(Resources.getImgByName("pay2.png")));
+		picPanel.add(jl3);
+        //jl3.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1, true));
+        jl3.setBounds(630, 180, 300, 220);
+        //picPanel.setBackground(Color.green);
         this.add(picPanel);
         
         go = new JButton("Confirming");

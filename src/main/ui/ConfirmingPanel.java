@@ -15,6 +15,7 @@ import javax.swing.border.Border;
 import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
+import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 public class ConfirmingPanel extends BasePanel implements ActionListener {
@@ -51,11 +52,17 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         label1.setBounds(80, 100, 700, 50);
         this.add(label1);
 
-        inforArea = new JTextArea();
+
+
+        /*inforArea = new JTextArea();
         inforArea.setEditable(false); 
         inforArea.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         inforArea.setBounds(60, 180, 470, 420);
-        this.add(inforArea);
+        JScrollPane scroll=new JScrollPane(inforArea);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.add(scroll);*/
+
+
 
         label2 = new JLabel("Please Scan your ID to confirm!!!");
         label2.setFont(new java.awt.Font("Dialog", 1, 28));
@@ -66,6 +73,8 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         picPanel.setBounds(600, 400, 350, 200);
         picPanel.setBackground(Color.green);
         this.add(picPanel);
+        JLabel jl3=new JLabel(new ImageIcon(Resources.getImgByName("ID.png")));
+		picPanel.add(jl3);
 
         go = new JButton("Finished!");
         go.setBounds(900, 675, 100, 40);
@@ -156,7 +165,17 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
             JSONObject mealPlan = checkinInfo.getJSONObject("mealPlan");
             String classify = mealPlan.getString("classify");
             String[] extraService2 =mealPlan.getJSONArray("extraService").toArray(String[]::new);
-    
+
+            inforArea = new JTextArea();
+            inforArea.setEditable(false); 
+            inforArea.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+            inforArea.setBounds(60, 180, 470, 420);
+            inforArea = new JTextArea();
+            inforArea.setEditable(false); 
+            inforArea.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+            inforArea.setBounds(60, 180, 470, 420);
+            this.add(inforArea);
+            
             inforArea.setText("BookingNo:"+" "+bookingNo);
             inforArea.append("\n"+"FlightNo:"+" "+flightNo);
             inforArea.append("\n"+"Date:"+" "+date);
