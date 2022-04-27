@@ -15,6 +15,7 @@ public class DataService {
     private List<Person> allPerson;
     private List<Flight> allFlight;
     private List<ExtraService> allExtraService;
+    private List<CreditCard> allCreditCard;
 
     public DataService() {
         Resources.extractData();
@@ -33,6 +34,13 @@ public class DataService {
      */
     public List<Flight> getAllFlight() {
         return allFlight;
+    }
+
+    /**
+     * @return the allFlight
+     */
+    public List<CreditCard> getAllCreditCard() {
+        return allCreditCard;
     }
 
     /**
@@ -123,19 +131,33 @@ public class DataService {
         return null;
     }
 
+    public boolean checkCreditCardPassword(String creditCardNo, String password) {
+        for (CreditCard cc : this.allCreditCard) {
+            if (cc.getCreditCardNo().equals(creditCardNo)) {
+                if (cc.getPassword().equals(password)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean saveData() {
 
         boolean f = Resources.writeStringData("flight.json", JSON.toJSONString(this.allFlight, true));
         boolean p = Resources.writeStringData("person.json", JSON.toJSONString(this.allPerson, true));
         boolean s = Resources.writeStringData("service.json", JSON.toJSONString(this.allExtraService, true));
-        return f && p && s;
+        boolean c = Resources.writeStringData("creditCard.json", JSON.toJSONString(this.allCreditCard, true));
+        return f && p && s && c;
     }
 
     public void refreshData() {
         this.allPerson = JSON.parseArray(Resources.readDataToString("person.json"), Person.class);
         this.allFlight = JSON.parseArray(Resources.readDataToString("flight.json"), Flight.class);
         this.allExtraService = JSON.parseArray(Resources.readDataToString("service.json"), ExtraService.class);
-        System.out.println(JSON.toJSONString(getBookingByBookingNo("114514")));
-        
+        this.allCreditCard = JSON.parseArray(Resources.readDataToString("creditCard.json"), CreditCard.class);
+
     }
 }
