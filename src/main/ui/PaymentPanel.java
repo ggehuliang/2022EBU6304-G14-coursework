@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.*;
 
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
+import main.MainFrame.JPanelWithBackground;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
 
@@ -36,6 +38,7 @@ public class PaymentPanel extends BasePanel implements ActionListener {
     private String card,password;
     private String[] seatService;
     private JSONObject checkinInfo;
+    private JPanelWithBackground bgPanel;
     
 
     public PaymentPanel(MainFrame mainFrame) {
@@ -43,6 +46,7 @@ public class PaymentPanel extends BasePanel implements ActionListener {
         this.mainFrame=mainFrame;
         this.setOpaque(false);
         this.setLayout(null);
+        
 
         back = new JButton("Meal options");
         back.setBounds(10, 15, 120, 40);
