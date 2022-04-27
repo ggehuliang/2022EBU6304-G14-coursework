@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.*;
 
 import javax.swing.JButton;
@@ -17,10 +18,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
+import main.MainFrame.JPanelWithBackground;
 import main.entity.CheckinInfoStruct;
 import main.entity.ExtraService;
 import main.entity.MealPlanStruct;
 import main.entity.SeatPlanStruct;
+import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 public class PaymentPanel extends BasePanel implements ActionListener {
@@ -38,7 +41,7 @@ public class PaymentPanel extends BasePanel implements ActionListener {
     private JLabel PL1,PL2,PL3,PL4,PLL;
     private String card,password;
     private String[] seatService;
-    private JSONObject checkinInfo;
+    private CheckinInfoStruct checkinInfo;
     
 
     public PaymentPanel(MainFrame mainFrame) {
@@ -46,6 +49,7 @@ public class PaymentPanel extends BasePanel implements ActionListener {
         this.mainFrame=mainFrame;
         this.setOpaque(false);
         this.setLayout(null);
+        
 
         back = new JButton("Meal options");
         back.setBounds(10, 15, 120, 40);
@@ -91,7 +95,11 @@ public class PaymentPanel extends BasePanel implements ActionListener {
 
         picPanel = new JPanel();
         picPanel.setBounds(630, 180, 300, 200);
-        picPanel.setBackground(Color.green);
+        JLabel jl3=new JLabel(new ImageIcon(Resources.getImgByName("pay2.png")));
+		picPanel.add(jl3);
+        //jl3.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1, true));
+        jl3.setBounds(630, 180, 300, 220);
+        //picPanel.setBackground(Color.green);
         this.add(picPanel);
         
         go = new JButton("Confirming");
@@ -169,14 +177,13 @@ public class PaymentPanel extends BasePanel implements ActionListener {
     public void onCalled(){
 
         System.out.println("来到了付款信息页面");
-        CheckinInfoStruct checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+        checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
         SeatPlanStruct seatPlan = checkinInfo.getSeatPlan();
-        String []extraService1=seatPlan.getExtraService().toArray(String[]::new);
-     
+        String[] extraService1=seatPlan.getExtraService().toArray(String[]::new);
         feeArea.setText("\n" + "Seat-Plan extra service");
 
         for(int i=0;i<extraService1.length;i++){
-            ExtraService extraObject =mainFrame.getDataService().getServiceByLabel(extraService1[i]);
+            ExtraService extraObject = mainFrame.getDataService().getServiceByLabel(extraService1[i]);
             int price = extraObject.getPrice();
             feeArea.append("\n"+extraService1[i]+" "+": "+price+" dollars");
         }
@@ -206,8 +213,6 @@ public class PaymentPanel extends BasePanel implements ActionListener {
         if (e.getActionCommand().equals("go")) {
             card = cardId.getText();
             password = cardPassword.getText();
-            JSONObject payment=JSON.parseObject("{\"creditCardNo\":\""+card+"\",\"password\":\""+password+"\"}");
-            checkinInfo.put("payment",payment);
              if(card.equals("")||password.equals("")){
                 JOptionPane.showMessageDialog(null,
                 "Please fill in the missing information.","Missing information",

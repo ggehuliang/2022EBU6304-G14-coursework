@@ -4,12 +4,17 @@ import javax.swing.*;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.border.Border;
 
 import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
+import main.entity.CheckinInfoStruct;
+import main.entity.Flight;
+import main.entity.MealPlanStruct;
+import main.entity.SeatPlanStruct;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
 
@@ -148,26 +153,26 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         public void onCalled(){
 
             System.out.println("来到了值机信息页面");
-            JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-            String bookingNo = checkinInfo.getString("bookingNo");
-            String flightNo = checkinInfo.getString("flightNo");
-            String date = checkinInfo.getString("date");
+            CheckinInfoStruct checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+            String bookingNo = checkinInfo.getBookingNo();
+            String flightNo = checkinInfo.getFlightNo();
+            //Date date = checkinInfo.getDate();
 
-            JSONObject filghObject = mainFrame.getDataService().getFlightById(flightNo);
-            String from = filghObject.getString("from");
-            String to = filghObject.getString("to");
-            String departureTime = filghObject.getString("departureTime");
-            String arrivalTime =filghObject.getString("arrivalTime");
+            Flight filghObject = mainFrame.getDataService().getFlightById(flightNo);
+            String from = filghObject.getFrom();
+            String to = filghObject.getTo();
+            String departureTime = filghObject.getDepartureTime();
+            String arrivalTime =filghObject.getArrivalTime();
     
-            JSONObject seatPlan = checkinInfo.getJSONObject("seatPlan");
-            String class1 = seatPlan.getString("class");
-            String seatNo = seatPlan.getString("seatNo");
-            String[] extraService1=seatPlan.getJSONArray("extraService").toArray(String[]::new);
+            SeatPlanStruct seatPlan = checkinInfo.getSeatPlan();
+            String class1 = seatPlan.getClassify();
+            String seatNo = seatPlan.getSeatNo();
+            String[] extraService1=seatPlan.getExtraService().toArray(String[]::new);
 
     
-            JSONObject mealPlan = checkinInfo.getJSONObject("mealPlan");
-            String classify = mealPlan.getString("classify");
-            String[] extraService2 =mealPlan.getJSONArray("extraService").toArray(String[]::new);
+            MealPlanStruct mealPlan = checkinInfo.getMealPlan();
+            String classify = mealPlan.getClassify();
+            String[] extraService2 =mealPlan.getExtraService().toArray(String[]::new);
 
             inforArea = new JTextArea();
             inforArea.setEditable(false); 
@@ -176,7 +181,7 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
             
             inforArea.setText("BookingNo:"+"    "+bookingNo);
             inforArea.append("\n"+"FlightNo:"+"    "+flightNo);
-            inforArea.append("\n"+"Date:"+"    "+date);
+            //inforArea.append("\n"+"Date:"+"    "+date);
             inforArea.append("\n"+"From   "+from+"   to   "+to);
             inforArea.append("\n"+"DepartureTime:    "+departureTime);
             inforArea.append("\n"+"ArrivalTime:    "+arrivalTime);
