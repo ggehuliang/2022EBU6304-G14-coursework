@@ -213,15 +213,20 @@ public class PaymentPanel extends BasePanel implements ActionListener {
         if (e.getActionCommand().equals("go")) {
             card = cardId.getText();
             password = cardPassword.getText();
+        boolean flag =mainFrame.getDataService().checkCreditCardPassword(card, password);
              if(card.equals("")||password.equals("")){
                 JOptionPane.showMessageDialog(null,
                 "Please fill in the missing information.","Missing information",
                 JOptionPane.ERROR_MESSAGE);}
-                else {int i =JOptionPane.showConfirmDialog(null,
+            else {
+                if(flag==true){int i =JOptionPane.showConfirmDialog(null,
                     "Have you checked the additional fee payment information is correct? You can't change the information once confirming",
                     "Pay or not? ", JOptionPane.YES_NO_OPTION);
-                    if(i==0){mainFrame.goPanel(Panels.FEE_PAYMENT, Panels.CONFIRMING);
+                    if(i==0){mainFrame.goPanel(Panels.FEE_PAYMENT, Panels.CONFIRMING);}
                  }
+                 else JOptionPane.showMessageDialog(null,
+                 "Please re-enter your account or password","Wrong information",
+                 JOptionPane.ERROR_MESSAGE);
             }
             
         }
