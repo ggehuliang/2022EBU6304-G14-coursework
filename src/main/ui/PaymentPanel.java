@@ -17,6 +17,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
+import main.entity.CheckinInfoStruct;
+import main.entity.ExtraService;
+import main.entity.MealPlanStruct;
+import main.entity.SeatPlanStruct;
 import main.utils.Typings.Panels;
 
 public class PaymentPanel extends BasePanel implements ActionListener {
@@ -165,24 +169,25 @@ public class PaymentPanel extends BasePanel implements ActionListener {
     public void onCalled(){
 
         System.out.println("来到了付款信息页面");
-        checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-        JSONObject seatPlan = checkinInfo.getJSONObject("seatPlan");
-        String[] extraService1=seatPlan.getJSONArray("extraService").toArray(String[]::new);
+        CheckinInfoStruct checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+        SeatPlanStruct seatPlan = checkinInfo.getSeatPlan();
+        String []extraService1=seatPlan.getExtraService().toArray(String[]::new);
+     
         feeArea.setText("\n" + "Seat-Plan extra service");
 
         for(int i=0;i<extraService1.length;i++){
-            JSONObject extraObject = mainFrame.getDataService().getServiceByLabel(extraService1[i]);
-            int price = extraObject.getIntValue("price");
+            ExtraService extraObject =mainFrame.getDataService().getServiceByLabel(extraService1[i]);
+            int price = extraObject.getPrice();
             feeArea.append("\n"+extraService1[i]+" "+": "+price+" dollars");
         }
 
-        JSONObject mealPlan = checkinInfo.getJSONObject("mealPlan");
-        String[] extraService2=mealPlan.getJSONArray("extraService").toArray(String[]::new);
+        MealPlanStruct mealPlan = checkinInfo.getMealPlan();
+        String[] extraService2=mealPlan.getExtraService().toArray(String[]::new);
         feeArea.append("\n\n\n" + "Meal-Plan extra service");
 
         for(int i=0;i<extraService2.length;i++){
-            JSONObject extraObject = mainFrame.getDataService().getServiceByLabel(extraService2[i]);
-            int price = extraObject.getIntValue("price");
+            ExtraService extraObject = mainFrame.getDataService().getServiceByLabel(extraService2[i]);
+            int price = extraObject.getPrice();
             feeArea.append("\n"+extraService2[i]+" "+": "+price+" dollars");
         }
 
