@@ -6,7 +6,9 @@ import java.util.List;
 
 import com.alibaba.fastjson.*;
 
+import main.entity.Admin;
 import main.entity.CheckinInfoStruct;
+import main.entity.CreditCard;
 import main.entity.ExtraService;
 import main.entity.Flight;
 import main.entity.Person;
@@ -16,6 +18,7 @@ public class DataService {
     private List<Flight> allFlight;
     private List<ExtraService> allExtraService;
     private List<CreditCard> allCreditCard;
+    private List<Admin> allAdmin;
 
     public DataService() {
         Resources.extractData();
@@ -48,6 +51,13 @@ public class DataService {
      */
     public List<ExtraService> getAllExtraService() {
         return allExtraService;
+    }
+
+    /**
+     * @return the allExtraService
+     */
+    public List<Admin> getAllAdmin() {
+        return allAdmin;
     }
 
     public Flight getFlightById(String id) {
@@ -144,6 +154,19 @@ public class DataService {
         return false;
     }
 
+    public boolean checkAdminPassword(String username, String password) {
+        for (Admin admin : this.allAdmin) {
+            if (admin.getUsername().equals(username)) {
+                if (admin.getPassword().equals(password)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean saveData() {
 
         boolean f = Resources.writeStringData("flight.json", JSON.toJSONString(this.allFlight, true));
@@ -158,6 +181,6 @@ public class DataService {
         this.allFlight = JSON.parseArray(Resources.readDataToString("flight.json"), Flight.class);
         this.allExtraService = JSON.parseArray(Resources.readDataToString("service.json"), ExtraService.class);
         this.allCreditCard = JSON.parseArray(Resources.readDataToString("creditCard.json"), CreditCard.class);
-
+        this.allAdmin = JSON.parseArray(Resources.readDataToString("admin.json"), Admin.class);
     }
 }

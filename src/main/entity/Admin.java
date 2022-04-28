@@ -1,31 +1,35 @@
-package main.utils;
+package main.entity;
 
-public class CreditCard {
-    private String creditCardNo;
+public class Admin {
+    private String username;
     private String password;
+
     /**
-     * @return the creditCardNo
+     * @return the username
      */
-    public String getCreditCardNo() {
-        return creditCardNo;
+    public String getUsername() {
+        return username;
     }
+
     /**
-     * @param creditCardNo the creditCardNo to set
+     * @param username the username to set
      */
-    public void setCreditCardNo(String creditCardNo) {
-        this.creditCardNo = creditCardNo;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
     /**
      * @return the password
      */
     public String getPassword() {
         return password;
     }
+
     /**
      * @param password the password to set
      */
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 }
