@@ -402,11 +402,11 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Next")) {
-            mainFrame.goPanel(Panels.FLIGHT_INFO, Panels.SEAT_PLAN);
             System.out.println("--------------------------------");
             System.out.println(BookingNum);
             System.out.println("--------------------------------");
             mainFrame.setOperatingBookingNo(BookingNum);
+            mainFrame.goPanel(Panels.FLIGHT_INFO, Panels.SEAT_PLAN);
 
         }
         if (e.getActionCommand().equals("Back")) {

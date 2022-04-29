@@ -36,6 +36,8 @@ public class Resources {
             folder.mkdirs();
             extractFile("person.json");
             extractFile("service.json");
+            extractFile("creditCard.json");
+            extractFile("admin.json");
             extractFile("flight.json");
         } else {
             System.out.println("Data already exist, start loading.");
