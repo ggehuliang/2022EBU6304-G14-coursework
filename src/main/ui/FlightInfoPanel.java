@@ -10,15 +10,20 @@ import com.alibaba.fastjson.JSONObject;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.IDN;
+import java.util.List;
 
 import main.MainFrame;
+import main.entity.BaseInfoStruct;
+import main.entity.CheckinInfoStruct;
+import main.entity.Flight;
+import main.entity.Person;
 import main.utils.Typings.Panels;
 
 public class FlightInfoPanel extends BasePanel implements ActionListener {
-    private JSONObject person;
-    private JSONObject check;
-    private JSONObject flight;
-    private JSONArray Array;
+    private Person person;
+    private CheckinInfoStruct check;
+    private Flight flight;
+    private List<CheckinInfoStruct> Array;
     private String SurName;
     private String BookingNum;
     private String IDNum;
@@ -202,18 +207,18 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
             System.out.println("---------------Here is the bookingnum case--------------");
             check = mainFrame.getDataService().getBookingByBookingNo(BookingNum);
             person = mainFrame.getDataService().getPersonByBookingNo(BookingNum);
-            IDNum = person.getJSONObject("baseInfo").getString("id");
+            IDNum = person.getBaseInfo().getId();
 
-            Array = person.getJSONArray("checkinInfo");
+            Array = person.getCheckinInfo();
 
-            // String objStr = JSON.toJSONString(person);
-            // System.out.println(objStr);
-            FlightNum = check.getString("flightNo");
+            FlightNum = check.getFlightNo();
             System.out.println(FlightNum);
+
             flight = mainFrame.getDataService().getFlightById(FlightNum);
-            DepartureTime = flight.getString("departureTime");
-            ArrivalTime = flight.getString("arrivalTime");
-            SurName = person.getJSONObject("baseInfo").getString("surName");
+
+            DepartureTime = flight.getDepartureTime();
+            ArrivalTime = flight.getArrivalTime();
+            SurName = person.getBaseInfo().getSurName();
 
             // System.out.println("--------------------------------");
             // System.out.println(Array.getJSONObject(1).getString("bookingNo"));
@@ -224,8 +229,10 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
             // jb = new JButton[Array.size()];
             // jb[Array.size()] = new JButton();
             for (i = 0; i < Array.size(); i++) {
-                String BNS = Array.getJSONObject(i).getString("bookingNo");
-                String FNS = Array.getJSONObject(i).getString("flightNo");
+                // String BNS = Array.getJSONObject(i).getString("bookingNo");
+                // String FNS = Array.getJSONObject(i).getString("flightNo");
+                String BNS = Array.get(i).getBookingNo();
+                String FNS = Array.get(i).getFlightNo();
                 jb[i] = new JButton(String.valueOf(i));
                 jp[i] = new JPanel();
                 jp[i].setBounds(40, 100 + 120 * i, 200, 100);
@@ -233,16 +240,18 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jp[i].add(jb[i]);
                 this.add(jp[i]);
                 jb[i].setText(
-                        "<html>" + "BookingNum: " + "<br>" + BNS + "<br>" + "FlightNo: " + "<br>"+ FNS + "</html>");
+                        "<html>" + "BookingNum: " + "<br>" + BNS + "<br>" + "FlightNo: " + "<br>" + FNS
+                                + "</html>");
                 jb[i].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JSONObject mealSelected=JSON.parseObject("{\"booking_num\":\""+BNS+"\",\"surname\":\""+SurName+"\",\"id\":\""+IDNum+"\"}");
+                        JSONObject mealSelected = JSON.parseObject("{\"booking_num\":\"" + BNS + "\",\"surname\":\""
+                                + SurName + "\",\"id\":\"" + IDNum + "\"}");
                         onCalled(mealSelected);
 
                     }
                 });
-                
+
             }
 
             // jb1.setText("<html>" + "BookingNum: " + "<br>" + BookingNum + "</html>");
@@ -337,16 +346,17 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
             // jl6.setText("Boarding Gate: " + ArrivalTime);
             // }
             // });
+
         } else {
             System.out.println("---------------Here is the id case--------------");
             person = mainFrame.getDataService().getPersonById(IDNum);
+            Array = person.getCheckinInfo();
 
-            Array = person.getJSONArray("checkinInfo");
             JButton[] jb = new JButton[Array.size()];
             JPanel[] jp = new JPanel[Array.size()];
             for (i = 0; i < Array.size(); i++) {
-                String BNS = Array.getJSONObject(i).getString("bookingNo");
-                String FNS = Array.getJSONObject(i).getString("flightNo");
+                String BNS = Array.get(i).getBookingNo();
+                String FNS = Array.get(i).getFlightNo();
                 jb[i] = new JButton(String.valueOf(i));
                 jp[i] = new JPanel();
                 jp[i].setBounds(40, 100 + 120 * i, 200, 100);
@@ -354,23 +364,25 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jp[i].add(jb[i]);
                 this.add(jp[i]);
                 jb[i].setText(
-                    "<html>" + "BookingNum: " + "<br>" + BNS + "<br>" + "FlightNo: " + "<br>"+ FNS + "</html>");
+                        "<html>" + "BookingNum: " + "<br>" + BNS + "<br>" + "FlightNo: " + "<br>" + FNS + "</html>");
                 jb[i].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        JSONObject mealSelected=JSON.parseObject("{\"booking_num\":\""+BNS+"\",\"surname\":\""+SurName+"\",\"id\":\""+IDNum+"\"}");
+                        JSONObject mealSelected = JSON.parseObject("{\"booking_num\":\"" + BNS + "\",\"surname\":\""
+                                + SurName + "\",\"id\":\"" + IDNum + "\"}");
                         onCalled(mealSelected);
                     }
                 });
             }
-            SurName = person.getJSONObject("baseInfo").getString("surName");
-            BookingNum = Array.getJSONObject(0).getString("bookingNo");
+            SurName = person.getBaseInfo().getSurName();
+            
+            BookingNum = Array.get(0).getBookingNo();
             check = mainFrame.getDataService().getBookingByBookingNo(BookingNum);
-            FlightNum = check.getString("flightNo");
-            System.out.println(FlightNum);
+            FlightNum = Array.get(0).getFlightNo();
+            // System.out.println(FlightNum);
             flight = mainFrame.getDataService().getFlightById(FlightNum);
-            DepartureTime = flight.getString("departureTime");
-            ArrivalTime = flight.getString("arrivalTime");
+            DepartureTime = flight.getDepartureTime();
+            ArrivalTime = flight.getArrivalTime();
 
             jl1.setText("Surname: " + SurName);
             jl2.setText("ID Num: " + IDNum);
@@ -379,13 +391,10 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
             jl5.setText("Arrival Time: " + ArrivalTime);
             jl6.setText("Boarding Gate: " + ArrivalTime);
 
-
             // for (int i = 0; i < Array.size(); i++) {
-            //     System.out.println(Array.getJSONObject(i).getString("bookingNo"));
-            //     System.out.println("haha");
+            // System.out.println(Array.getJSONObject(i).getString("bookingNo"));
+            // System.out.println("haha");
             // }
-
-            
 
         }
     }

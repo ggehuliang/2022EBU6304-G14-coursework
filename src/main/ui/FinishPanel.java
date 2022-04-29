@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 
 import main.MainFrame;
+import main.utils.Resources;
 import main.utils.Typings.Panels;
 public class FinishPanel extends BasePanel implements ActionListener {
     private JButton back;
@@ -13,6 +14,7 @@ public class FinishPanel extends BasePanel implements ActionListener {
     private MainFrame mainFrame;
     private JPanel jp1,jp2,P1,P2;
     private JLabel jl1,jl2,jl3;
+    private JLabel pic;
 
     public FinishPanel(MainFrame mainFrame) {
         super(mainFrame);
@@ -47,6 +49,10 @@ public class FinishPanel extends BasePanel implements ActionListener {
         this.add(jp1);
         this.add(jp2);
 
+        // pic=new JLabel(new ImageIcon(Resources.getImgByName("finish.png")));
+        // this.add(jl3);
+		// pic.setBounds(0, 150, 700, 500);
+
         P1 = new JPanel();
         P1.setBounds(0, 70, 10000, 5);
         P1.setBackground(new Color(100,100,200));
@@ -63,7 +69,7 @@ public class FinishPanel extends BasePanel implements ActionListener {
     public void onCalled(){
         System.out.println("来到结束页面");
         System.out.println(mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()));
-        mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()).put("checkinFinished",true);
+        mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()).setCheckinFinished(true);
         mainFrame.getDataService().saveData();
         System.out.println(mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()));
     }
