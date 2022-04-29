@@ -36,7 +36,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
     private JButton start;
     private JPanel P1, P2, P3, P4;
     private JPanel P5, P6, P7, P8, P9, P10;
-    private JLabel PL1, PL2, PL3, PL4, PLL;
+    private JLabel PL1, PL2, PL3, PL4, PLL,LP;
     private JLabel L1, L2, L3, box1, box2;
     private JRadioButton C1, C2, C3;
     private JCheckBox box;
@@ -88,7 +88,9 @@ public class FifthPanel extends BasePanel implements ActionListener {
         P4.setBounds(520, 100, 450, 525);
         P4.setBackground(Color.pink);
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        LP = new JLabel(new ImageIcon(Resources.getImgByName("meal.png")));
         this.add(P4);
+        P4.add(LP);
 
         // ----------------------------------------------------------------------------------------------
         P9 = new JPanel();
@@ -210,7 +212,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
                     }
                 }
             }
-            
+
             // System.out.println(classify);
 
             // if (info == "") {
