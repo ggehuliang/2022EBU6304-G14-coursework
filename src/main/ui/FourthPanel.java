@@ -55,7 +55,6 @@ public class FourthPanel extends BasePanel implements ActionListener {
             "5G", "6E", "6F", "6G", "7E", "7F", "7G", "8E", "8F", "8G" };
 
     private MainFrame mainFrame;
-
     public FourthPanel(MainFrame mainFrame) {
 
         super(mainFrame);
@@ -234,69 +233,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
         // ------------------------------------------------------------------------------------
 
-        SF1 sf1 = new SF1();
-        System.out.println(sf1.find("5A", seatName1));
-
-        CheckinInfoStruct booking = mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-        System.out.println(booking.getFlightNo());
-
-        Flight flightinfo = mainFrame.getDataService().getFlightById(booking.getFlightNo());
-
-        List<String> occupiedSeat = flightinfo.getOccupiedSeat();
-
-        for (int i = 0; i < seatbutton1.length; i++)
-
-        {
-            for (String JJ : occupiedSeat) {
-                for (String YY : seatName1) {
-                    int a = 0;
-                    if (YY.equals(JJ)) {
-                        seatbutton1[a] = new JButton(seatName1[i], new ImageIcon(Resources.getImgByName("red.png")));
-                    }
-                    a++;
-                }
-            }
-
-            if (i < 3) {
-                seatbutton1[i] = new JButton(seatName1[i], new ImageIcon(Resources.getImgByName("red.png")));
-            } else {
-                seatbutton1[i] = new JButton(seatName1[i], new ImageIcon(Resources.getImgByName("blue.png")));
-            }
-            seatbutton1[i].setPreferredSize(new Dimension(55, 55));
-            seatbutton1[i].setHorizontalTextPosition(JButton.CENTER);
-            seatbutton1[i].setFont(new Font("Times New Roman", Font.BOLD, 10));
-
-            seatbutton1[i].addActionListener(this);
-            seatbutton1[i].setActionCommand("#1" + i);
-
-            P41.add(seatbutton1[i]);
-        }
-
-        for (int i = 0; i < seatbutton2.length; i++) {
-            for (String JJ : occupiedSeat) {
-                for (String YY : seatName2) {
-                    int a = 0;
-                    if (YY.equals(JJ)) {
-                        seatbutton1[a] = new JButton(seatName1[i], new ImageIcon(Resources.getImgByName("red.png")));
-                    }
-                    a++;
-                }
-            }
-
-            if (i < 3) {
-                seatbutton2[i] = new JButton(seatName2[i], new ImageIcon(Resources.getImgByName("red.png")));
-            } else {
-                seatbutton2[i] = new JButton(seatName2[i], new ImageIcon(Resources.getImgByName("blue.png")));
-            }
-            seatbutton2[i].setPreferredSize(new Dimension(55, 55));
-            seatbutton2[i].setHorizontalTextPosition(JButton.CENTER);
-            seatbutton2[i].setFont(new Font("Times New Roman", Font.BOLD, 10));
-
-            seatbutton2[i].addActionListener(this);
-            seatbutton2[i].setActionCommand("#2" + i);
-
-            P42.add(seatbutton2[i]);
-        }
+        
 
     }
 
@@ -313,6 +250,71 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
     public void onCalled() {
         System.out.println("来到选座页");
+        SF1 sf1 = new SF1();
+        System.out.println(sf1.find("5A", seatName1));
+
+        CheckinInfoStruct booking = mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+        
+        Flight flightinfo = mainFrame.getDataService().getFlightById(booking.getFlightNo());
+
+        List<String> occupiedSeat = flightinfo.getOccupiedSeat();
+
+        
+        for (int i = 0; i < seatbutton1.length; i++)
+
+        {
+           
+
+            if (i < 3) {
+                seatbutton1[i] = new JButton(seatName1[i], new ImageIcon(Resources.getImgByName("red.png")));
+            } else {
+                seatbutton1[i] = new JButton(seatName1[i], new ImageIcon(Resources.getImgByName("blue.png")));
+            }
+
+            for (String JJ : occupiedSeat) {
+                
+                for (int a = 0; a < seatName1.length; a++) {
+                    
+                    if (seatName1[a].equals(JJ)) {  
+
+                        seatbutton1[a] = new JButton(seatName1[a], new ImageIcon(Resources.getImgByName("red.png")));
+                    }
+                }
+            }
+
+            seatbutton1[i].setPreferredSize(new Dimension(55, 55));
+            seatbutton1[i].setHorizontalTextPosition(JButton.CENTER);
+            seatbutton1[i].setFont(new Font("Times New Roman", Font.BOLD, 10));
+            seatbutton1[i].addActionListener(this);
+            seatbutton1[i].setActionCommand("#1" + i);
+
+            P41.add(seatbutton1[i]);
+        }
+
+        for (int i = 0; i < seatbutton2.length; i++) {
+            
+            if (i < 3) {
+                seatbutton2[i] = new JButton(seatName2[i], new ImageIcon(Resources.getImgByName("red.png")));
+            } else {
+                seatbutton2[i] = new JButton(seatName2[i], new ImageIcon(Resources.getImgByName("blue.png")));
+            }
+            
+            for (String JJ : occupiedSeat) {
+                for (int a = 0; a < seatName2.length; a++) {
+
+                    if (seatName2.equals(JJ)) {
+                        seatbutton2[a] = new JButton(seatName2[a], new ImageIcon(Resources.getImgByName("red.png")));
+                    }
+                }
+            }
+            seatbutton2[i].setPreferredSize(new Dimension(55, 55));
+            seatbutton2[i].setHorizontalTextPosition(JButton.CENTER);
+            seatbutton2[i].setFont(new Font("Times New Roman", Font.BOLD, 10));
+            seatbutton2[i].addActionListener(this);
+            seatbutton2[i].setActionCommand("#2" + i);
+
+            P42.add(seatbutton2[i]);
+        }
     }
 
     @Override
@@ -372,7 +374,10 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 chooseno = Integer.parseInt(str);
                 int i = chooseno;
                 // System.out.println(seatName1[i]);
-
+                
+                CheckinInfoStruct booking = mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+                Flight flightinfo = mainFrame.getDataService().getFlightById(booking.getFlightNo());
+                List<String> occupiedSeat = flightinfo.getOccupiedSeat();
                 for (String JJ : occupiedSeat) {
                    if(seatName1[i].equals(JJ)){
                     JOptionPane.showMessageDialog(null,
@@ -396,19 +401,22 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 }
                 chooseno = Integer.parseInt(str);
                 int i = chooseno;
-                // System.out.println(seatName1[i]);
+                CheckinInfoStruct booking = mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+                Flight flightinfo = mainFrame.getDataService().getFlightById(booking.getFlightNo());
+                List<String> occupiedSeat = flightinfo.getOccupiedSeat();
+                System.out.println(seatName1[i]);
 
-                for (String JJ : occupiedSeat) {
-                    if(seatName2[i].equals(JJ)){
-                     JOptionPane.showMessageDialog(null,
-                     "This seat has been selected.", "Please reselect your seat",
-                     JOptionPane.ERROR_MESSAGE);
-                    }else{
+                 for (String JJ : occupiedSeat) {
+                     if(seatName2[i].equals(JJ)){
+                      JOptionPane.showMessageDialog(null,
+                      "This seat has been selected.", "Please reselect your seat",
+                      JOptionPane.ERROR_MESSAGE);
+                     }else{
                         seatbutton2[i].setIcon(new ImageIcon(Resources.getImgByName("green.png")));
                         seatTName = seatName2[i];
                     }
                      
-                 }
+                  }
                 
             }
 
