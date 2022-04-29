@@ -210,6 +210,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
                     }
                 }
             }
+            
             // System.out.println(classify);
 
             // if (info == "") {
@@ -258,24 +259,28 @@ public class FifthPanel extends BasePanel implements ActionListener {
 
             List<ExtraService> meallist = mainFrame.getDataService().getMealServicesByFlightId("AB1234");
 
-for(ExtraService JJ:meallist){
+            for(ExtraService JJ:meallist){
+                int i= 0;
 
                 if (info.equals("Standard")) {
 
                 } else {
-                    if (JJ.getString("classify").equals(info) == false) {
+                    if (JJ.getClassify().equals(info) == false) {
 
                         meallist.remove(i);
                     }
                 }
+                i++;
 
             }
 
-            for (int i = 0; i < meallist.size(); i++) {
-                JJ = meallist.getJSONObject(i);
-                Mealcheckbox.add(JJ.getString("label"));
-                Mealprice.add("price: " + JJ.getString("price"));
-                Mealimag.add(JJ.getString("imgName"));
+            for (ExtraService JJ:meallist) {
+                int i= 0;
+                JJ = meallist.get(i);            
+                Mealcheckbox.add(JJ.getLabel());
+                Mealprice.add("price: " + JJ.getPrice());
+                Mealimag.add(JJ.getImgName());
+                i++;
             }
 
             classify = info;

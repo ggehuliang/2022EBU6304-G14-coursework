@@ -3,6 +3,8 @@ package main.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -22,6 +24,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
+import main.entity.CheckinInfoStruct;
+import main.entity.ExtraService;
+import main.entity.Flight;
+import main.entity.SeatPlanStruct;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
 
@@ -45,11 +51,13 @@ public class FourthPanel extends BasePanel implements ActionListener {
     private String[] seatName1 = {"1A","1B","1C","2A","2B","2C","3A","3B","3C","4A","4B","4C","5A","5B","5C","6A","6B","6C","7A","7B","7C","8A","8B","8C"};
     private JButton[] seatbutton2 = new JButton[24];
     private String[] seatName2 = {"1E","1F","1G","2E","2F","2G","3E","3F","3G","4E","4F","4G","5E","5F","5G","6E","6F","6G","7E","7F","7G","8E","8F","8G"};
+    
 
 
     private MainFrame mainFrame;
 
     public FourthPanel(MainFrame mainFrame) {
+        
         super(mainFrame);
         this.mainFrame = mainFrame;
         back = new JButton("back");
@@ -197,12 +205,13 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
         //----------------------------------------------
 
-        JSONArray seatlist = mainFrame.getDataService().getSeatServicesByFlightId("AB1234");
+        List<ExtraService> seatlist = mainFrame.getDataService().getSeatServicesByFlightId("AB1234");
+
         for (int i = 0; i < seatlist.size(); i++) { 
 
-            JSONObject tool = seatlist.getJSONObject(i);
-            seatcheckbox.add(tool.getString("label")); 
-            seatprice.add("price: "+ tool.getString("price"));
+            ExtraService tool = seatlist.get(i);
+            seatcheckbox.add(tool.getLabel()); 
+            seatprice.add("price: "+ tool.getPrice());
            }
 
            for(int i = 0; i < seatcheckbox.size();i ++ ) 
@@ -225,6 +234,19 @@ public class FourthPanel extends BasePanel implements ActionListener {
            }
 
 //------------------------------------------------------------------------------------
+
+            SF1 sf1 = new SF1();
+            System.out.println(sf1.find("5A",seatName1));
+
+            CheckinInfoStruct booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+            System.out.println(booking.getFlightNo());
+
+            Flight flightinfo = mainFrame.getDataService().getFlightById(booking.getFlightNo());
+            List<String> occupiedSeat = flightinfo.getOccupiedSeat();
+            
+
+
+
             for (int i = 0;i < seatbutton1.length;i ++)
             {
                 if(i<3){
@@ -264,6 +286,18 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
     }
 
+
+    class SF1{
+        public int find(String finder,String[] arr){//finder为要查找的字符串,
+         for(int i=0;i<arr.length;i++){
+             if(finder.equals(arr[i])){
+                 return i;
+             }
+         }
+         return -1;//找到的话就是下标 不是就是-1;
+        }
+    }
+
     public void onCalled(){
         System.out.println("来到选座页");
     }
@@ -277,24 +311,25 @@ public class FourthPanel extends BasePanel implements ActionListener {
             "You haven't chosen your seat yet.","Please select your seat",
             JOptionPane.ERROR_MESSAGE);
             }else{
-            String info ="";
-            System.out.println(info);
-            for(Component box:this.getComponents()){
-                if(box instanceof JCheckBox){
-                    if(((JCheckBox) box).isSelected()){
-                        info += ("\""+((JCheckBox)box).getText()+"\"");
+
+            List<String> extraService = new ArrayList<String>();
+
+            for (Component box : this.getComponents()) {
+                if (box instanceof JCheckBox) {
+                    if (((JCheckBox) box).isSelected()) {
+                        extraService.add(((JCheckBox) box).getText());
                     }
                 }
-            }  
-            System.out.println(info);
-            if(info == ""){
-                info = ("\"No need\"");
             }
-             JSONObject booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-             JSONObject seatSelected=JSON.parseObject("{\"class\": \"头等舱\",\"seatNo\":\""+seatTName+"\",\"extraService\":["+info+"]}");
-             
-            booking.put("seatPlan",seatSelected);
-            System.out.println(booking);
+
+             CheckinInfoStruct booking=mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+             SeatPlanStruct seatSelected = new SeatPlanStruct();
+             seatSelected.setClassify(seatTName);
+             seatSelected.setExtraService(extraService);
+             // JSONObject
+             // mealSelected=JSON.parseObject("{\"classify\":\""+classify+"\",\"extraService\":["+info+"]}");
+             booking.setSeatPlan(seatSelected);
+ 
 
             mainFrame.goPanel(Panels.SEAT_PLAN, Panels.MEAL_PLAN);
 
