@@ -4,17 +4,18 @@ import javax.swing.*;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
+import main.entity.CheckinInfoStruct;
+import main.entity.Flight;
+import main.entity.MealPlanStruct;
+import main.entity.SeatPlanStruct;
+import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 public class ConfirmingPanel extends BasePanel implements ActionListener {
@@ -23,7 +24,7 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
     private JLabel label1;
     private JTextArea inforArea;
     private JLabel label2;
-    private JPanel panel1,panel2,picPanel;
+    private JPanel panel1,panel2,picPanel,scanPanel;
 
 
     private JPanel P5,P6,P7,P8,P9,P10;
@@ -51,11 +52,17 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         label1.setBounds(80, 100, 700, 50);
         this.add(label1);
 
-        inforArea = new JTextArea();
+
+
+        /*inforArea = new JTextArea();
         inforArea.setEditable(false); 
         inforArea.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         inforArea.setBounds(60, 180, 470, 420);
-        this.add(inforArea);
+        JScrollPane scroll=new JScrollPane(inforArea);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.add(scroll);*/
+
+
 
         label2 = new JLabel("Please Scan your ID to confirm!!!");
         label2.setFont(new java.awt.Font("Dialog", 1, 28));
@@ -63,9 +70,19 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         this.add(label2);
 
         picPanel = new JPanel();
-        picPanel.setBounds(600, 400, 350, 200);
-        picPanel.setBackground(Color.green);
+        picPanel.setBounds(600, 150, 350, 200);
+        //picPanel.setBackground(Color.green);
         this.add(picPanel);
+        ImageIcon img = new ImageIcon(Resources.getImgByName("ID.png")) ;
+        JLabel jl3=new JLabel(img);
+		picPanel.add(jl3);
+        
+        scanPanel = new JPanel();
+        scanPanel.setBounds(600, 400, 350, 200);
+        this.add(scanPanel);
+        ImageIcon img1 = new ImageIcon(Resources.getImgByName("ID2.png")) ;
+        JLabel jl4=new JLabel(img1);
+        scanPanel.add(jl4);
 
         go = new JButton("Finished!");
         go.setBounds(900, 675, 100, 40);
@@ -136,48 +153,53 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         public void onCalled(){
 
             System.out.println("来到了值机信息页面");
-            JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-            String bookingNo = checkinInfo.getString("bookingNo");
-            String flightNo = checkinInfo.getString("flightNo");
-            String date = checkinInfo.getString("date");
+            CheckinInfoStruct checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
+            String bookingNo = checkinInfo.getBookingNo();
+            String flightNo = checkinInfo.getFlightNo();
+            //Date date = checkinInfo.getDate();
 
-            JSONObject filghObject = mainFrame.getDataService().getFlightById(flightNo);
-            String from = filghObject.getString("from");
-            String to = filghObject.getString("to");
-            String departureTime = filghObject.getString("departureTime");
-            String arrivalTime =filghObject.getString("arrivalTime");
+            Flight filghObject = mainFrame.getDataService().getFlightById(flightNo);
+            String from = filghObject.getFrom();
+            String to = filghObject.getTo();
+            String departureTime = filghObject.getDepartureTime();
+            String arrivalTime =filghObject.getArrivalTime();
     
-            JSONObject seatPlan = checkinInfo.getJSONObject("seatPlan");
-            String class1 = seatPlan.getString("class");
-            String seatNo = seatPlan.getString("seatNo");
-            String[] extraService1=seatPlan.getJSONArray("extraService").toArray(String[]::new);
+            SeatPlanStruct seatPlan = checkinInfo.getSeatPlan();
+            String class1 = seatPlan.getClassify();
+            String seatNo = seatPlan.getSeatNo();
+            String[] extraService1=seatPlan.getExtraService().toArray(String[]::new);
 
     
-            JSONObject mealPlan = checkinInfo.getJSONObject("mealPlan");
-            String classify = mealPlan.getString("classify");
-            String[] extraService2 =mealPlan.getJSONArray("extraService").toArray(String[]::new);
-    
-            inforArea.setText("BookingNo:"+" "+bookingNo);
-            inforArea.append("\n"+"FlightNo:"+" "+flightNo);
-            inforArea.append("\n"+"Date:"+" "+date);
-            inforArea.append("\n"+"From "+from+" to "+to);
-            inforArea.append("\n"+"DepartureTime: "+departureTime);
-            inforArea.append("\n"+"ArrivalTime: "+arrivalTime);
+            MealPlanStruct mealPlan = checkinInfo.getMealPlan();
+            String classify = mealPlan.getClassify();
+            String[] extraService2 =mealPlan.getExtraService().toArray(String[]::new);
 
-            inforArea.append("\n\n\n"+"SeatPlan");
-            inforArea.append("\n"+"class:"+" "+class1);
-            inforArea.append("\n"+"seatNo:"+" "+seatNo);
-            inforArea.append("\n"+"extraService:");
+            inforArea = new JTextArea();
+            inforArea.setEditable(false); 
+            inforArea.setBounds(60, 180, 470, 420);
+            this.add(inforArea);
+            
+            inforArea.setText("BookingNo:"+"    "+bookingNo);
+            inforArea.append("\n"+"FlightNo:"+"    "+flightNo);
+            //inforArea.append("\n"+"Date:"+"    "+date);
+            inforArea.append("\n"+"From   "+from+"   to   "+to);
+            inforArea.append("\n"+"DepartureTime:    "+departureTime);
+            inforArea.append("\n"+"ArrivalTime:    "+arrivalTime);
+
+            //inforArea.append("\n"+"SeatPlan");
+            inforArea.append("\n"+"Class:"+"    "+class1);
+            inforArea.append("\n"+"SeatNo:"+"    "+seatNo);
+            inforArea.append("\n"+"Seat-extraService:");
             for(int i=0;i<extraService1.length;i++){
-                inforArea.append("\n"+extraService1[i]);
+                inforArea.append("  "+extraService1[i]+" ");
             }
-            inforArea.append("\n\n\n"+"MealPlan");
-            inforArea.append("\n"+"classify:"+" "+classify);
-            inforArea.append("\n"+"extraService:");
+            //inforArea.append("\n\n\n"+"MealPlan");
+            inforArea.append("\n"+"Meal-classify:"+"    "+classify);
+            inforArea.append("\n"+"Meal-extraService:");
             for(int i=0;i<extraService2.length;i++){
-                inforArea.append("\n"+extraService2[i]);
+                inforArea.append("  "+extraService2[i]);
             }
-            inforArea.setFont(new java.awt.Font("Dialog", 1, 15));
+            inforArea.setFont(new java.awt.Font("alias", 1, 20));
             inforArea.setForeground(Color.black);
         }
     

@@ -262,21 +262,21 @@ public class SecondPanel extends BasePanel implements ActionListener {
 			String surname=jtf5.getText();
 			String id=jtf6.getText();
 
-			JSONObject person=mainFrame.getDataService().getPersonById(id);
+			// JSONObject person=mainFrame.getDataService().getPersonById(id);
 			
-			String name="";
-			try {
-				name=person.getJSONObject("baseInfo").getString("surName");
-			} catch (Exception ex) {
+			// String name="";
+			// try {
+			// 	name=person.getJSONObject("baseInfo").getString("surName");
+			// } catch (Exception ex) {
 			
-			}
+			// }
 
-			if(!name.equals(surname)){
-				JOptionPane.showMessageDialog(null, "ID and name not match!", 
-					"Missing information",JOptionPane.ERROR_MESSAGE);
-			}
+			// if(!name.equals(surname)){
+			// 	JOptionPane.showMessageDialog(null, "ID and name not match!", 
+			// 		"Missing information",JOptionPane.ERROR_MESSAGE);
+			// }
 
-			else{
+			// else{
 				if(jtf.getText().equals("")) bn="None";
 				if(jtf5.getText().equals("")) surname="None";
 				if(jtf6.getText().equals("")) id="None";
@@ -287,7 +287,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
 				System.out.println(s1+s2+s3);
 				mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO,info);
 				
-			}
+			// }
 			
         
             // mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO);
