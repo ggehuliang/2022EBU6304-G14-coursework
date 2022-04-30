@@ -195,9 +195,10 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
             }
             //inforArea.append("\n\n\n"+"MealPlan");
             inforArea.append("\n"+"Meal-classify:"+"    "+classify);
+            System.out.println(classify);
             inforArea.append("\n"+"Meal-extraService:");
             for(int i=0;i<extraService2.length;i++){
-                inforArea.append("\n"+extraService2[i]);
+                inforArea.append("  "+extraService2[i]);
             }
             inforArea.setFont(new java.awt.Font("alias", 1, 20));
             inforArea.setForeground(Color.black);
