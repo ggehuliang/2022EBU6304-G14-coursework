@@ -36,7 +36,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
     private JButton start;
     private JPanel P1, P2, P3, P4;
     private JPanel P5, P6, P7, P8, P9, P10;
-    private JLabel PL1, PL2, PL3, PL4, PLL,LP;
+    private JLabel PL1, PL2, PL3, PL4, PLL, LP;
     private JLabel L1, L2, L3, box1, box2;
     private JRadioButton C1, C2, C3;
     private JCheckBox box;
@@ -216,7 +216,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
             // System.out.println(classify);
 
             // if (info == "") {
-            //     info = ("\"No need\"");
+            // info = ("\"No need\"");
             // }
 
             CheckinInfoStruct booking = mainFrame.getDataService()
@@ -228,8 +228,8 @@ public class FifthPanel extends BasePanel implements ActionListener {
             // mealSelected=JSON.parseObject("{\"classify\":\""+classify+"\",\"extraService\":["+info+"]}");
             booking.setMealPlan(mealSelected);
 
-            if (booking.getSeatPlan().getExtraService().size()+
-                    booking.getMealPlan().getExtraService().size()==0) {
+            if (booking.getSeatPlan().getExtraService().size() +
+                    booking.getMealPlan().getExtraService().size() == 0) {
                 mainFrame.goPanel(Panels.MEAL_PLAN, Panels.CONFIRMING);
             } else {
                 mainFrame.goPanel(Panels.MEAL_PLAN, Panels.FEE_PAYMENT);
@@ -256,13 +256,12 @@ public class FifthPanel extends BasePanel implements ActionListener {
                 }
             }
 
-            System.out.println(info);
-            System.out.println(info.equals("Standard"));
-
             List<ExtraService> meallist = mainFrame.getDataService().getMealServicesByFlightId("AB1234");
 
-            for(ExtraService JJ:meallist){
-                int i= 0;
+            
+
+            for (ExtraService JJ : meallist) {
+                int i = 0;
 
                 if (info.equals("Standard")) {
 
@@ -272,17 +271,19 @@ public class FifthPanel extends BasePanel implements ActionListener {
                         meallist.remove(i);
                     }
                 }
+
                 i++;
 
             }
 
-            for (ExtraService JJ:meallist) {
-                int i= 0;
-                JJ = meallist.get(i);            
+            for (int i = 0; i < meallist.size(); i++) {
+
+                ExtraService JJ = meallist.get(i);
+
                 Mealcheckbox.add(JJ.getLabel());
+
                 Mealprice.add("price: " + JJ.getPrice());
                 Mealimag.add(JJ.getImgName());
-                i++;
             }
 
             classify = info;
@@ -290,9 +291,11 @@ public class FifthPanel extends BasePanel implements ActionListener {
         }
 
         for (int i = 0; i < Mealcheckbox.size(); i++) {
+
             String element = Mealcheckbox.get(i);
 
             box = new JCheckBox(element);
+
             box.setFont(new java.awt.Font("Serif", 1, 25));
             box.setBounds(50, y1 + 40 * i, 300, 30);
             this.add(box);

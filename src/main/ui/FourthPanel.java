@@ -47,12 +47,12 @@ public class FourthPanel extends BasePanel implements ActionListener {
     private ArrayList<String> seatprice = new ArrayList<String>();
     private ArrayList<String> occupiedSeat = new ArrayList<String>();
 
-    private JButton[] seatbutton1 = new JButton[24];
+    private JButton[] seatbutton1 = new JButton[27];
     private String[] seatName1 = { "1A", "1B", "1C", "2A", "2B", "2C", "3A", "3B", "3C", "4A", "4B", "4C", "5A", "5B",
-            "5C", "6A", "6B", "6C", "7A", "7B", "7C", "8A", "8B", "8C" };
-    private JButton[] seatbutton2 = new JButton[24];
+            "5C", "6A", "6B", "6C", "7A", "7B", "7C", "8A", "8B", "8C" ,"9A", "9B", "9C"};
+    private JButton[] seatbutton2 = new JButton[27];
     private String[] seatName2 = { "1E", "1F", "1G", "2E", "2F", "2G", "3E", "3F", "3G", "4E", "4F", "4G", "5E", "5F",
-            "5G", "6E", "6F", "6G", "7E", "7F", "7G", "8E", "8F", "8G" };
+            "5G", "6E", "6F", "6G", "7E", "7F", "7G", "8E", "8F", "8G","9E", "9F", "9G"};
 
     private MainFrame mainFrame;
     public FourthPanel(MainFrame mainFrame) {
