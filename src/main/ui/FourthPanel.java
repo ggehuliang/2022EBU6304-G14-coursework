@@ -340,7 +340,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 CheckinInfoStruct booking = mainFrame.getDataService()
                         .getBookingByBookingNo(mainFrame.getOperatingBookingNo());
                 SeatPlanStruct seatSelected = new SeatPlanStruct();
-                seatSelected.setClassify(seatTName);
+                seatSelected.setSeatNo(seatTName);
                 seatSelected.setExtraService(extraService);
                 // JSONObject
                 // mealSelected=JSON.parseObject("{\"classify\":\""+classify+"\",\"extraService\":["+info+"]}");
