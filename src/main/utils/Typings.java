@@ -10,5 +10,6 @@ public class Typings {
         FEE_PAYMENT,
         CONFIRMING,
         FINISHED,
+        ADMIN,
     }
 }
