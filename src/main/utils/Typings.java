@@ -1,7 +1,7 @@
 package main.utils;
 
 public class Typings {
-    public enum Panels {
+    public enum Panels{
         WELCOME,
         CODE_INPUT,
         FLIGHT_INFO,

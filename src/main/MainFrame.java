@@ -38,7 +38,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     public void goPanel(Panels nowPanel, Panels targetPanel, JSONObject param) {
-
+        
         // TODO: 如果有可能的话做成滑动的切换效果？
         // set now panel invisible
 
@@ -95,7 +95,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // panels[Panels.WELCOME.ordinal()].setBounds(0, 0, 400, 800);
         // TODO：背景图还有问题，与Layout冲突，去掉下面这页即可看到背景图
         this.setLayout(new CardLayout());
-        for (BasePanel p : panels) { // for(int i = 0 ; i < panels.length ; i ++){BasePanel p = panels[i] }
+        for (BasePanel p : panels) { //for(int i = 0 ; i < panels.length ; i ++){BasePanel p = panels[i] }
             if (p == null) {
                 continue;
             }
