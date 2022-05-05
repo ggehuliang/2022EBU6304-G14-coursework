@@ -99,6 +99,19 @@ public class DataService {
         return null;
     }
 
+    public List<CheckinInfoStruct> getBookingsByFlightId(String id) {
+        List<CheckinInfoStruct> result = new ArrayList<>();
+        for (Person person : this.allPerson) {
+            List<CheckinInfoStruct> checkinInfos = person.getCheckinInfo();
+            for (CheckinInfoStruct checkin : checkinInfos) {
+                if (checkin.getFlightNo().equals(id)) {
+                    result.add(checkin);
+                }
+            }
+        }
+        return result;
+    }
+
     public List<ExtraService> getSeatServicesByFlightId(String id) {
         List<ExtraService> result = new ArrayList<>();
         HashSet<String> serviceLabels = new HashSet<String>();
