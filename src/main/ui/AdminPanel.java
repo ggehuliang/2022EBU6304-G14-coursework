@@ -24,7 +24,7 @@ import main.utils.Typings.Panels;
 import java.util.List;
 public class AdminPanel extends BasePanel implements ActionListener {
     private MainFrame mainFrame;
-    private JTable flightTable;
+    private JTable flightTable,personTable;
     private JScrollPane flightPane;
     private String[] name={"Flight No","Plane","From","To",
                            "Depature Time","Arrival Time","Time","OccupiedSeat","AvailableExtraSeat","AvailableMeal"};
@@ -132,7 +132,8 @@ public class AdminPanel extends BasePanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Go")){
-            tableInfo[flightTable.getSelectedRow()][flightTable.getSelectedColumn()]="";
+            flightTable.setVisible(false);
+            personTable = new JTable(5,5);
         }
         // TODO Auto-generated method stub
         
