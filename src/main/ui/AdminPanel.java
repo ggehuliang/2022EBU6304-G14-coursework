@@ -6,9 +6,12 @@ import javax.swing.*;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.sql.Date;
 
 import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -18,6 +21,7 @@ import main.MainFrame;
 import main.entity.CheckinInfoStruct;
 import main.entity.Flight;
 import main.entity.MealPlanStruct;
+import main.entity.Person;
 import main.entity.SeatPlanStruct;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
@@ -25,30 +29,22 @@ import java.util.List;
 public class AdminPanel extends BasePanel implements ActionListener {
     private MainFrame mainFrame;
     private JTable flightTable,personTable;
-    private JScrollPane flightPane;
-    private String[] name={"Flight No","Plane","From","To",
+    private JScrollPane flightPane,personPane;
+    private String[] name={"FlightNo","Plane","From","To",
                            "Depature Time","Arrival Time","Time","OccupiedSeat","AvailableExtraSeat","AvailableMeal"};
+    private String[] personName={"FlightNo","ID","Name","BookingNo","Date","CheckinFinished","SeatClassify","SeatNo",
+                            "SeatExtraService","MealClassify","MealExtraService"};
     private List<Flight> allFlight;
+    private List<CheckinInfoStruct> allCheckin;
     private JButton button;
     private Object[][] tableInfo;
+    private Object[][] checkInfo;
     private int x,y;
     public AdminPanel(MainFrame mainFrame) {
         super(mainFrame);
         this.mainFrame=mainFrame;
         this.setOpaque(false);
         this.setLayout(null);
-        //flightTable= new JTable(5,6);
-        //add(flightTable);
-        /*for(int i=0;i<5;i++)
-        {
-            tableDate[i][0]="1000"+i;
-            for(int j=1;j<8;j++)
-            {
-                tableDate[i][j]=0;
-            }
-        }
-        String[] name={"学号","软件工程","Java","网络","数据结构","数据库","总成绩","平均成绩"};
-        JTable table=new JTable(tableDate,name);*/
         allFlight = mainFrame.getDataService().getAllFlight();
         Object[][] tableInfo=new Object[allFlight.size()][10];
         for(int i=0;i<allFlight.size();i++){
@@ -94,8 +90,21 @@ public class AdminPanel extends BasePanel implements ActionListener {
         flightPane.setBounds(10, 10, 900, 600);
         this.add(flightPane);
 
-        x =flightTable.getSelectedRow();
-        y=flightTable.getSelectedColumn();
+        flightPane.setVisible(true);
+        //System.out.println(tableInfo[flightTable.getSelectedRow()][0].toString());
+        //allCheckin = mainFrame.getDataService().getBookingsByFlightId(tableInfo[flightTable.getSelectedRow()][0].toString());
+        flightTable.setRowSelectionAllowed(true);//设置是否可以选择此模型中的行
+        flightTable.setColumnSelectionAllowed(true);//设置是否可以选择此模型中的列
+        flightTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        /*flightTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int row=flightTable.getSelectedRow();//选中行
+                //int col=flightTable.getSelectedColumn();//选中列
+                //System.out.println("方法一:"+flightTable.getValueAt(row, 1));   
+            }
+        });*/
 
         button = new JButton("Go");
         button.addActionListener(this);
@@ -103,39 +112,54 @@ public class AdminPanel extends BasePanel implements ActionListener {
         button.setBounds(900, 675, 100, 40);
         this.add(button);
         //CheckinInfoStruct allFlight.get(index).getFlightNo();
-        
-        /*flightTable.addMouseListener(new java.awt.event.MouseAdapter(){
-
-            public void mouseClicked(MouseEvent e) {//仅当鼠标单击时响应
-
-               //得到选中的行列的索引值
-
-              int r= table.getSelectedRow();
-
-              int c= table.getSelectedColumn();
-
-              //得到选中的单元格的值，表格中都是字符串
-
-              Object value= table.getValueAt(r, c);
-
-           String info=r+"行"+c+"列值 : "+value.toString();
-
-           javax.swing.JOptionPane.showMessageDialog(null,info);
-
-            }
-
-        });*/
-        
-        
     }
 
-    @Override
+
+
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Go")){
-            flightTable.setVisible(false);
-            personTable = new JTable(5,5);
+            personPane.setVisible(true);
+            flightPane.setVisible(false);
+            //System.out.println(tableInfo[flightTable.getSelectedRow()][0].toString());
+            allCheckin = mainFrame.getDataService().getBookingsByFlightId(tableInfo[flightTable.getSelectedRow()][0].toString());
+            //allCheckin = mainFrame.getDataService().getBookingsByFlightId("AB1235");
+            //System.out.println(allCheckin.get(0).getBookingNo());
+            checkInfo = new Object[allCheckin.size()][11];
+
+            for(int i=0;i<allCheckin.size();i++){
+            Person person = mainFrame.getDataService().getPersonByBookingNo(allCheckin.get(i).getBookingNo());
+            checkInfo[i][0] = allCheckin.get(i).getFlightNo();
+            checkInfo[i][1] = person.getBaseInfo().getId();
+            checkInfo[i][2] = person.getBaseInfo().getSurName()+person.getBaseInfo().getFirstName();
+            checkInfo[i][3] = allCheckin.get(i).getBookingNo();
+            checkInfo[i][5] = allCheckin.get(i).isCheckinFinished();
+            if(allCheckin.get(i).isCheckinFinished()){
+                checkInfo[i][6] = allCheckin.get(i).getSeatPlan().getClassify();
+                checkInfo[i][7] = allCheckin.get(i).getSeatPlan().getSeatNo();
+                String[] seatExtra = allCheckin.get(i).getSeatPlan().getExtraService().toArray(String[]::new);
+                String seatExtraInfo="",mealExtraInfo="";
+            for(int j=0;j<seatExtra.length;j++){
+                seatExtraInfo = seatExtraInfo + seatExtra[j];
+                if(j!=seatExtra.length-1){
+                seatExtraInfo= seatExtraInfo+","; 
+                }
+            }
+            checkInfo[i][8] = seatExtraInfo;
+            checkInfo[i][9] = allCheckin.get(i).getMealPlan().getClassify();
+            String[] mealExtra = allCheckin.get(i).getMealPlan().getExtraService().toArray(String[]::new);
+            for(int j=0;j<mealExtra.length;j++){
+                mealExtraInfo = mealExtraInfo + mealExtra[j];
+                if(j!=mealExtra.length-1){
+                mealExtraInfo= mealExtraInfo+","; 
+                }
+            }
+            checkInfo[i][10] = mealExtraInfo;
+            }  
         }
-        // TODO Auto-generated method stub
-        
+        personTable = new JTable(checkInfo, personName);
+        personPane = new JScrollPane(personTable);
+        personPane.setBounds(10, 10, 900, 600);
+        this.add(personPane);
     }
+}
 }
