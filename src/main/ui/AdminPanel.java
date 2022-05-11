@@ -121,7 +121,7 @@ public class AdminPanel extends BasePanel implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Please select a flight number");
             }else{      
             //personPane.setVisible(true);
-            //flightPane.setVisible(false);   
+            flightPane.setVisible(false);   
             allCheckin = mainFrame.getDataService().getBookingsByFlightId((String) flightTable.getValueAt(row, col));
             System.out.println(flightTable.getValueAt(row, col));
                 String a = (String) flightTable.getValueAt(row, col);
@@ -165,6 +165,8 @@ public class AdminPanel extends BasePanel implements ActionListener {
         personTable = new JTable(checkInfo, personName);
         personTable.setShowHorizontalLines(true);
         personTable.setShowVerticalLines(true);
+        personTable.setRowSelectionAllowed(false);//设置是否可以选择此模型中的行
+        personTable.setColumnSelectionAllowed(false);//设置是否可以选择此模型中的列
         //personTable.setGridColor(Color.black);
         personPane =new JScrollPane(personTable);
         personPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
