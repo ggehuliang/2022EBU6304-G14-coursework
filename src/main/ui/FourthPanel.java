@@ -3,7 +3,7 @@ package main.ui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.Arrays;
 import java.util.List;
 import java.awt.Color;
 import java.awt.Component;
@@ -19,9 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+// import com.alibaba.fastjson.JSON;
+// import com.alibaba.fastjson.JSONArray;
+// import com.alibaba.fastjson.JSONObject;
 
 import main.MainFrame;
 import main.entity.CheckinInfoStruct;
@@ -37,7 +37,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
     private JPanel P1, P2, P3, P4, P41, P42;
     private JPanel P5, P6, P7, P8, P9, P10;
     private JLabel PL1, PL2, PL3, PL4, PLL;
-    private JLabel L1, L2, L3, L4, LP, box1, box2;
+    private JLabel L1, L2, L3, L4, box1;
     private JTextField F1, F2;
     private JCheckBox box;
     private int y1 = 370, chooseno = 5;
@@ -45,7 +45,6 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
     private ArrayList<String> seatcheckbox = new ArrayList<String>();
     private ArrayList<String> seatprice = new ArrayList<String>();
-    private ArrayList<String> occupiedSeat = new ArrayList<String>();
 
     private JButton[] seatbutton1 = new JButton[27];
     private String[] seatName1 = { "1A", "1B", "1C", "2A", "2B", "2C", "3A", "3B", "3C", "4A", "4B", "4C", "5A", "5B",
@@ -94,7 +93,6 @@ public class FourthPanel extends BasePanel implements ActionListener {
         P4.setBackground(Color.pink);
         P4.setOpaque(false);
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
-        LP = new JLabel(new ImageIcon(Resources.getImgByName("flight.png")));
         this.add(P4);
 
         P41 = new JPanel();
@@ -282,7 +280,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 }
             }
 
-            seatbutton1[i].setPreferredSize(new Dimension(55, 55));
+            seatbutton1[i].setPreferredSize(new Dimension(53, 53));
             seatbutton1[i].setHorizontalTextPosition(JButton.CENTER);
             seatbutton1[i].setFont(new Font("Times New Roman", Font.BOLD, 10));
             seatbutton1[i].addActionListener(this);
@@ -307,7 +305,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
                     }
                 }
             }
-            seatbutton2[i].setPreferredSize(new Dimension(55, 55));
+            seatbutton2[i].setPreferredSize(new Dimension(53, 53));
             seatbutton2[i].setHorizontalTextPosition(JButton.CENTER);
             seatbutton2[i].setFont(new Font("Times New Roman", Font.BOLD, 10));
             seatbutton2[i].addActionListener(this);
@@ -358,8 +356,6 @@ public class FourthPanel extends BasePanel implements ActionListener {
         }
 
         if (e.getActionCommand().substring(0, 1).equals("#")) {
-
-
 
             seatbutton1[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
             seatbutton2[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
