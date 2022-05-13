@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
 import java.awt.Component;
+// import java.awt.Dimension;
+// import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -13,15 +15,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+// import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.asm.Label;
-import com.formdev.flatlaf.json.Json;
+// import com.alibaba.fastjson.JSON;
+// import com.alibaba.fastjson.JSONArray;
+// import com.alibaba.fastjson.JSONObject;
+// import com.alibaba.fastjson.asm.Label;
+// import com.formdev.flatlaf.json.Json;
 
 import main.MainFrame;
 import main.entity.CheckinInfoStruct;
@@ -31,23 +33,27 @@ import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 public class FifthPanel extends BasePanel implements ActionListener {
-    private JButton back;
-    private JButton go;
-    private JButton start;
+    private JButton back, go, start, box2, Refresh;
     private JPanel P1, P2, P3, P4;
     private JPanel P5, P6, P7, P8, P9, P10;
-    private JLabel PL1, PL2, PL3, PL4, PLL, LP;
-    private JLabel L1, L2, L3, box1, box2;
+    private JLabel PL1, PL2, PL3, PL4, PLL;
+    private JLabel L1, L2, L3, box1, box3;
     private JRadioButton C1, C2, C3;
     private JCheckBox box;
-    private JSONObject JJ, mealname0, mealname1, mealname2;
+    // private JSONObject JJ, mealname0, mealname1, mealname2;
 
     private int y1 = 370;
     private String classify = "233";
 
     private ArrayList<String> Mealcheckbox = new ArrayList<String>();
+    // private ArrayList<String> Mealbutton = new ArrayList<String>();
     private ArrayList<String> Mealprice = new ArrayList<String>();
     private ArrayList<String> Mealimag = new ArrayList<String>();
+
+    private ArrayList<JCheckBox> Mealcheckbox1 = new ArrayList<JCheckBox>();
+    // private ArrayList<String> Mealbutton = new ArrayList<String>();
+    private ArrayList<JLabel> Mealprice1 = new ArrayList<JLabel>();
+    private ArrayList<JButton> Mealbutton1 = new ArrayList<JButton>();
 
     private MainFrame mainFrame;
 
@@ -88,9 +94,9 @@ public class FifthPanel extends BasePanel implements ActionListener {
         P4.setBounds(520, 100, 450, 525);
         P4.setBackground(Color.pink);
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
-        LP = new JLabel(new ImageIcon(Resources.getImgByName("meal.png")));
+        // LP = new JLabel(new ImageIcon(Resources.getImgByName("meal.png")));
         this.add(P4);
-        P4.add(LP);
+        // P4.add(LP);
 
         // ----------------------------------------------------------------------------------------------
         P9 = new JPanel();
@@ -191,16 +197,30 @@ public class FifthPanel extends BasePanel implements ActionListener {
         start.setBounds(300, 310, 100, 30);
         start.addActionListener(this);
         start.setActionCommand("start");
+        this.repaint();
+
+        Refresh = new JButton("Refresh");
+        // this.add(Refresh);
+        Refresh.setBounds(400, 310, 100, 30);
+        Refresh.addActionListener(this);
+        Refresh.setActionCommand("Refresh");
+
+        this.repaint();
 
     }
 
     public void onCalled() {
         System.out.println("来到选餐页");
+        this.repaint();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        mainFrame.repaint();
+        this.repaint();
         if (e.getActionCommand().equals("go")) {
+
+            this.repaint();
             // mainFrame.goPanel(Panels.MEAL_PLAN, Panels.WELCOME);//test
 
             List<String> extraService = new ArrayList<String>();
@@ -236,6 +256,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
             }
         }
         if (e.getActionCommand().equals("back")) {
+            repaint();
 
             mainFrame.goPanel(Panels.MEAL_PLAN, Panels.SEAT_PLAN);
 
@@ -244,10 +265,32 @@ public class FifthPanel extends BasePanel implements ActionListener {
 
         if (e.getActionCommand().equals("start")) {
 
+            
+            this.repaint();
             Mealcheckbox.clear();
+            Mealprice.clear();
+
+            this.repaint();
+
+            for (int i = Mealcheckbox1.size() - 1; i >= 0; i--) {
+                this.remove(Mealcheckbox1.get(i));
+                ;
+
+            }
+            for (int i = Mealprice1.size() - 1; i >= 0; i--) {
+                this.remove(Mealprice1.get(i));
+                ;
+
+            }
+            for (int i = Mealbutton1.size() - 1; i >= 0; i--) {
+                this.remove(Mealbutton1.get(i));
+                ;
+
+            }
+
 
             String info = "";
-            System.out.println(info);
+
             for (Component C : this.getComponents()) {
                 if (C instanceof JRadioButton) {
                     if (((JRadioButton) C).isSelected()) {
@@ -255,17 +298,17 @@ public class FifthPanel extends BasePanel implements ActionListener {
                     }
                 }
             }
+            System.out.println(info);
 
             List<ExtraService> meallist = mainFrame.getDataService().getMealServicesByFlightId("AB1234");
 
-            
-
             for (ExtraService JJ : meallist) {
                 int i = 0;
-
+                System.out.println(JJ.getClassify());
                 if (info.equals("Standard")) {
 
                 } else {
+
                     if (JJ.getClassify().equals(info) == false) {
 
                         meallist.remove(i);
@@ -281,53 +324,82 @@ public class FifthPanel extends BasePanel implements ActionListener {
                 ExtraService JJ = meallist.get(i);
 
                 Mealcheckbox.add(JJ.getLabel());
-
                 Mealprice.add("price: " + JJ.getPrice());
                 Mealimag.add(JJ.getImgName());
             }
 
             classify = info;
 
+            for (int i = 0; i < Mealcheckbox.size(); i++) {
+
+                String element = Mealcheckbox.get(i);
+                box = new JCheckBox(element);
+                box.setFont(new java.awt.Font("Serif", 1, 25));
+                box.setBounds(50, y1 + 40 * i, 300, 30);
+                this.add(box);
+                box.addActionListener(this);
+                box.setActionCommand("box" + i);
+                Mealcheckbox1.add(box);
+            }
+
+            for (int i = 0; i < Mealprice.size(); i++) {
+                String element1 = Mealprice.get(i);
+                box1 = new JLabel(element1);
+                box1.setFont(new java.awt.Font("Serif", 1, 25));
+                box1.setBounds(170, y1 + 40 * i, 300, 30);
+                this.add(box1);
+                Mealprice1.add(box1);
+            }
+
+            for (int i = 0; i < Mealcheckbox.size(); i++) {
+                String element2 = Mealimag.get(i);
+                box2 = new JButton("picture");
+                box2.setBounds(300, y1 + 40 * i, 100, 30);
+                box2.addActionListener(this);
+                box2.setActionCommand("p" + element2);
+
+                this.add(box2);
+                Mealbutton1.add(box2);
+            }
+
         }
 
-        for (int i = 0; i < Mealcheckbox.size(); i++) {
+        if (e.getActionCommand().substring(0, 1).equals("p")) {
 
-            String element = Mealcheckbox.get(i);
+            P4.repaint();
+            this.repaint();
+            P4.removeAll();
 
-            box = new JCheckBox(element);
-
-            box.setFont(new java.awt.Font("Serif", 1, 25));
-            box.setBounds(50, y1 + 40 * i, 300, 30);
-            this.add(box);
-            box.addActionListener(this);
-            box.setActionCommand("box" + i);
+            System.out.println(e.getActionCommand().substring(1));
+            box3 = new JLabel(new ImageIcon(Resources.getImgByName(e.getActionCommand().substring(1))));
+            P4.add(box3);
+            mainFrame.goPanel(Panels.MEAL_PLAN, Panels.MEAL_PLAN);
         }
+        // this.repaint();
+        // mainFrame.repaint();
 
-        for (int i = 0; i < Mealprice.size(); i++) {
-            String element1 = Mealprice.get(i);
-            box1 = new JLabel(element1);
-            box1.setFont(new java.awt.Font("Serif", 1, 25));
-            box1.setBounds(200, y1 + 40 * i, 300, 30);
-            this.add(box1);
+        if (e.getActionCommand().equals("Refresh")) {
+
+            this.repaint();
+
+            for (int i = Mealcheckbox1.size() - 1; i >= 0; i--) {
+                this.remove(Mealcheckbox1.get(i));
+                ;
+
+            }
+            for (int i = Mealprice1.size() - 1; i >= 0; i--) {
+                this.remove(Mealprice1.get(i));
+                ;
+
+            }
+            for (int i = Mealbutton1.size() - 1; i >= 0; i--) {
+                this.remove(Mealbutton1.get(i));
+                ;
+
+            }
+
+            mainFrame.goPanel(Panels.MEAL_PLAN, Panels.MEAL_PLAN);
         }
-
-        // for(int i = 0; i < Mealimag.size();i ++ )
-        // { String element2 = Mealimag.get(i);
-        // box2 = new JLabel(new ImageIcon(Resources.getImgByName("chickenM.png")));
-        // P4.add(box2);
-        // }
-
-        // if (e.getActionCommand().equals("box"+ 0)) {
-
-        // String str="";
-        // Component[] jcbs = this.getComponents();//将勾选的内容存入数组
-        // for(Component component : jcbs) {
-        // JCheckBox jcb = (JCheckBox) component;
-        // if(jcb.isSelected()) {
-        // str+=jcb.getText()+" ";
-        // }
-        // }
-        // System.out.println(str);
 
     }
 
