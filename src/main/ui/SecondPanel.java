@@ -9,12 +9,20 @@ import java.awt.event.KeyEvent;
 import javax.swing.border.Border;
 import com.alibaba.fastjson.*;
 import main.MainFrame;
+import main.entity.Person;
 import main.utils.Typings.Panels;
 
+/**
+ * Title: SecondPanel.java
+ * 
+ * This class is used to design the interface for user to check in and improve the interface interactivity.
+ * @author Jiangshan Wang Group14
+ * @version 2.0
+ */
 public class SecondPanel extends BasePanel implements ActionListener {
 
     private MainFrame mainFrame;
-    private JPanel top,med,bot;
+    private JPanel top,bot;
 	private JPanel bnp,pip,cp;
 	private JPanel jp_title,jp1,jp2,jp3,jp4,jp5,jp6,jp7;
 	private JPanel button;
@@ -26,6 +34,9 @@ public class SecondPanel extends BasePanel implements ActionListener {
 	private JPanel P1,P2,P5,P6,P7,P8,P9,P10;
     private JLabel PL1,PL2,PL3,PL4,PLL;
 	
+	/**
+	 * This is a constructor for class SecondPanel, which create the main interface.
+	 */
     public SecondPanel(MainFrame mainFrame) {
         super(mainFrame);
         this.mainFrame = mainFrame;
@@ -48,9 +59,6 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		button.add(jb_back);
 		top.add(button);
 
-		// bnp.setBounds(100,250,250,350);
-		// pip.setBounds(385,250,250,350);
-		// cp.setBounds(670,250,250,350);
 		jp_title=new JPanel();
 		jp_title.add(title_zong);
 		jp_title.setBounds(70,100,900,100);
@@ -68,9 +76,6 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		jtp.setBorder(BorderFactory.createTitledBorder(etchedBorder));
 		jtp.setBounds(100,200,800,400);
 		this.add(jtp);
-		// this.add(bnp);
-		// this.add(pip);
-		// this.add(cp);
 		this.add(bot);
 
 		//加线
@@ -139,7 +144,9 @@ public class SecondPanel extends BasePanel implements ActionListener {
         this.add(P8);
 //----------------------------------------------------------------------------------------------		
     }
-
+	/**
+	 * This method is used to create the JTabbedPane, which is the main part of this panel, used for checking in.
+	 */
 	public JTabbedPane creatJTabbedPaneDemo()
 	{
 	    JTabbedPane tabbedPane=new JTabbedPane();
@@ -157,7 +164,9 @@ public class SecondPanel extends BasePanel implements ActionListener {
 
 	    return tabbedPane;
 	}
-
+	/**
+	 * This method is used to create image icon.
+	 */
 	protected static ImageIcon createImageIcon(String path)
 	{
 	    java.net.URL imgURL=SecondPanel.class.getResource(path);
@@ -172,10 +181,11 @@ public class SecondPanel extends BasePanel implements ActionListener {
 	    }
 	}
 
+	/**
+	 * This method is used to create the panel for users using booking number to check in.
+	 */
 	protected JComponent bookingnumPanel()
 	{
-		Border etchedBorder;
-		etchedBorder = BorderFactory.createEtchedBorder();
 		Border lineBorder;
 		lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY,2);
 		title=new JLabel("Use your booking number to check in",JLabel.CENTER);
@@ -187,7 +197,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		jp3=new JPanel();
 		jb3=new JButton("Check In!");
 		jb3.addActionListener(this);
-		jb3.setActionCommand("Check In!");
+		jb3.setActionCommand("Check In!bn");
 		jtf=new JTextField(15);
 		jtf.setBorder(BorderFactory.createTitledBorder(lineBorder,"booking number"));
 		jp1.add(title,BorderLayout.CENTER);
@@ -203,10 +213,11 @@ public class SecondPanel extends BasePanel implements ActionListener {
 	    return bnp;
 	}
 
+	/**
+	 * This method is used to create the panel for users using surname and id to check in.
+	 */
 	protected JComponent nameidPanel()
 	{
-		Border etchedBorder;
-		etchedBorder = BorderFactory.createEtchedBorder();
 		Border lineBorder;
 		lineBorder = BorderFactory.createLineBorder(Color.LIGHT_GRAY,2);
 		title_1=new JLabel("Use your personal information to check in",JLabel.CENTER);
@@ -218,7 +229,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		jp7=new JPanel();
 		jb7=new JButton("Check In!");
 		jb7.addActionListener(this);
-		jb7.setActionCommand("Check In!");
+		jb7.setActionCommand("Check In!s");
 		jtf5=new JTextField(10);
 		jtf6=new JTextField(10);
 		
@@ -238,14 +249,14 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		return pip;
 	}
 
+	/**
+	 * This method is used to create the panel for users using their card to check in.
+	 */
 	protected JComponent cardPanel(){
-		Border etchedBorder;
-		etchedBorder = BorderFactory.createEtchedBorder();
 		cp=new JPanel();
 		title_2=new JLabel("Scan your card to check in",JLabel.CENTER);
 		title_2.setFont(new Font("",Font.BOLD, 22));
 		cp.add(title_2);
-		// cp.setBorder(BorderFactory.createTitledBorder(etchedBorder));
 		return cp;
 	}
 	
@@ -254,43 +265,74 @@ public class SecondPanel extends BasePanel implements ActionListener {
         System.out.println("来到信息填写页");
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Check In!")) {
+        if (e.getActionCommand().equals("Check In!bn")) {
 
 			String bn=jtf.getText();
 			String surname=jtf5.getText();
 			String id=jtf6.getText();
+			Person person;
 
-			// JSONObject person=mainFrame.getDataService().getPersonById(id);
-			
-			// String name="";
-			// try {
-			// 	name=person.getJSONObject("baseInfo").getString("surName");
-			// } catch (Exception ex) {
-			
-			// }
-
-			// if(!name.equals(surname)){
-			// 	JOptionPane.showMessageDialog(null, "ID and name not match!", 
-			// 		"Missing information",JOptionPane.ERROR_MESSAGE);
-			// }
-
-			// else{
-				if(jtf.getText().equals("")) bn="None";
-				if(jtf5.getText().equals("")) surname="None";
-				if(jtf6.getText().equals("")) id="None";
-				JSONObject info=JSON.parseObject("{\"booking_num\":\""+bn+"\",\"surname\":\""+surname+"\",\"id\":\""+id+"\"}");
-				String s1 = info.getString("booking_num");
-				String s2 = info.getString("surname");
-				String s3 = info.getString("id");
-				System.out.println(s1+s2+s3);
-				mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO,info);
+			if (!bn.equals("")) {
+		
+				person = mainFrame.getDataService().getPersonByBookingNo(bn);
+				if(person==null){
+					JOptionPane.showMessageDialog(null, "This booking number doesn't exists!", 
+					"Missing information",JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					surname="None";
+					id="None";
+					JSONObject info=JSON.parseObject("{\"booking_num\":\""+bn+"\",\"surname\":\""+surname+"\",\"id\":\""+id+"\"}");
+					String s1 = info.getString("booking_num");
+					String s2 = info.getString("surname");
+					String s3 = info.getString("id");
+					System.out.println(s1+s2+s3);
+					mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO,info);
+					
+				}
 				
-			// }
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "Please input your booking number!", 
+					"Missing information",JOptionPane.ERROR_MESSAGE);
+			}
+            
+        }
+
+		if (e.getActionCommand().equals("Check In!s")) {
+
+			String bn=jtf.getText();
+			String surname=jtf5.getText();
+			String id=jtf6.getText();
+			Person person;
 			
-        
-            // mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO);
+			if(surname.equals("")||id.equals("")){
+				JOptionPane.showMessageDialog(null, "Please fill in the missing information!", 
+					"Missing information",JOptionPane.ERROR_MESSAGE);
+			}
+			else{
+				person = mainFrame.getDataService().getPersonById(id);
+				if(person==null){
+					JOptionPane.showMessageDialog(null, "Surname and id not match!", 
+					"Missing information",JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					String real_surname=person.getBaseInfo().getSurName();
+					if(!real_surname.equals(surname)){
+						JOptionPane.showMessageDialog(null, "Surname and id not match!", 
+					"Missing information",JOptionPane.ERROR_MESSAGE);
+					}
+					else{
+						bn="None";
+						JSONObject info=JSON.parseObject("{\"booking_num\":\""+bn+"\",\"surname\":\""+surname+"\",\"id\":\""+id+"\"}");
+						mainFrame.goPanel(Panels.CODE_INPUT, Panels.FLIGHT_INFO,info);
+					}
+				}
+			}
+			
             
         }
         if (e.getActionCommand().equals("back")) {
