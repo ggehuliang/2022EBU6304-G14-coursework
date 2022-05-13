@@ -16,88 +16,99 @@ import main.entity.SeatPlanStruct;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
 
+/**
+ * This is PaymentPanel class filling payment information
+ *
+ * @author Yikai Wang
+ * @version 1.0
+ */
 public class PaymentPanel extends BasePanel implements ActionListener {
+    /**
+     * Add some basic components used in this panel
+     */
     private JButton back;
     private JButton go;
     private MainFrame mainFrame;
-    private JLabel label1;
+    private JLabel label1,label2;
     private JTextArea feeArea;
-    private JLabel label2;
-    private JTextField cardId;
-    private JTextField cardPassword;
-    private JPanel panel1,panel2,picPanel;
-    private JPanel P5,P6,P7,P8,P9,P10;
+    private JTextField cardPassword,cardId;
+    private JPanel panel1,panel2,picPanel,P5,P6,P7,P8,P9,P10;
     private JLabel PL1,PL2,PL3,PL4,PLL;
     private String card,password;
     private CheckinInfoStruct checkinInfo;
-    
 
+    /**
+     * Add constructor for PaymentPanel.It will create panel and add some basic components of it.
+     * @param mainFrame
+     */
     public PaymentPanel(MainFrame mainFrame) {
+        //Invoke the parent class constructor
         super(mainFrame);
         this.mainFrame=mainFrame;
         this.setOpaque(false);
         this.setLayout(null);
         
-
+        //Creat meal options button
+        go = new JButton("Confirming");
+        go.setBounds(900, 675, 100, 40);
+        go.addActionListener(this);
+        go.setActionCommand("go");
+        this.add(go); 
         back = new JButton("Meal options");
         back.setBounds(10, 15, 120, 40);
+        back.addActionListener(this);
+        back.setActionCommand("back");
         this.add(back);
 
+        //Create panel with background
         panel1 = new JPanel();
         panel1.setBounds(0, 70, 10000, 5);
         panel1.setBackground(new Color(100,100,200));
         this.add(panel1);
-
         panel2 = new JPanel();
         panel2.setBounds(0, 655, 10000, 5);
         panel2.setBackground(new Color(100,100,200));
         this.add(panel2);
-        
+
+        //Create new label with text
         label1 = new JLabel("YOUR ADDITIONAL FEE:");
         label1.setFont(new java.awt.Font("Serif", 1, 35));
         label1.setBounds(80, 100, 700, 50);
         this.add(label1);
 
+        //Create new textarea displaying payment information
         feeArea = new JTextArea();
         feeArea.setBounds(60, 180, 470, 420);
         feeArea.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         feeArea.setEditable(false);
         this.add(feeArea);
         
+        //Create new label with text
         label2 = new JLabel("Please input your CreditID and Password");
         label2.setFont(new java.awt.Font("Dialog", 1, 20));
         label2.setBounds(580, 400, 400,50);
         this.add(label2);
+        
+        //Create new textfield to input card Id and password
         cardId = new JTextField();
         cardId.setBorder(BorderFactory.createTitledBorder("CardID"));
         cardId.setBounds(630, 460, 300, 35);
         cardId.setActionCommand("ID");
         cardId.addActionListener(this);
-
         this.add(cardId);
         cardPassword = new JTextField();
         cardPassword.setBorder(BorderFactory.createTitledBorder("CardPassword"));
         cardPassword.setBounds(630, 520, 300, 35);
         this.add(cardPassword);
         
-
+        //Create new picture panel
         picPanel = new JPanel();
         picPanel.setBounds(630, 180, 300, 200);
         JLabel jl3=new JLabel(new ImageIcon(Resources.getImgByName("pay2.png")));
 		picPanel.add(jl3);
-        //jl3.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1, true));
         jl3.setBounds(630, 180, 300, 220);
-        //picPanel.setBackground(Color.green);
         this.add(picPanel);
-        
-        go = new JButton("Confirming");
-        go.setBounds(900, 675, 100, 40);
-        this.add(go);
-        
-        back.addActionListener(this);
-        back.setActionCommand("back");
-        go.addActionListener(this);
-        go.setActionCommand("go");
+
 //----------------------------------------------------------------------------------------------
         P9 = new JPanel();
         P9.setBounds(203, 716, 500, 4);
@@ -159,6 +170,9 @@ public class PaymentPanel extends BasePanel implements ActionListener {
   
         
     }
+    /**
+     * When this panel is invoked, Calling this method to display service and payment information 
+     */
     public void onCalled(){
 
         System.out.println("来到了付款信息页面");
@@ -187,9 +201,13 @@ public class PaymentPanel extends BasePanel implements ActionListener {
         feeArea.setForeground(Color.black);
        
     }
-
+    /**
+     * Listener for button
+     */
     public void actionPerformed(ActionEvent e) {
+        //Listener for go button
         if (e.getActionCommand().equals("go")) {
+            //Check card and passsword information 
             card = cardId.getText();
             password = cardPassword.getText();
         boolean flag =mainFrame.getDataService().checkCreditCardPassword(card, password);
@@ -209,6 +227,7 @@ public class PaymentPanel extends BasePanel implements ActionListener {
             }
             
         }
+        //Listener for back button
         else if (e.getActionCommand().equals("back")) {
             mainFrame.goPanel(Panels.FEE_PAYMENT, Panels.MEAL_PLAN);
         }
