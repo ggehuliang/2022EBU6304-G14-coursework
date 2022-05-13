@@ -33,11 +33,11 @@ import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 public class FifthPanel extends BasePanel implements ActionListener {
-    private JButton back, go,start, box2;
+    private JButton back, go, start, box2, Refresh;
     private JPanel P1, P2, P3, P4;
     private JPanel P5, P6, P7, P8, P9, P10;
     private JLabel PL1, PL2, PL3, PL4, PLL;
-    private JLabel L1, L2, L3, box1,box3;
+    private JLabel L1, L2, L3, box1, box3;
     private JRadioButton C1, C2, C3;
     private JCheckBox box;
     // private JSONObject JJ, mealname0, mealname1, mealname2;
@@ -49,6 +49,11 @@ public class FifthPanel extends BasePanel implements ActionListener {
     // private ArrayList<String> Mealbutton = new ArrayList<String>();
     private ArrayList<String> Mealprice = new ArrayList<String>();
     private ArrayList<String> Mealimag = new ArrayList<String>();
+
+    private ArrayList<JCheckBox> Mealcheckbox1 = new ArrayList<JCheckBox>();
+    // private ArrayList<String> Mealbutton = new ArrayList<String>();
+    private ArrayList<JLabel> Mealprice1 = new ArrayList<JLabel>();
+    private ArrayList<JButton> Mealbutton1 = new ArrayList<JButton>();
 
     private MainFrame mainFrame;
 
@@ -192,6 +197,13 @@ public class FifthPanel extends BasePanel implements ActionListener {
         start.setBounds(300, 310, 100, 30);
         start.addActionListener(this);
         start.setActionCommand("start");
+        this.repaint();
+
+        Refresh = new JButton("Refresh");
+        // this.add(Refresh);
+        Refresh.setBounds(400, 310, 100, 30);
+        Refresh.addActionListener(this);
+        Refresh.setActionCommand("Refresh");
 
         this.repaint();
 
@@ -207,6 +219,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
         mainFrame.repaint();
         this.repaint();
         if (e.getActionCommand().equals("go")) {
+
             this.repaint();
             // mainFrame.goPanel(Panels.MEAL_PLAN, Panels.WELCOME);//test
 
@@ -251,14 +264,33 @@ public class FifthPanel extends BasePanel implements ActionListener {
         }
 
         if (e.getActionCommand().equals("start")) {
-            mainFrame.repaint();
-            this.repaint();
 
+            
+            this.repaint();
             Mealcheckbox.clear();
             Mealprice.clear();
 
+            this.repaint();
+
+            for (int i = Mealcheckbox1.size() - 1; i >= 0; i--) {
+                this.remove(Mealcheckbox1.get(i));
+                ;
+
+            }
+            for (int i = Mealprice1.size() - 1; i >= 0; i--) {
+                this.remove(Mealprice1.get(i));
+                ;
+
+            }
+            for (int i = Mealbutton1.size() - 1; i >= 0; i--) {
+                this.remove(Mealbutton1.get(i));
+                ;
+
+            }
+
+
             String info = "";
-            System.out.println(info);
+
             for (Component C : this.getComponents()) {
                 if (C instanceof JRadioButton) {
                     if (((JRadioButton) C).isSelected()) {
@@ -266,17 +298,17 @@ public class FifthPanel extends BasePanel implements ActionListener {
                     }
                 }
             }
+            System.out.println(info);
 
             List<ExtraService> meallist = mainFrame.getDataService().getMealServicesByFlightId("AB1234");
 
-            
-
             for (ExtraService JJ : meallist) {
                 int i = 0;
-
+                System.out.println(JJ.getClassify());
                 if (info.equals("Standard")) {
 
                 } else {
+
                     if (JJ.getClassify().equals(info) == false) {
 
                         meallist.remove(i);
@@ -292,7 +324,6 @@ public class FifthPanel extends BasePanel implements ActionListener {
                 ExtraService JJ = meallist.get(i);
 
                 Mealcheckbox.add(JJ.getLabel());
-
                 Mealprice.add("price: " + JJ.getPrice());
                 Mealimag.add(JJ.getImgName());
             }
@@ -308,41 +339,68 @@ public class FifthPanel extends BasePanel implements ActionListener {
                 this.add(box);
                 box.addActionListener(this);
                 box.setActionCommand("box" + i);
+                Mealcheckbox1.add(box);
             }
-            
+
             for (int i = 0; i < Mealprice.size(); i++) {
                 String element1 = Mealprice.get(i);
                 box1 = new JLabel(element1);
                 box1.setFont(new java.awt.Font("Serif", 1, 25));
                 box1.setBounds(170, y1 + 40 * i, 300, 30);
                 this.add(box1);
+                Mealprice1.add(box1);
             }
-        
+
             for (int i = 0; i < Mealcheckbox.size(); i++) {
                 String element2 = Mealimag.get(i);
                 box2 = new JButton("picture");
                 box2.setBounds(300, y1 + 40 * i, 100, 30);
                 box2.addActionListener(this);
-                box2.setActionCommand("p"+ element2);
-                
+                box2.setActionCommand("p" + element2);
+
                 this.add(box2);
+                Mealbutton1.add(box2);
             }
-            
+
+        }
+
+        if (e.getActionCommand().substring(0, 1).equals("p")) {
+
+            P4.repaint();
+            this.repaint();
+            P4.removeAll();
+
+            System.out.println(e.getActionCommand().substring(1));
+            box3 = new JLabel(new ImageIcon(Resources.getImgByName(e.getActionCommand().substring(1))));
+            P4.add(box3);
+            mainFrame.goPanel(Panels.MEAL_PLAN, Panels.MEAL_PLAN);
+        }
+        // this.repaint();
+        // mainFrame.repaint();
+
+        if (e.getActionCommand().equals("Refresh")) {
+
+            this.repaint();
+
+            for (int i = Mealcheckbox1.size() - 1; i >= 0; i--) {
+                this.remove(Mealcheckbox1.get(i));
+                ;
+
+            }
+            for (int i = Mealprice1.size() - 1; i >= 0; i--) {
+                this.remove(Mealprice1.get(i));
+                ;
+
+            }
+            for (int i = Mealbutton1.size() - 1; i >= 0; i--) {
+                this.remove(Mealbutton1.get(i));
+                ;
+
+            }
+
+            mainFrame.goPanel(Panels.MEAL_PLAN, Panels.MEAL_PLAN);
+        }
+
     }
 
-    
-    if (e.getActionCommand().substring(0, 1).equals("p")) {
-        mainFrame.repaint();
-        this.repaint();
-        P4.repaint();
-        System.out.println(e.getActionCommand().substring(1));      
-        box3 = new JLabel(new ImageIcon(Resources.getImgByName(e.getActionCommand().substring(1))));
-        P4.add(box3);
-    }
-    this.repaint();
-    mainFrame.repaint();
-
-}
-
-  
 }
