@@ -9,8 +9,15 @@ import main.entity.Flight;
 import main.entity.Person;
 import main.utils.Typings.Panels;
 import java.util.List;
+/**
+ * This is AdminPanel class filling flight and passengers information
+ * @author Yikai Wang
+ * @version 1.0
+ */
 public class AdminPanel extends BasePanel implements ActionListener {
-
+    /**
+     * Add some basic components used in this panel
+     */
     private MainFrame mainFrame;
     private JTable flightTable,personTable;
     private JScrollPane flightPane,personPane;
@@ -26,13 +33,17 @@ public class AdminPanel extends BasePanel implements ActionListener {
 
     public AdminPanel(MainFrame mainFrame) {
 
+        //Invoke the parent class constructor
         super(mainFrame);
         this.mainFrame=mainFrame;
         this.setOpaque(false);
         this.setLayout(null);
-        allFlight = mainFrame.getDataService().getAllFlight();
-        tableInfo=new Object[allFlight.size()][10];
 
+        //Get all flight objects
+        allFlight = mainFrame.getDataService().getAllFlight();
+        
+        //Create new tableInfo object
+        tableInfo=new Object[allFlight.size()][10];
         for(int i=0;i<allFlight.size();i++){
 
             tableInfo[i][0]=allFlight.get(i).getFlightNo();
@@ -72,31 +83,31 @@ public class AdminPanel extends BasePanel implements ActionListener {
             tableInfo[i][9]=availableMealInfo;
         }
 
-
+        // Create new table with tableInfo to display flight information
         flightTable = new JTable(tableInfo,name);
         flightTable.setShowHorizontalLines(true);
         flightTable.setShowVerticalLines(true);
         //flightTable.setGridColor(Color.black);
+        //Create new scrollpane
         flightPane =new JScrollPane(flightTable);
         flightPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         flightPane.setBounds(30, 50, 950, 610);
         this.add(flightPane);
         flightPane.setVisible(true);
-        flightTable.setRowSelectionAllowed(true);//设置是否可以选择此模型中的行
-        flightTable.setColumnSelectionAllowed(true);//设置是否可以选择此模型中的列
-        
+        flightTable.setRowSelectionAllowed(true);
+        flightTable.setColumnSelectionAllowed(true);
+
+        //Create new buttons
         goButton = new JButton("Passenger List");
         goButton.addActionListener(this);
         goButton.setActionCommand("Go");
         goButton.setBounds(880, 675, 120, 40);
         this.add(goButton);
-
         backButton = new JButton("Flight List");
         backButton.addActionListener(this);
         backButton.setActionCommand("back");
         backButton.setBounds(10, 675, 120, 40);
         this.add(backButton);
-
         checkButton = new JButton("passenger login");
         checkButton.addActionListener(this);
         checkButton.setActionCommand("login");
@@ -104,8 +115,11 @@ public class AdminPanel extends BasePanel implements ActionListener {
         this.add(checkButton);
     }
 
-
+    /**
+     * Listener for button
+     */
     public void actionPerformed(ActionEvent e) {
+        // When Go button is listened, displaying relevant passengers information 
         if(e.getActionCommand().equals("Go")){
             int row = flightTable.getSelectedRow();
             int col = flightTable.getSelectedColumn();   
@@ -157,8 +171,8 @@ public class AdminPanel extends BasePanel implements ActionListener {
         personTable = new JTable(checkInfo, personName);
         personTable.setShowHorizontalLines(true);
         personTable.setShowVerticalLines(true);
-        personTable.setRowSelectionAllowed(false);//设置是否可以选择此模型中的行
-        personTable.setColumnSelectionAllowed(false);//设置是否可以选择此模型中的列
+        personTable.setRowSelectionAllowed(false);
+        personTable.setColumnSelectionAllowed(false);
         //personTable.setGridColor(Color.black);
         personPane =new JScrollPane(personTable);
         personPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -170,12 +184,14 @@ public class AdminPanel extends BasePanel implements ActionListener {
             
     }
 }
-
+    // When back button is listened, displaying original flight information 
     else if(e.getActionCommand().equals("back")){
         flightPane.setVisible(true);
         personPane.setVisible(false);
 
     }
+
+    // When login button is listened, switching to the initial login screen
     else if(e.getActionCommand().equals("login")){
         mainFrame.goPanel(Panels.ADMIN, Panels.WELCOME);
     }
