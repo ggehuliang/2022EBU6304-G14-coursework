@@ -1,20 +1,12 @@
 package main.ui;
-import java.awt.*;
-import javax.net.ssl.TrustManager;
 import javax.swing.*;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.sql.Date;
 
 import main.MainFrame;
 import main.entity.CheckinInfoStruct;
 import main.entity.Flight;
-import main.entity.MealPlanStruct;
 import main.entity.Person;
-import main.entity.SeatPlanStruct;
-import main.utils.Resources;
 import main.utils.Typings.Panels;
 import java.util.List;
 public class AdminPanel extends BasePanel implements ActionListener {
@@ -39,7 +31,7 @@ public class AdminPanel extends BasePanel implements ActionListener {
         this.setOpaque(false);
         this.setLayout(null);
         allFlight = mainFrame.getDataService().getAllFlight();
-        Object[][] tableInfo=new Object[allFlight.size()][10];
+        tableInfo=new Object[allFlight.size()][10];
 
         for(int i=0;i<allFlight.size();i++){
 

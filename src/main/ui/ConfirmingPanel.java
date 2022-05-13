@@ -1,15 +1,8 @@
 package main.ui;
 import java.awt.*;
 import javax.swing.*;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-
-import javax.swing.border.Border;
-
-import com.alibaba.fastjson.JSONObject;
-
 import main.MainFrame;
 import main.entity.CheckinInfoStruct;
 import main.entity.Flight;
@@ -52,18 +45,6 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         label1.setBounds(80, 100, 700, 50);
         this.add(label1);
 
-
-
-        /*inforArea = new JTextArea();
-        inforArea.setEditable(false); 
-        inforArea.setBorder(BorderFactory.createLineBorder(Color.black, 3));
-        inforArea.setBounds(60, 180, 470, 420);
-        JScrollPane scroll=new JScrollPane(inforArea);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        this.add(scroll);*/
-
-
-
         label2 = new JLabel("Please Scan your ID to confirm!!!");
         label2.setFont(new java.awt.Font("Dialog", 1, 28));
         label2.setBounds(560, 350, 450,50);
@@ -71,7 +52,6 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
 
         picPanel = new JPanel();
         picPanel.setBounds(600, 150, 350, 200);
-        //picPanel.setBackground(Color.green);
         this.add(picPanel);
         ImageIcon img = new ImageIcon(Resources.getImgByName("ID.png")) ;
         JLabel jl3=new JLabel(img);

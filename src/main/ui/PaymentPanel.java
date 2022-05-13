@@ -1,24 +1,14 @@
 package main.ui;
 import java.awt.*;
 import javax.swing.*;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.*;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
 import main.MainFrame;
-import main.MainFrame.JPanelWithBackground;
 import main.entity.CheckinInfoStruct;
 import main.entity.ExtraService;
 import main.entity.MealPlanStruct;
@@ -35,12 +25,10 @@ public class PaymentPanel extends BasePanel implements ActionListener {
     private JLabel label2;
     private JTextField cardId;
     private JTextField cardPassword;
-    private JPanel creditPanel,panel1,panel2,picPanel;
-    private JSONObject param;
+    private JPanel panel1,panel2,picPanel;
     private JPanel P5,P6,P7,P8,P9,P10;
     private JLabel PL1,PL2,PL3,PL4,PLL;
     private String card,password;
-    private String[] seatService;
     private CheckinInfoStruct checkinInfo;
     
 
@@ -170,9 +158,6 @@ public class PaymentPanel extends BasePanel implements ActionListener {
   //----------------------------------------------------------------------------------------------  
   
         
-        //JSONObject checkinInfo =mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-        
-
     }
     public void onCalled(){
 
@@ -200,12 +185,6 @@ public class PaymentPanel extends BasePanel implements ActionListener {
 
         feeArea.setFont(new java.awt.Font("Dialog", 1, 20));
         feeArea.setForeground(Color.black);
-
-        /*String extraService2 = checkinInfo.getJSONObject("mealPlan").getString("extraService");
-        feeArea.setText("\n"+extraService1 +":50 dollars");
-        feeArea.append("\n\n\n"+extraService2 +":50 dollars");*/
-        /*card = checkinInfo.getJSONObject("payment").getString("creditCardNo");
-        password = checkinInfo.getJSONObject("payment").getString("password");*/
        
     }
 
