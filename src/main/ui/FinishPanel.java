@@ -1,20 +1,20 @@
 package main.ui;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import main.MainFrame;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
+
 public class FinishPanel extends BasePanel implements ActionListener {
     private JButton back;
     private JButton finish;
     private MainFrame mainFrame;
-    private JPanel jp1,jp2,P1,P2;
-    private JLabel jl1,jl2,jl3;
-    private JLabel pic;
+    private JPanel jp1, jp2, P1, P2;
+    private JLabel jl1, jl2, jl3;
 
     public FinishPanel(MainFrame mainFrame) {
         super(mainFrame);
@@ -25,15 +25,15 @@ public class FinishPanel extends BasePanel implements ActionListener {
         finish.setActionCommand("finish");
         back.addActionListener(this);
         back.setActionCommand("Back");
-        GridLayout layoutLabal = new GridLayout(3,1);
+        GridLayout layoutLabal = new GridLayout(3, 1);
         jp1 = new JPanel(layoutLabal);
         jp2 = new JPanel();
-        jl1 = new JLabel("The boarding pass, baggage tag and the ticket is pringting");
+        jl1 = new JLabel("The boarding pass, baggage tag is printing");
         jl2 = new JLabel("Please remember to bring them away");
         jl3 = new JLabel("Thank you for choose our flight");
-        jl1.setFont(new Font("",Font.BOLD, 30));
-        jl2.setFont(new Font("",Font.BOLD, 30));
-        jl3.setFont(new Font("",Font.BOLD, 30));
+        jl1.setFont(new Font("", Font.BOLD, 30));
+        jl2.setFont(new Font("", Font.BOLD, 30));
+        jl3.setFont(new Font("", Font.BOLD, 30));
 
         jp1.add(jl1);
         jp1.add(jl2);
@@ -49,40 +49,39 @@ public class FinishPanel extends BasePanel implements ActionListener {
         this.add(jp1);
         this.add(jp2);
 
-        // pic=new JLabel(new ImageIcon(Resources.getImgByName("finish.png")));
-        // this.add(jl3);
-		// pic.setBounds(0, 150, 700, 500);
+        JLabel pic=new JLabel(new ImageIcon(Resources.getImgByName("finish2.jpg")));
+        this.add(pic);
+        pic.setBounds(60, 120, 853, 480);
 
         P1 = new JPanel();
         P1.setBounds(0, 70, 10000, 5);
-        P1.setBackground(new Color(100,100,200));
+        P1.setBackground(new Color(100, 100, 200));
         this.add(P1);
 
         P2 = new JPanel();
         P2.setBounds(0, 655, 10000, 5);
-        P2.setBackground(new Color(100,100,200));
+        P2.setBackground(new Color(100, 100, 200));
         this.add(P2);
-
 
     }
 
-    public void onCalled(){
+    public void onCalled() {
         System.out.println("来到结束页面");
         System.out.println(mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()));
         mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()).setCheckinFinished(true);
         mainFrame.getDataService().saveData();
         System.out.println(mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()));
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("finish")) {
+        if (e.getActionCommand().equals("finish")) {
             mainFrame.goPanel(Panels.FINISHED, Panels.WELCOME);
         }
-        if(e.getActionCommand().equals("Back")) {
+        if (e.getActionCommand().equals("Back")) {
             mainFrame.goPanel(Panels.FINISHED, Panels.CONFIRMING);
         }
 
     }
 
-    
 }

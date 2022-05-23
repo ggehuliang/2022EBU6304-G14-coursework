@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
 import java.awt.Component;
-// import java.awt.Dimension;
-// import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -15,15 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-// import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-
-// import com.alibaba.fastjson.JSON;
-// import com.alibaba.fastjson.JSONArray;
-// import com.alibaba.fastjson.JSONObject;
-// import com.alibaba.fastjson.asm.Label;
-// import com.formdev.flatlaf.json.Json;
 
 import main.MainFrame;
 import main.entity.CheckinInfoStruct;
@@ -265,7 +256,6 @@ public class FifthPanel extends BasePanel implements ActionListener {
 
         if (e.getActionCommand().equals("start")) {
 
-            
             this.repaint();
             Mealcheckbox.clear();
             Mealprice.clear();
@@ -287,7 +277,6 @@ public class FifthPanel extends BasePanel implements ActionListener {
                 ;
 
             }
-
 
             String info = "";
 

@@ -4,16 +4,13 @@ import java.awt.*;
 import javax.swing.*;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.IDN;
 import java.util.List;
 
 import main.MainFrame;
-import main.entity.BaseInfoStruct;
 import main.entity.CheckinInfoStruct;
 import main.entity.Flight;
 import main.entity.Person;
@@ -32,22 +29,15 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
     private String FlightNum;
     private String DepartureTime;
     private String ArrivalTime;
-    private String BoardingGate;
 
     private JButton back;
     private JButton next;
-    private JButton[] jb;
-    private JButton jb1, jb2, jb3, jb4;
     private MainFrame mainFrame;
     private JLabel title, jl1, jl2, jl3, jl4, jl5, jl6;
     private JPanel jp1, jp2, jp3, P1, P2;
 
-    private JPanel jp4, jp5, jp6, jp7;
-    private JPanel[] jp;
-
     private JPanel P5, P6, P7, P8, P9, P10;
     private JLabel PL1, PL2, PL3, PL4, PLL;
-    private JSONObject param;
 
     public FlightInfoPanel(MainFrame mainFrame) {
         super(mainFrame);
@@ -375,7 +365,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 });
             }
             SurName = person.getBaseInfo().getSurName();
-            
+
             BookingNum = Array.get(0).getBookingNo();
             check = mainFrame.getDataService().getBookingByBookingNo(BookingNum);
             FlightNum = Array.get(0).getFlightNo();
