@@ -31,11 +31,16 @@ public class FirstPanel extends BasePanel implements ActionListener {
         // Border etchedBorder;
         // etchedBorder = BorderFactory.createEtchedBorder();
         jp1 = new JPanel();
+        jp1.setOpaque(false);
         jp2 = new JPanel();
+        jp2.setOpaque(false);
         jb1 = new JButton("Check In!");
         jb1.setFont(new Font("", Font.BOLD, 25));
+        jb1.setForeground(new Color(255,100,100, 255));
         jb1.addActionListener(this);
         jb1.setActionCommand("Check In!");
+        jb1.setOpaque(false);
+        jb1.setBackground(new Color(0, 0, 0, 150));
         jb2 = new JButton("Admin login");
 
         jb2.addActionListener(this);
