@@ -61,6 +61,8 @@ public class PaymentPanel extends BasePanel implements ActionListener {
         back.setBounds(10, 15, 120, 40);
         back.addActionListener(this);
         back.setActionCommand("back");
+        go.setBackground(new Color(0, 0, 0, 150));
+        back.setBackground(new Color(0, 0, 0, 150));
         this.add(back);
 
         // Create panel with background
@@ -202,7 +204,7 @@ public class PaymentPanel extends BasePanel implements ActionListener {
         }
 
         feeArea.setFont(new java.awt.Font("Dialog", 1, 20));
-        feeArea.setForeground(Color.black);
+        feeArea.setForeground(Color.white);
 
     }
 

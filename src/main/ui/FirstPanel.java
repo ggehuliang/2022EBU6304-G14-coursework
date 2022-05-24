@@ -42,7 +42,9 @@ public class FirstPanel extends BasePanel implements ActionListener {
         jb1.setOpaque(false);
         jb1.setBackground(new Color(0, 0, 0, 150));
         jb2 = new JButton("Admin login");
+        jb2.setBackground(new Color(0, 0, 0, 150));
 
+        
         jb2.addActionListener(this);
         jb2.setActionCommand("Admin login");
 

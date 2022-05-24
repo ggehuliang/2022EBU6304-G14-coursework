@@ -25,6 +25,8 @@ public class FinishPanel extends BasePanel implements ActionListener {
         finish.setActionCommand("finish");
         back.addActionListener(this);
         back.setActionCommand("Back");
+        back.setBackground(new Color(0, 0, 0, 150));
+        finish.setBackground(new Color(0, 0, 0, 150));
         GridLayout layoutLabal = new GridLayout(3, 1);
         jp1 = new JPanel(layoutLabal);
         jp2 = new JPanel();

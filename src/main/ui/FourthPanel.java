@@ -72,6 +72,9 @@ public class FourthPanel extends BasePanel implements ActionListener {
         this.add(go);
         go.setBounds(900, 675, 100, 40);
 
+        go.setBackground(new Color(0, 0, 0, 150));
+        back.setBackground(new Color(0, 0, 0, 150));
+
         P1 = new JPanel();
         P1.setBounds(0, 70, 10000, 5);
         P1.setBackground(new Color(100, 100, 200));
@@ -171,6 +174,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
         L1 = new JLabel("SEAT INFORMATION");
         L1.setFont(new java.awt.Font("Serif", 1, 40));
         L1.setBounds(50, 100, 700, 50);
+        L1.setForeground(Color.white);
         this.add(L1);
 
         L2 = new JLabel("Class:");
@@ -200,6 +204,8 @@ public class FourthPanel extends BasePanel implements ActionListener {
         F2.setBounds(150, 250, 100, 35);
         this.add(F2);
 
+        this.setForeground(Color.white);
+
         // ----------------------------------------------
 
         List<ExtraService> seatlist = mainFrame.getDataService().getSeatServicesByFlightId("AB1234");
@@ -227,6 +233,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
             box1 = new JLabel(element1);
             box1.setFont(new java.awt.Font("Serif", 1, 25));
             box1.setBounds(200, y1 + 40 * i, 300, 30);
+            
             this.add(box1);
         }
 
@@ -282,6 +289,8 @@ public class FourthPanel extends BasePanel implements ActionListener {
             seatbutton1[i].setFont(new Font("Times New Roman", Font.BOLD, 10));
             seatbutton1[i].addActionListener(this);
             seatbutton1[i].setActionCommand("#1" + i);
+            seatbutton1[i].setForeground(Color.white);
+            seatbutton1[i].setBackground(new Color(0, 0, 0, 150));
 
             P41.add(seatbutton1[i]);
         }
@@ -307,6 +316,8 @@ public class FourthPanel extends BasePanel implements ActionListener {
             seatbutton2[i].setFont(new Font("Times New Roman", Font.BOLD, 10));
             seatbutton2[i].addActionListener(this);
             seatbutton2[i].setActionCommand("#2" + i);
+            seatbutton2[i].setForeground(Color.white);
+            seatbutton2[i].setBackground(new Color(0, 0, 0, 150));
 
             P42.add(seatbutton2[i]);
         }

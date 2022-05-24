@@ -64,6 +64,9 @@ public class FifthPanel extends BasePanel implements ActionListener {
         this.add(go);
         go.setBounds(900, 675, 100, 40);
 
+        go.setBackground(new Color(0, 0, 0, 150));
+        back.setBackground(new Color(0, 0, 0, 150));
+
         P1 = new JPanel();
         P1.setBounds(0, 70, 10000, 5);
         P1.setBackground(new Color(100, 100, 200));
@@ -83,7 +86,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
 
         P4 = new JPanel();
         P4.setBounds(520, 100, 450, 525);
-        P4.setBackground(Color.pink);
+        P4.setOpaque(false);
         P4.setBorder(BorderFactory.createLineBorder(Color.black, 3));
         // LP = new JLabel(new ImageIcon(Resources.getImgByName("meal.png")));
         this.add(P4);
@@ -188,6 +191,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
         start.setBounds(300, 310, 100, 30);
         start.addActionListener(this);
         start.setActionCommand("start");
+        start.setBackground(new Color(0, 0, 0, 150));
         this.repaint();
 
         Refresh = new JButton("Refresh");
@@ -346,6 +350,7 @@ public class FifthPanel extends BasePanel implements ActionListener {
                 box2.setBounds(300, y1 + 40 * i, 100, 30);
                 box2.addActionListener(this);
                 box2.setActionCommand("p" + element2);
+                box2.setBackground(new Color(0, 0, 0, 150));
 
                 this.add(box2);
                 Mealbutton1.add(box2);
