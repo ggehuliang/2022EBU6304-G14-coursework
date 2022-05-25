@@ -14,10 +14,9 @@ import main.utils.Resources;
 import main.utils.Typings.Panels;
 
 /**
- * Title: SecondPanel.java
+ * Title: AdminLoginPanel.java
  * 
- * This class is used to design the interface for user to check in and improve
- * the interface interactivity.
+ * This class is used for admin to log in.
  * 
  * @author Jiangshan Wang Group14
  * @version 2.0
@@ -36,7 +35,7 @@ public class AdminLoginPanel extends BasePanel implements ActionListener {
 	private JLabel PL1, PL2, PL3, PL4, PLL;
 
 	/**
-	 * This is a constructor for class SecondPanel, which create the main interface.
+	 * This is a constructor for class AdminLoginPanel, which create the main interface.
 	 */
 	public AdminLoginPanel(MainFrame mainFrame) {
 		super(mainFrame);
@@ -157,7 +156,7 @@ public class AdminLoginPanel extends BasePanel implements ActionListener {
 	}
 
 	/**
-	 * This method is used to create the panel for users using booking number to
+	 * This method is used to create the panel for using username and password to
 	 * check in.
 	 */
 	protected JPanel bookingnumPanel() {
@@ -190,6 +189,9 @@ public class AdminLoginPanel extends BasePanel implements ActionListener {
 		System.out.println("来到信息填写页");
 	}
 
+	/**
+	 * This method is used to reponse to user's action.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Check In!bn")) {
