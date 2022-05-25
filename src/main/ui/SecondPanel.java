@@ -27,8 +27,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
 	private MainFrame mainFrame;
 	private JPanel top, bot;
 	private JPanel bnp, pip, cp;
-	private JPanel jp_title, jp1, jp2, jp3, jp4, jp5, jp6, jp7;
-	private JPanel button;
+	private JPanel jp1, jp2, jp3, jp4, jp5, jp6, jp7;
 	private JButton jb3, jb7, jb_back;
 	private JLabel title_zong, title, title_1, title_2;
 	private JTextField jtf, jtf5, jtf6;
@@ -54,27 +53,25 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		jb_back = new JButton("Back");
 		jb_back.addActionListener(this);
 		jb_back.setActionCommand("back");
-		button = new JPanel();
-		button.add(jb_back);
-		top.add(button);
+		top.add(jb_back);
 
-		jp_title = new JPanel();
-		jp_title.add(title_zong);
-		jp_title.setBounds(70, 100, 900, 100);
+		// jp_title = new JPanel();
+		// jp_title.add(title_zong);
+		title_zong.setBounds(70, 100, 900, 100);
 
-		top.setBounds(10, 10, 100, 60);
+		jb_back.setBounds(15, 10, 100, 40);
 		bot.setBounds(0, 370, 1000, 60);
 
 		this.setLayout(null);
 
-		this.add(jp_title);
-		this.add(top);
+		this.add(title_zong);
+		this.add(jb_back);
 
 		JTabbedPane jtp = creatJTabbedPaneDemo();
 		jtp.setBorder(BorderFactory.createTitledBorder(etchedBorder));
 		jtp.setBounds(100, 200, 800, 400);
 		this.add(jtp);
-		this.add(bot);
+		// this.add(bot);
 
 		// 加线
 		P1 = new JPanel();
@@ -243,13 +240,13 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		cp = new JPanel();
 		title_2 = new JLabel("Scan your card to check in", JLabel.CENTER);
 		title_2.setFont(new Font("", Font.BOLD, 22));
-		cp.add(title_2);
+		cp.add(title_2, BorderLayout.CENTER);
 		JPanel picPanel = new JPanel();
-		cp.add(picPanel, BorderLayout.CENTER);
 		ImageIcon img = new ImageIcon(Resources.getImgByName("ID.png"));
 		JLabel jl3 = new JLabel(img);
+		picPanel.add(new JLabel("<html><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></html>"));
 		picPanel.add(jl3);
-
+		cp.add(picPanel, BorderLayout.CENTER);
 		return cp;
 	}
 
@@ -267,7 +264,11 @@ public class SecondPanel extends BasePanel implements ActionListener {
 			Person person;
 
 			if (!bn.equals("")) {
-
+				if (!mainFrame.getDataService().verifyBookingNumber(bn)) {
+					JOptionPane.showMessageDialog(null, "This booking number is in the wrong format!",
+							"Wrong format", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				person = mainFrame.getDataService().getPersonByBookingNo(bn);
 				if (person == null) {
 					JOptionPane.showMessageDialog(null, "This booking number doesn't exists!",

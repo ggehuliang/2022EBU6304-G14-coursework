@@ -2,33 +2,33 @@
   {
     "baseInfo": {
       "id": "114514",
-      "surName": "田所",
-      "firstName": "浩二"
+      "surName": "Koji",
+      "firstName": "Tadokoro"
     },
     "checkinInfo": [
       {
-        "bookingNo": "1919810",
+        "bookingNo": "AB666666",
         "flightNo": "AB1234",
         "date": "2022-1-11",
         "checkinFinished": true,
-        "seatPlan": { "classify": "头等舱", "seatNo": "5A", "extraService": ["按摩座位"]},
-        "mealPlan": { "classify": "清真", "extraService": ["快乐水"] },
+        "seatPlan": { "classify": "First Class", "seatNo": "5A", "extraService": ["Massage Seats"]},
+        "mealPlan": { "classify": "Halal", "extraService": ["Coke"] },
         "payment": { "creditCardNo": "1145141919810", "password": "114514" }
       },
       {
-        "bookingNo": "1919811",
+        "bookingNo": "AB66666",
         "flightNo": "AB1235",
         "date": "2021-1-15",
-        "seatPlan": { "classify": "头等舱", "seatNo": "5A", "extraService": ["大座位"] },
-        "mealPlan": { "classify": "清真", "extraService": ["鸡汤来咯"] },
+        "seatPlan": { "classify": "First Class", "seatNo": "5A", "extraService": ["Extra large seats"] },
+        "mealPlan": { "classify": "Halal", "extraService": ["Healthy chicken soup"] },
         "payment": { "creditCardNo": "1145141919810", "password": "114514" }
       },
       {
-        "bookingNo": "1919812",
+        "bookingNo": "AB6666",
         "flightNo": "AB1236",
         "date": "2021-1-21",
-        "seatPlan": { "classify": "头等舱", "seatNo": "5A", "extraService": ["大座位"] },
-        "mealPlan": { "classify": "清真", "extraService": ["鸡汤来咯"] },
+        "seatPlan": { "classify": "First Class", "seatNo": "5A", "extraService": ["Extra large seats"] },
+        "mealPlan": { "classify": "Halal", "extraService": ["Healthy chicken soup"] },
         "payment": { "creditCardNo": "1145141919810", "password": "114514" }
       }
       
@@ -38,12 +38,12 @@
   {
     "baseInfo": {
       "id": "114515",
-      "surName": "田所",
-      "firstName": "浩三"
+      "surName": "小",
+      "firstName": "明"
     },
     "checkinInfo": [
       {
-        "bookingNo": "1919813",
+        "bookingNo": "AB8888",
         "flightNo": "AB1235",
         "date": "2022-1-11",
         "checkinFinished": false

@@ -16,7 +16,17 @@ import main.entity.Flight;
 import main.entity.Person;
 import main.utils.Typings.Panels;
 
+/**
+ * Title: FlightInfoPanel.java
+ * 
+ * This class is used to design the interface for user to choose their flights
+ * after they enter the correct booking number or ID number and surname.
+ * 
+ * @author Langhan Zou
+ * @version 2.0
+ */
 public class FlightInfoPanel extends BasePanel implements ActionListener {
+    // Define some variables here
     private Person person;
     private CheckinInfoStruct check;
     private Flight flight;
@@ -25,30 +35,31 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
     private String BookingNum;
     private String IDNum;
     private int i = 0;
-
     private String FlightNum;
     private String DepartureTime;
     private String ArrivalTime;
 
+    // Define some components used in the frame here
     private JButton back;
     private JButton next;
     private MainFrame mainFrame;
     private JLabel title, jl1, jl2, jl3, jl4, jl5, jl6;
     private JPanel jp1, jp2, jp3, P1, P2;
-
     private JPanel P5, P6, P7, P8, P9, P10;
     private JLabel PL1, PL2, PL3, PL4, PLL;
 
     public FlightInfoPanel(MainFrame mainFrame) {
-        super(mainFrame);
+        super(mainFrame);// Invoke the parent class constructor
         this.mainFrame = mainFrame;
+
         jp1 = new JPanel();
         GridLayout layoutLabal = new GridLayout(6, 1);
         jp2 = new JPanel(layoutLabal);
         jp3 = new JPanel();
+
+        // Define the back and finish button
         next = new JButton("next");
         back = new JButton("back");
-
         next.addActionListener(this);
         next.setActionCommand("Next");
         back.addActionListener(this);
@@ -58,6 +69,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
         jp3.add(back);
         jp3.add(next);
 
+        // Design the panel to contain the flight and passenger information
         title = new JLabel("Flight Information", JLabel.LEFT);
         title.setFont(new Font("", Font.BOLD, 50));
         jp1.add(title, BorderLayout.CENTER);
@@ -103,34 +115,6 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
         P2.setBounds(0, 655, 10000, 5);
         P2.setBackground(new Color(100, 100, 200));
         this.add(P2);
-
-        // jp4 = new JPanel();
-        // jb1 = new JButton();
-        // jp4.setBounds(40, 100, 200, 100);
-        // jp4.setBackground(Color.gray);
-        // jp4.add(jb1);
-        // this.add(jp4);
-
-        // jp5 = new JPanel();
-        // jb2 = new JButton();
-        // jp5.setBounds(40, 220, 200, 100);
-        // jp5.setBackground(Color.gray);
-        // jp5.add(jb2);
-        // this.add(jp5);
-
-        // jp6 = new JPanel();
-        // jb3 = new JButton();
-        // jp6.setBounds(40, 340, 200, 100);
-        // jp6.setBackground(Color.gray);
-        // jp6.add(jb3);
-        // this.add(jp6);
-
-        // jp7 = new JPanel();
-        // jb4 = new JButton();
-        // jp7.setBounds(40, 460, 200, 100);
-        // jp7.setBackground(Color.gray);
-        // jp7.add(jb4);
-        // this.add(jp7);
 
         // ----------------------------------------------------------------------------------------------
         P9 = new JPanel();
@@ -190,6 +174,13 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
         // ----------------------------------------------------------------------------------------------
     }
 
+    /**
+     * @Title: onCalled
+     * @Description: This method is used to design the changable information decided
+     *               by users
+     * @Param: JSONObject param
+     * @Return: Nothing
+     */
     public void onCalled(JSONObject param) {
         System.out.println("来到航班信息页");
         BookingNum = param.getString("booking_num");
@@ -200,35 +191,23 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
             check = mainFrame.getDataService().getBookingByBookingNo(BookingNum);
             person = mainFrame.getDataService().getPersonByBookingNo(BookingNum);
             IDNum = person.getBaseInfo().getId();
-
             Array = person.getCheckinInfo();
-
             FlightNum = check.getFlightNo();
             System.out.println(FlightNum);
-
             flight = mainFrame.getDataService().getFlightById(FlightNum);
-
             DepartureTime = flight.getDepartureTime();
             ArrivalTime = flight.getArrivalTime();
             SurName = person.getBaseInfo().getSurName();
 
-            // System.out.println("--------------------------------");
-            // System.out.println(Array.getJSONObject(1).getString("bookingNo"));
-            // System.out.println("--------------------------------");
             JButton[] jb = new JButton[Array.size()];
             JPanel[] jp = new JPanel[Array.size()];
-            // jp = new JPanel[Array.size()];
-            // jb = new JButton[Array.size()];
-            // jb[Array.size()] = new JButton();
+
             for (i = 0; i < Array.size(); i++) {
-                // String BNS = Array.getJSONObject(i).getString("bookingNo");
-                // String FNS = Array.getJSONObject(i).getString("flightNo");
                 String BNS = Array.get(i).getBookingNo();
                 String FNS = Array.get(i).getFlightNo();
                 jb[i] = new JButton(String.valueOf(i));
                 jp[i] = new JPanel();
                 jp[i].setBounds(40, 100 + 120 * i, 200, 100);
-                // jp[i].setBackground(Color.gray);
                 jp[i].add(jb[i]);
                 this.add(jp[i]);
                 jb[i].setText(
@@ -240,20 +219,9 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                         JSONObject mealSelected = JSON.parseObject("{\"booking_num\":\"" + BNS + "\",\"surname\":\""
                                 + SurName + "\",\"id\":\"" + IDNum + "\"}");
                         onCalled(mealSelected);
-
                     }
                 });
-
             }
-
-            // jb1.setText("<html>" + "BookingNum: " + "<br>" + BookingNum + "</html>");
-            // jb2.setText("<html>" + "BookingNum: " + "<br>" +
-            // Array.getJSONObject(1).getString("bookingNo")+ "</html>");
-            // jb3.setText("<html>" + "BookingNum: " + "<br>" +
-            // Array.getJSONObject(2).getString("bookingNo")+ "</html>");
-            // jb4.setText("<html>" + "BookingNum: " + "<br>" +
-            // Array.getJSONObject(2).getString("bookingNo")+ "</html>");
-
             jl1.setText("Surname: " + SurName);
             jl2.setText("ID Num: " + IDNum);
             jl3.setText("Flight Num: " + FlightNum);
@@ -261,89 +229,10 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
             jl5.setText("Arrival Time: " + ArrivalTime);
             jl6.setText("Boarding Gate: " + ArrivalTime);
 
-            // jb1.addActionListener(new ActionListener() {
-            // @Override
-            // public void actionPerformed(ActionEvent e) {
-            // BookingNum = Array.getJSONObject(0).getString("bookingNo");
-            // System.out.println(BookingNum);
-            // check = mainFrame.getDataService().getBookingByBookingNo(BookingNum);
-            // person = mainFrame.getDataService().getPersonByBookingNo(BookingNum);
-            // IDNum = person.getJSONObject("baseInfo").getString("id");
-            // FlightNum = check.getString("flightNo");
-            // System.out.println(FlightNum);
-            // flight = mainFrame.getDataService().getFlightById(FlightNum);
-            // DepartureTime = flight.getString("departureTime");
-            // ArrivalTime = flight.getString("arrivalTime");
-            // SurName = person.getJSONObject("baseInfo").getString("surName");
-            // jl1.setText("Surname: " + SurName);
-            // jl2.setText("ID Num: " + IDNum);
-            // jl3.setText("Flight Num: " + FlightNum);
-            // jl4.setText("Departure Time: " + DepartureTime);
-            // jl5.setText("Arrival Time: " + ArrivalTime);
-            // jl6.setText("Boarding Gate: " + ArrivalTime);
-            // }
-            // });
-            // jb2.addActionListener(new ActionListener() {
-            // @Override
-            // public void actionPerformed(ActionEvent e) {
-            // BookingNum = Array.getJSONObject(1).getString("bookingNo");
-            // System.out.println(BookingNum);
-            // check = mainFrame.getDataService().getBookingByBookingNo(BookingNum);
-            // person = mainFrame.getDataService().getPersonByBookingNo(BookingNum);
-            // IDNum = person.getJSONObject("baseInfo").getString("id");
-            // FlightNum = check.getString("flightNo");
-            // System.out.println(FlightNum);
-            // flight = mainFrame.getDataService().getFlightById(FlightNum);
-            // DepartureTime = flight.getString("departureTime");
-            // ArrivalTime = flight.getString("arrivalTime");
-            // SurName = person.getJSONObject("baseInfo").getString("surName");
-            // jl1.setText("Surname: " + SurName);
-            // jl2.setText("ID Num: " + IDNum);
-            // jl3.setText("Flight Num: " + FlightNum);
-            // jl4.setText("Departure Time: " + DepartureTime);
-            // jl5.setText("Arrival Time: " + ArrivalTime);
-            // jl6.setText("Boarding Gate: " + ArrivalTime);
-            // }
-            // });
-            // jb3.addActionListener(new ActionListener() {
-            // @Override
-            // public void actionPerformed(ActionEvent e) {
-            // BookingNum = Array.getJSONObject(2).getString("bookingNo");
-            // System.out.println(BookingNum);
-            // check = mainFrame.getDataService().getBookingByBookingNo(BookingNum);
-            // person = mainFrame.getDataService().getPersonByBookingNo(BookingNum);
-            // IDNum = person.getJSONObject("baseInfo").getString("id");
-            // FlightNum = check.getString("flightNo");
-            // System.out.println(FlightNum);
-            // flight = mainFrame.getDataService().getFlightById(FlightNum);
-            // DepartureTime = flight.getString("departureTime");
-            // ArrivalTime = flight.getString("arrivalTime");
-            // SurName = person.getJSONObject("baseInfo").getString("surName");
-            // jl1.setText("Surname: " + SurName);
-            // jl2.setText("ID Num: " + IDNum);
-            // jl3.setText("Flight Num: " + FlightNum);
-            // jl4.setText("Departure Time: " + DepartureTime);
-            // jl5.setText("Arrival Time: " + ArrivalTime);
-            // jl6.setText("Boarding Gate: " + ArrivalTime);
-            // }
-            // });
-            // jb4.addActionListener(new ActionListener() {
-            // @Override
-            // public void actionPerformed(ActionEvent e) {
-            // jl1.setText("Surname: " + SurName);
-            // jl2.setText("ID Num: " + IDNum);
-            // jl3.setText("Flight Num: " + FlightNum);
-            // jl4.setText("Departure Time: " + DepartureTime);
-            // jl5.setText("Arrival Time: " + ArrivalTime);
-            // jl6.setText("Boarding Gate: " + ArrivalTime);
-            // }
-            // });
-
         } else {
             System.out.println("---------------Here is the id case--------------");
             person = mainFrame.getDataService().getPersonById(IDNum);
             Array = person.getCheckinInfo();
-
             JButton[] jb = new JButton[Array.size()];
             JPanel[] jp = new JPanel[Array.size()];
             for (i = 0; i < Array.size(); i++) {
@@ -352,7 +241,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jb[i] = new JButton(String.valueOf(i));
                 jp[i] = new JPanel();
                 jp[i].setBounds(40, 100 + 120 * i, 200, 100);
-                // jp[i].setBackground(Color.gray);
+
                 jp[i].add(jb[i]);
                 this.add(jp[i]);
                 jb[i].setText(
@@ -366,31 +255,29 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                     }
                 });
             }
-            SurName = person.getBaseInfo().getSurName();
 
+            SurName = person.getBaseInfo().getSurName();
             BookingNum = Array.get(0).getBookingNo();
             check = mainFrame.getDataService().getBookingByBookingNo(BookingNum);
             FlightNum = Array.get(0).getFlightNo();
-            // System.out.println(FlightNum);
             flight = mainFrame.getDataService().getFlightById(FlightNum);
             DepartureTime = flight.getDepartureTime();
             ArrivalTime = flight.getArrivalTime();
-
             jl1.setText("Surname: " + SurName);
             jl2.setText("ID Num: " + IDNum);
             jl3.setText("Flight Num: " + FlightNum);
             jl4.setText("Departure Time: " + DepartureTime);
             jl5.setText("Arrival Time: " + ArrivalTime);
             jl6.setText("Boarding Gate: " + ArrivalTime);
-
-            // for (int i = 0; i < Array.size(); i++) {
-            // System.out.println(Array.getJSONObject(i).getString("bookingNo"));
-            // System.out.println("haha");
-            // }
-
         }
     }
 
+    /**
+     * @Title: actionPerformed
+     * @Description: This method is used to go to previous or next panel
+     * @Param: ActionEvent e
+     * @Return: Nothing
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Next")) {
