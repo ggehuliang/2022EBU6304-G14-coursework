@@ -1,5 +1,5 @@
 [
-  { "type": 0, "label": "至尊Extra large seats", "price": 233 },
+  { "type": 0, "label": "Extra large seats", "price": 233 },
   { "type": 0, "label": "No need", "price": 0 },
   { "type": 1, "label": "No need", "price": 0 },
   { "type": 1, "label": "Healthy chicken soup", "price": 20, "imgName": "chicken.png" ,"classify":"Halal"},

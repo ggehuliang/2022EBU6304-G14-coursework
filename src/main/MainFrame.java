@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import com.alibaba.fastjson.*;
 
 import main.ui.AdminPanel;
+import main.ui.AdminLoginPanel;
 import main.ui.BasePanel;
 import main.ui.FifthPanel;
 import main.ui.FinishPanel;
@@ -94,7 +95,7 @@ public class MainFrame extends JFrame implements ActionListener {
         panels[Panels.MEAL_PLAN.ordinal()] = new FifthPanel(mainFrame);
         panels[Panels.FINISHED.ordinal()] = new FinishPanel(mainFrame);
         panels[Panels.ADMIN.ordinal()] = new AdminPanel(mainFrame);
-
+        panels[Panels.ADMIN_LOGIN.ordinal()] = new AdminLoginPanel(mainFrame);
         for (BasePanel p : panels) {
             if (p == null) {
                 continue;
