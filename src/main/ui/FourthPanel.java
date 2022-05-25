@@ -208,35 +208,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
         // ----------------------------------------------
 
-        List<ExtraService> seatlist = mainFrame.getDataService().getSeatServicesByFlightId("AB1234");
-
-        for (int i = 0; i < seatlist.size(); i++) {
-
-            ExtraService tool = seatlist.get(i);
-            seatcheckbox.add(tool.getLabel());
-            seatprice.add("price: " + tool.getPrice());
-        }
-
-        for (int i = 0; i < seatcheckbox.size(); i++) {
-            String element = seatcheckbox.get(i);
-
-            box = new JCheckBox(element);
-            box.setFont(new java.awt.Font("Serif", 1, 25));
-            box.setBounds(50, y1 + 40 * i, 300, 30);
-            this.add(box);
-            box.addActionListener(this);
-            box.setActionCommand("box" + i);
-        }
-
-        for (int i = 0; i < seatprice.size(); i++) {
-            String element1 = seatprice.get(i);
-            box1 = new JLabel(element1);
-            box1.setFont(new java.awt.Font("Serif", 1, 25));
-            box1.setBounds(200, y1 + 40 * i, 300, 30);
-            
-            this.add(box1);
-        }
-
+       
         // ------------------------------------------------------------------------------------
 
     }
@@ -262,6 +234,41 @@ public class FourthPanel extends BasePanel implements ActionListener {
         Flight flightinfo = mainFrame.getDataService().getFlightById(booking.getFlightNo());
 
         List<String> occupiedSeat = flightinfo.getOccupiedSeat();
+
+        List<ExtraService> seatlist = mainFrame.getDataService().getSeatServicesByFlightId(booking.getFlightNo());
+        this.repaint();
+        seatcheckbox.clear();
+        seatprice.clear();
+
+        this.repaint();
+
+        for (int i = 0; i < seatlist.size(); i++) {
+
+            ExtraService tool = seatlist.get(i);
+            seatcheckbox.add(tool.getLabel());
+            seatprice.add("price: " + tool.getPrice());
+        }
+
+        for (int i = 0; i < seatcheckbox.size(); i++) {
+            String element = seatcheckbox.get(i);
+
+            box = new JCheckBox(element);
+            box.setFont(new java.awt.Font("Serif", 1, 25));
+            box.setBounds(50, y1 + 40 * i, 300, 30);
+            this.add(box);
+            box.addActionListener(this);
+            box.setActionCommand("box" + i);
+        }
+
+        for (int i = 0; i < seatprice.size(); i++) {
+            String element1 = seatprice.get(i);
+            box1 = new JLabel(element1);
+            box1.setFont(new java.awt.Font("Serif", 1, 25));
+            box1.setBounds(300, y1 + 40 * i, 300, 30);
+            
+            this.add(box1);
+        }
+
 
         for (int i = 0; i < seatbutton1.length; i++)
 
