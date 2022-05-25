@@ -9,7 +9,17 @@ import main.MainFrame;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
 
+/**
+ * Title: FinishPanel.java
+ * 
+ * This class is used to inform the users that check-in process is over
+ * and remind users to take their boarding pass.
+ * 
+ * @author Langhan Zou
+ * @version 2.0
+ */
 public class FinishPanel extends BasePanel implements ActionListener {
+    // Define some components used in the frame here
     private JButton back;
     private JButton finish;
     private MainFrame mainFrame;
@@ -17,14 +27,18 @@ public class FinishPanel extends BasePanel implements ActionListener {
     private JLabel jl1, jl2, jl3;
 
     public FinishPanel(MainFrame mainFrame) {
-        super(mainFrame);
+        super(mainFrame);// Invoke the parent class constructor
         this.mainFrame = mainFrame;
+
+        // Define the back and finish button
         back = new JButton("back");
         finish = new JButton("finish");
         finish.addActionListener(this);
         finish.setActionCommand("finish");
         back.addActionListener(this);
         back.setActionCommand("Back");
+
+        // define the panel to contain label
         GridLayout layoutLabal = new GridLayout(3, 1);
         jp1 = new JPanel(layoutLabal);
         jp2 = new JPanel();
@@ -35,12 +49,14 @@ public class FinishPanel extends BasePanel implements ActionListener {
         jl2.setFont(new Font("", Font.BOLD, 30));
         jl3.setFont(new Font("", Font.BOLD, 30));
 
+        // add lable to panel
         jp1.add(jl1);
         jp1.add(jl2);
         jp1.add(jl3);
         jp1.setOpaque(false);
         jp1.setBounds(100, 200, 1024, 300);
 
+        // add button to panel
         jp2.add(back);
         jp2.add(finish);
         jp2.setOpaque(false);
@@ -49,7 +65,7 @@ public class FinishPanel extends BasePanel implements ActionListener {
         this.add(jp1);
         this.add(jp2);
 
-        JLabel pic=new JLabel(new ImageIcon(Resources.getImgByName("finish2.jpg")));
+        JLabel pic = new JLabel(new ImageIcon(Resources.getImgByName("finish2.jpg")));
         this.add(pic);
         pic.setBounds(60, 120, 853, 480);
 
@@ -65,6 +81,12 @@ public class FinishPanel extends BasePanel implements ActionListener {
 
     }
 
+    /**
+     * @Title: onCalled
+     * @Description: This method is used to save check-in data
+     * @Param: Nothing
+     * @Return: Nothing
+     */
     public void onCalled() {
         System.out.println("来到结束页面");
         System.out.println(mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()));
@@ -73,6 +95,12 @@ public class FinishPanel extends BasePanel implements ActionListener {
         System.out.println(mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo()));
     }
 
+    /**
+     * @Title: actionPerformed
+     * @Description: This method is used to go to previous panel or finish check-in
+     * @Param: ActionEvent e
+     * @Return: Nothing
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("finish")) {
