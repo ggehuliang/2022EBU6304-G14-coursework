@@ -64,6 +64,8 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
         next.setActionCommand("Next");
         back.addActionListener(this);
         back.setActionCommand("Back");
+        next.setBackground(new Color(0, 0, 0, 150));
+        back.setBackground(new Color(0, 0, 0, 150));
         jp3.add(back);
         jp3.add(next);
 

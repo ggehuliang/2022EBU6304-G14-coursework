@@ -1,6 +1,8 @@
 package main.ui;
 
 import javax.swing.*;
+
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -116,6 +118,9 @@ public class AdminPanel extends BasePanel implements ActionListener {
         checkButton.addActionListener(this);
         checkButton.setActionCommand("login");
         checkButton.setBounds(860, 20, 140, 20);
+        goButton.setBackground(new Color(0, 0, 0, 150));
+        backButton.setBackground(new Color(0, 0, 0, 150));
+        checkButton.setBackground(new Color(0, 0, 0, 150));
         this.add(checkButton);
     }
 

@@ -82,6 +82,8 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         this.add(go);
         go.addActionListener(this);
         go.setActionCommand("go");
+        go.setBackground(new Color(0, 0, 0, 150));
+        
         // ----------------------------------------------------------------------------------------------
         P9 = new JPanel();
         P9.setBounds(203, 716, 500, 4);
@@ -198,7 +200,7 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
             inforArea.append("  " + extraService2[i]);
         }
         inforArea.setFont(new java.awt.Font("alias", 1, 20));
-        inforArea.setForeground(Color.black);
+        inforArea.setForeground(Color.white);
     }
 
     /**

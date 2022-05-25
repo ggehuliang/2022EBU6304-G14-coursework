@@ -1,5 +1,7 @@
 import javax.swing.*;
-// import java.awt.*;
+
+import java.awt.Color;
+
 // import java.awt.event.ActionEvent;
 // import java.awt.event.ActionListener;
 
@@ -11,7 +13,14 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+            UIManager.put("Label.foreground", Color.white);
+            UIManager.put("Button.foreground", Color.white);;
+            UIManager.put("RadioButton.foreground", Color.white);
+            UIManager.put("TextField.foreground", Color.white);
+            UIManager.put("String.foreground", Color.white);
+            UIManager.put("Panel.foreground", Color.white);
+            UIManager.put("CheckBox.foreground", Color.white);
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
