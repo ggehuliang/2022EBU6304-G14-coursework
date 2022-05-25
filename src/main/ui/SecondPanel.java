@@ -267,7 +267,11 @@ public class SecondPanel extends BasePanel implements ActionListener {
 			Person person;
 
 			if (!bn.equals("")) {
-
+				if (!mainFrame.getDataService().verifyBookingNumber(bn)) {
+					JOptionPane.showMessageDialog(null, "This booking number is in the wrong format!",
+							"Wrong format", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				person = mainFrame.getDataService().getPersonByBookingNo(bn);
 				if (person == null) {
 					JOptionPane.showMessageDialog(null, "This booking number doesn't exists!",

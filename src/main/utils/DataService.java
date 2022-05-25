@@ -3,6 +3,7 @@ package main.utils;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import com.alibaba.fastjson.*;
 
@@ -58,6 +59,11 @@ public class DataService {
      */
     public List<Admin> getAllAdmin() {
         return allAdmin;
+    }
+
+    public boolean verifyBookingNumber(String bookingNo) {
+        return Pattern.matches("[a-zA-Z0-9]{5,9}", bookingNo) && Pattern.matches(".*[a-zA-Z].*", bookingNo)
+                && Pattern.matches(".*[0-9].*", bookingNo);
     }
 
     public Flight getFlightById(String id) {

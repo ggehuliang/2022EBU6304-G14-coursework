@@ -1,38 +1,38 @@
 [
   {
     "flightNo": "AB1234",
-    "plane": "波音737",
-    "from": "下北泽",
-    "to": "新日暮里",
+    "plane": "Boeing 737",
+    "from": "Shimokita",
+    "to": "New Nippori",
     "departureTime": "0:00",
     "arrivalTime": "23:33",
     "time": "0:00-23:33",
     "occupiedSeat": ["1A", "1B","1C", "1E","1F", "1G","5A", "5B"],
-    "availableExtraSeat": ["按摩座位"],
-    "availableMeal": ["快乐水", "火鸡面"]
+    "availableExtraSeat": ["Massage Seats","Extra large seats"],
+    "availableMeal": ["Coke", "Turkey Noodles"]
   },
   {
     "flightNo": "AB1235",
-    "plane": "波音737",
-    "from": "新日暮里",
-    "to": "广州",
+    "plane": "Boeing 737",
+    "from": "New Nippori",
+    "to": "Guangzhou",
     "departureTime": "6:00",
     "arrivalTime": "15:33",
     "time": "6:00-15:33",
     "occupiedSeat": ["5A", "5B"],
-    "availableExtraSeat": ["按摩座位"],
-    "availableMeal": ["快乐水", "火鸡面"]
+    "availableExtraSeat": ["Massage Seats","Extra large seats"],
+    "availableMeal": ["Coke", "Turkey Noodles"]
   },
   {
     "flightNo": "AB1236",
-    "plane": "波音737",
-    "from": "广州",
-    "to": "北京",
+    "plane": "Boeing 737",
+    "from": "Guangzhou",
+    "to": "Beijing",
     "departureTime": "11:30",
     "arrivalTime": "14:33",
     "time": "11:30-14:33",
     "occupiedSeat": ["5A", "5B"],
-    "availableExtraSeat": ["按摩座位"],
-    "availableMeal": ["快乐水", "火鸡面"]
+    "availableExtraSeat": ["Massage Seats"],
+    "availableMeal": ["Coke", "Turkey Noodles"]
   }
 ]
