@@ -11,5 +11,6 @@ public class Typings {
         CONFIRMING,
         FINISHED,
         ADMIN,
+        ADMIN_LOGIN,
     }
 }

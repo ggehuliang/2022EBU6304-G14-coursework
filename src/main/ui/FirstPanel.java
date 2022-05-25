@@ -81,7 +81,7 @@ public class FirstPanel extends BasePanel implements ActionListener {
             // System.out.print("lallala");
             mainFrame.goPanel(Panels.WELCOME, Panels.CODE_INPUT);
         } else if (e.getActionCommand().equals("Admin login")) {
-            mainFrame.goPanel(Panels.WELCOME, Panels.ADMIN);
+            mainFrame.goPanel(Panels.WELCOME, Panels.ADMIN_LOGIN);
         }
 
     }
