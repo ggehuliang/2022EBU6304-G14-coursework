@@ -193,13 +193,13 @@ public class FourthPanel extends BasePanel implements ActionListener {
         this.add(L4);
 
         F1 = new JTextField("");
-        F1.setText("Jesus");
+        F1.setText("----");
         F1.setFont(new java.awt.Font("Dialog", 1, 25));
         F1.setBounds(150, 175, 100, 35);
         this.add(F1);
 
         F2 = new JTextField("");
-        F2.setText("God");
+        F2.setText("----");
         F2.setFont(new java.awt.Font("Dialog", 1, 25));
         F2.setBounds(150, 250, 100, 35);
         this.add(F2);
@@ -372,6 +372,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
         if (e.getActionCommand().substring(0, 1).equals("#")) {
 
+
             seatbutton1[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
             seatbutton2[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
 
@@ -430,6 +431,11 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 }
 
             }
+        
+        F1.setText(seatTName.substring(0, 1));
+        F2.setText(seatTName.substring(1, 2));
+
+        this.repaint();
 
         }
 
