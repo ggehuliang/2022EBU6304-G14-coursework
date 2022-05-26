@@ -53,13 +53,14 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		jb_back = new JButton("Back");
 		jb_back.addActionListener(this);
 		jb_back.setActionCommand("back");
+		jb_back.setBackground(new Color(0, 0, 0, 150));
 		top.add(jb_back);
 
 		// jp_title = new JPanel();
 		// jp_title.add(title_zong);
 		title_zong.setBounds(70, 100, 900, 100);
 
-		jb_back.setBounds(15, 10, 100, 40);
+		jb_back.setBounds(10, 15, 100, 40);
 		bot.setBounds(0, 370, 1000, 60);
 
 		this.setLayout(null);
@@ -211,6 +212,7 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		jp6 = new JPanel();
 		jp7 = new JPanel();
 		jb7 = new JButton("Check In!");
+		jb7.setBounds(15, 10, 100, 40);
 		jb7.addActionListener(this);
 		jb7.setActionCommand("Check In!s");
 		jtf5 = new JTextField(10);

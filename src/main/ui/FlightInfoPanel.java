@@ -64,10 +64,12 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
         next.setActionCommand("Next");
         back.addActionListener(this);
         back.setActionCommand("Back");
+        back.setBounds(10, 15, 100, 40);
+        next.setBounds(900, 675, 100, 40);
         next.setBackground(new Color(0, 0, 0, 150));
         back.setBackground(new Color(0, 0, 0, 150));
-        jp3.add(back);
-        jp3.add(next);
+        this.add(back);
+        this.add(next);
 
         // Design the panel to contain the flight and passenger information
         title = new JLabel("Flight Information", JLabel.LEFT);

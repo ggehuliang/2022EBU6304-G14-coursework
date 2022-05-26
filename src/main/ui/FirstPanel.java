@@ -52,7 +52,7 @@ public class FirstPanel extends BasePanel implements ActionListener {
         jp2.add(jb1);
         jp1.setBounds(0, 80, 1024, 200);
         jb1.setBounds(390, 400, 240, 50);
-        jb2.setBounds(900, 20, 100, 20);
+        jb2.setBounds(880, 20, 110, 40);
         // jp1.setBorder(BorderFactory.createTitledBorder(etchedBorder));
         // jb1.setBorder(BorderFactory.createTitledBorder(etchedBorder));
         // this.setSize(1024,768);
