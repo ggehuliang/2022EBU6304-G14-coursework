@@ -44,7 +44,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
     private JButton next;
     private MainFrame mainFrame;
     private JLabel title, jl1, jl2, jl3, jl4, jl5, jl6;
-    private JPanel jp1, jp2, jp3, P1, P2;
+    private JPanel jp1, jp2, jp3, P1, P2, L;
     private JPanel P5, P6, P7, P8, P9, P10;
     private JLabel PL1, PL2, PL3, PL4, PLL;
 
@@ -173,6 +173,11 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
         ;
         P8.add(PL4);
         this.add(P8);
+
+        L = new JPanel();
+        L.setBounds(195, 140, 80, 5);
+        L.setBackground(Color.WHITE);
+        this.add(L);
         // ----------------------------------------------------------------------------------------------
     }
 
@@ -188,6 +193,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
         BookingNum = param.getString("booking_num");
         SurName = param.getString("surname");
         IDNum = param.getString("id");
+
         if (BookingNum.equals("None") == false) {
             System.out.println("---------------Here is the bookingnum case--------------");
             check = mainFrame.getDataService().getBookingByBookingNo(BookingNum);
@@ -203,14 +209,24 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
 
             JButton[] jb = new JButton[Array.size()];
             JPanel[] jp = new JPanel[Array.size()];
+            
 
             for (i = 0; i < Array.size(); i++) {
                 String BNS = Array.get(i).getBookingNo();
                 String FNS = Array.get(i).getFlightNo();
                 jb[i] = new JButton(String.valueOf(i));
+                jb[i].setBackground(new Color(0, 0, 0, 150));
+                jb[i].addActionListener(this);
+                jb[i].setActionCommand("l" + i);
                 jp[i] = new JPanel();
-                jp[i].setBounds(40, 100 + 120 * i, 200, 100);
+                jp[i].setBounds(30, 100 + 130 * i, 200, 100);
+                jp[i].setOpaque(false);
                 jp[i].add(jb[i]);
+
+             
+               
+
+
                 this.add(jp[i]);
                 jb[i].setText(
                         "<html>" + "BookingNum: " + "<br>" + BNS + "<br>" + "FlightNo: " + "<br>" + FNS
@@ -218,6 +234,15 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jb[i].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+
+                        if (e.getActionCommand().substring(0, 1).equals("l")) {
+
+                            String a = e.getActionCommand().substring(1, 2);
+                            int b = Integer.parseInt(a);
+                            System.out.println(b);
+                            L.setBounds(195, 140 + b*130, 80, 5);
+
+                        }
                         JSONObject mealSelected = JSON.parseObject("{\"booking_num\":\"" + BNS + "\",\"surname\":\""
                                 + SurName + "\",\"id\":\"" + IDNum + "\"}");
                         onCalled(mealSelected);
@@ -241,8 +266,11 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 String BNS = Array.get(i).getBookingNo();
                 String FNS = Array.get(i).getFlightNo();
                 jb[i] = new JButton(String.valueOf(i));
+                jb[i].setBackground(new Color(0, 0, 0, 150));
                 jp[i] = new JPanel();
-                jp[i].setBounds(40, 100 + 120 * i, 200, 100);
+                jp[i].setBounds(40, 100 + 160 * i, 200, 100);
+                jp[i].setOpaque(false);
+                
 
                 jp[i].add(jb[i]);
                 this.add(jp[i]);
@@ -251,6 +279,15 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jb[i].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+
+                        if (e.getActionCommand().substring(0, 1).equals("l")) {
+
+                            String a = e.getActionCommand().substring(1, 2);
+                            int b = Integer.parseInt(a);
+                            System.out.println(b);
+                            L.setBounds(195, 140 * b, 80, 5);
+
+                        }
                         JSONObject mealSelected = JSON.parseObject("{\"booking_num\":\"" + BNS + "\",\"surname\":\""
                                 + SurName + "\",\"id\":\"" + IDNum + "\"}");
                         onCalled(mealSelected);
