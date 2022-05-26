@@ -22,7 +22,7 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
     /**
      * Add some basic components used in this panel
      */
-    private JButton go;
+    private JButton go,back;
     private MainFrame mainFrame;
     private JLabel label1, label2;
     private JTextArea inforArea;
@@ -141,6 +141,14 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         PLL.setForeground(Color.black);
         this.add(PLL);
         this.add(P8);
+        
+        back = new JButton("back");
+        this.add(back);
+        this.setOpaque(false);
+        back.addActionListener(this);
+        back.setActionCommand("back");
+        back.setBounds(10, 15, 100, 40);
+        back.setBackground(new Color(0, 0, 0, 150));
         // ----------------------------------------------------------------------------------------------
 
     }
@@ -210,5 +218,13 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         if (e.getActionCommand().equals("go")) {
             mainFrame.goPanel(Panels.CONFIRMING, Panels.FINISHED);
         }
+
+        if (e.getActionCommand().equals("back")) {
+            mainFrame.goPanel(Panels.CONFIRMING, Panels.MEAL_PLAN);
+            System.out.println("回");
+        }
+
+
+        
     }
 }

@@ -35,6 +35,7 @@ public class FinishPanel extends BasePanel implements ActionListener {
         finish = new JButton("finish");
         finish.addActionListener(this);
         finish.setActionCommand("finish");
+        finish.setBounds(900, 675, 100, 40);
         back.addActionListener(this);
         back.setActionCommand("Back");
         back.setBackground(new Color(0, 0, 0, 150));
@@ -59,10 +60,10 @@ public class FinishPanel extends BasePanel implements ActionListener {
         jp1.setBounds(100, 200, 1024, 300);
 
         // add button to panel
-        jp2.add(back);
-        jp2.add(finish);
+        // jp2.add(back);
+        this.add(finish);
         jp2.setOpaque(false);
-        jp2.setBounds(400, 600, 200, 50);
+       
         this.setLayout(null);
         this.add(jp1);
         this.add(jp2);
