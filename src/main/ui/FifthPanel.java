@@ -262,9 +262,6 @@ public class FifthPanel extends BasePanel implements ActionListener {
             } else {
 
                 if (JJ.getClassify().equals(info) == false) {
-                   
-                    System.out.println(info);
-
                     meallist.remove(i);
                 }
             }
@@ -292,7 +289,8 @@ public class FifthPanel extends BasePanel implements ActionListener {
             this.add(box);
             box.addActionListener(this);
             box.setActionCommand("box" + i);
-            box.setActionCommand("box" + element2);
+            // System.out.println(element2);
+            box.setActionCommand("P" + element2);
             Mealcheckbox1.add(box);
         }
 
@@ -355,13 +353,13 @@ public class FifthPanel extends BasePanel implements ActionListener {
 
         }
 
-        if (e.getActionCommand().substring(0, 3).equals("box")) {
+        if (e.getActionCommand().substring(0, 1).equals("P")) {
 
             P4.repaint();
             this.repaint();
             P4.removeAll();
 
-            box3 = new JLabel(new ImageIcon(Resources.getImgByName(e.getActionCommand().substring(3))));
+            box3 = new JLabel(new ImageIcon(Resources.getImgByName(e.getActionCommand().substring(1))));
             P4.add(box3);
             mainFrame.goPanel(Panels.MEAL_PLAN, Panels.MEAL_PLAN);
         }
