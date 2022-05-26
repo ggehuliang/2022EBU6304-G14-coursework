@@ -225,6 +225,8 @@ public class FourthPanel extends BasePanel implements ActionListener {
     }
 
     public void onCalled() {
+
+        this.repaint();
         System.out.println("来到选座页");
         SF1 sf1 = new SF1();
         System.out.println(sf1.find("5A", seatName1));
@@ -274,11 +276,11 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
         {
 
-            if (i < 3) {
-                seatbutton1[i] = new JButton(seatName1[i], new ImageIcon(Resources.getImgByName("red.png")));
-            } else {
+            // if (i < 3) {
+            //     seatbutton1[i] = new JButton(seatName1[i], new ImageIcon(Resources.getImgByName("red.png")));
+            // } else {
                 seatbutton1[i] = new JButton(seatName1[i], new ImageIcon(Resources.getImgByName("blue.png")));
-            }
+            // }
 
             for (String JJ : occupiedSeat) {
 
@@ -304,16 +306,18 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
         for (int i = 0; i < seatbutton2.length; i++) {
 
-            if (i < 3) {
-                seatbutton2[i] = new JButton(seatName2[i], new ImageIcon(Resources.getImgByName("red.png")));
-            } else {
+            // if (i < 3) {
+            //     seatbutton2[i] = new JButton(seatName2[i], new ImageIcon(Resources.getImgByName("red.png")));
+            // } else {
                 seatbutton2[i] = new JButton(seatName2[i], new ImageIcon(Resources.getImgByName("blue.png")));
-            }
+            // }
 
             for (String JJ : occupiedSeat) {
+
                 for (int a = 0; a < seatName2.length; a++) {
 
-                    if (seatName2.equals(JJ)) {
+                    if (seatName2[a].equals(JJ)) {
+
                         seatbutton2[a] = new JButton(seatName2[a], new ImageIcon(Resources.getImgByName("red.png")));
                     }
                 }
@@ -374,15 +378,14 @@ public class FourthPanel extends BasePanel implements ActionListener {
 
 
             seatbutton1[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
-            seatbutton2[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
+            seatbutton2[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));      
 
             if (e.getActionCommand().substring(1, 2).equals("1")) {
-                if (e.getActionCommand().substring(2, 3).equals("1")
-                        || e.getActionCommand().substring(2, 3).equals("2")) {
-                    str = e.getActionCommand().substring(2, 4);
-                } else {
-                    str = e.getActionCommand().substring(2, 3);
-                }
+                seatTName = null;
+                
+              
+                    str = e.getActionCommand().substring(2);
+               
                 chooseno = Integer.parseInt(str);
                 int i = chooseno;
                 // System.out.println(seatName1[i]);
@@ -393,23 +396,27 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 List<String> occupiedSeat = flightinfo.getOccupiedSeat();
                 for (String JJ : occupiedSeat) {
                     if (seatName1[i].equals(JJ)) {
+                        System.out.println(JJ);
+
                         JOptionPane.showMessageDialog(null,
                                 "This seat has been selected.", "Please reselect your seat",
                                 JOptionPane.ERROR_MESSAGE);
+                        
+                                seatTName = null;
+                                break;
                     } else {
                         seatbutton1[i].setIcon(new ImageIcon(Resources.getImgByName("green.png")));
                         seatTName = seatName1[i];
+
+                        F1.setText(seatTName.substring(0, 1));
+                        F2.setText(seatTName.substring(1, 2));
                     }
 
                 }
 
             } else {
-                if (e.getActionCommand().substring(2, 3).equals("1")
-                        || e.getActionCommand().substring(2, 3).equals("2")) {
-                    str = e.getActionCommand().substring(2, 4);
-                } else {
-                    str = e.getActionCommand().substring(2, 3);
-                }
+                seatTName = null;
+                    str = e.getActionCommand().substring(2);
                 chooseno = Integer.parseInt(str);
                 int i = chooseno;
                 CheckinInfoStruct booking = mainFrame.getDataService()
@@ -419,21 +426,26 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 System.out.println(seatName1[i]);
 
                 for (String JJ : occupiedSeat) {
+                    
                     if (seatName2[i].equals(JJ)) {
                         JOptionPane.showMessageDialog(null,
                                 "This seat has been selected.", "Please reselect your seat",
                                 JOptionPane.ERROR_MESSAGE);
+                        seatTName = null;
+                        break;
                     } else {
                         seatbutton2[i].setIcon(new ImageIcon(Resources.getImgByName("green.png")));
                         seatTName = seatName2[i];
+
+                        F1.setText(seatTName.substring(0, 1));
+                        F2.setText(seatTName.substring(1, 2));
                     }
 
                 }
 
             }
         
-        F1.setText(seatTName.substring(0, 1));
-        F2.setText(seatTName.substring(1, 2));
+       
 
         this.repaint();
 
