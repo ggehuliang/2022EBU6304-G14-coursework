@@ -61,11 +61,25 @@ public class DataService {
         return allAdmin;
     }
 
+    /**
+     * Check that the booking number entered matches the format
+     * 
+     * @author Liang Hu
+     * @param bookingNo
+     * @return true if matches the format
+     */
     public boolean verifyBookingNumber(String bookingNo) {
         return Pattern.matches("[a-zA-Z0-9]{5,9}", bookingNo) && Pattern.matches(".*[a-zA-Z].*", bookingNo)
                 && Pattern.matches(".*[0-9].*", bookingNo);
     }
 
+    /**
+     * Find flight object by flight number
+     * 
+     * @author Liang Hu
+     * @param id flight number(id)
+     * @return flight object that matches the id
+     */
     public Flight getFlightById(String id) {
         for (Flight flight : this.allFlight) {
             if (flight.getFlightNo().equals(id)) {
@@ -75,6 +89,13 @@ public class DataService {
         return null;
     }
 
+    /**
+     * Find person object by person id
+     * 
+     * @author Liang Hu
+     * @param id
+     * @return person object that matches the id
+     */
     public Person getPersonById(String id) {
         for (Person person : this.allPerson) {
             if (person.getBaseInfo().getId().equals(id)) {
@@ -84,6 +105,13 @@ public class DataService {
         return null;
     }
 
+    /**
+     * Find the person object containing the booking based on the booking no
+     * 
+     * @author Liang Hu
+     * @param no
+     * @return person object
+     */
     public Person getPersonByBookingNo(String no) {
         for (Person person : this.allPerson) {
             List<CheckinInfoStruct> checkinInfos = person.getCheckinInfo();
@@ -96,6 +124,13 @@ public class DataService {
         return null;
     }
 
+    /**
+     * Find the service object according to the service's label
+     * 
+     * @author Liang Hu
+     * @param label
+     * @return service object that matches the label
+     */
     public ExtraService getServiceByLabel(String label) {
         for (ExtraService service : this.allExtraService) {
             if (service.getLabel().equals(label)) {
@@ -105,6 +140,13 @@ public class DataService {
         return null;
     }
 
+    /**
+     * Fetching booking objects based on flight id
+     * 
+     * @author Liang Hu
+     * @param id
+     * @return booking objects that match the flight id
+     */
     public List<CheckinInfoStruct> getBookingsByFlightId(String id) {
         List<CheckinInfoStruct> result = new ArrayList<>();
         for (Person person : this.allPerson) {
@@ -118,6 +160,13 @@ public class DataService {
         return result;
     }
 
+    /**
+     * Fetching seat service objects based on flight id
+     * 
+     * @author Liang Hu
+     * @param id
+     * @return seat service that match the flight id
+     */
     public List<ExtraService> getSeatServicesByFlightId(String id) {
         List<ExtraService> result = new ArrayList<>();
         HashSet<String> serviceLabels = new HashSet<String>();
@@ -133,6 +182,13 @@ public class DataService {
         return result;
     }
 
+    /**
+     * Fetching meal service objects based on flight id
+     * 
+     * @author Liang Hu
+     * @param id
+     * @return meal service that match the flight id
+     */
     public List<ExtraService> getMealServicesByFlightId(String id) {
         List<ExtraService> result = new ArrayList<>();
         HashSet<String> serviceLabels = new HashSet<String>();
@@ -148,6 +204,13 @@ public class DataService {
         return result;
     }
 
+    /**
+     * Find a booking object based on booking no
+     * 
+     * @author Liang Hu
+     * @param no
+     * @return booking object that match the no
+     */
     public CheckinInfoStruct getBookingByBookingNo(String no) {
         for (Person person : this.allPerson) {
             List<CheckinInfoStruct> checkinInfos = person.getCheckinInfo();
@@ -160,6 +223,14 @@ public class DataService {
         return null;
     }
 
+    /**
+     * Verify that the bank card account number and password match
+     * 
+     * @author Liang Hu
+     * @param creditCardNo
+     * @param password
+     * @return true if match
+     */
     public boolean checkCreditCardPassword(String creditCardNo, String password) {
         for (CreditCard cc : this.allCreditCard) {
             if (cc.getCreditCardNo().equals(creditCardNo)) {
@@ -173,6 +244,14 @@ public class DataService {
         return false;
     }
 
+    /**
+     * Verify that the administrator account and password match
+     * 
+     * @author Liang Hu
+     * @param username
+     * @param password
+     * @return true if match
+     */
     public boolean checkAdminPassword(String username, String password) {
         for (Admin admin : this.allAdmin) {
             if (admin.getUsername().equals(username)) {
@@ -186,6 +265,12 @@ public class DataService {
         return false;
     }
 
+    /**
+     * Save the objects to json files
+     * 
+     * @author Liang Hu
+     * @return true if success
+     */
     public boolean saveData() {
 
         boolean f = Resources.writeStringData("flight.json", JSON.toJSONString(this.allFlight, true));
@@ -195,6 +280,11 @@ public class DataService {
         return f && p && s && c;
     }
 
+    /**
+     * Fetch the objects from json files
+     * 
+     * @author Liang Hu
+     */
     public void refreshData() {
         this.allPerson = JSON.parseArray(Resources.readDataToString("person.json"), Person.class);
         this.allFlight = JSON.parseArray(Resources.readDataToString("flight.json"), Flight.class);

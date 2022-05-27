@@ -5,10 +5,24 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class Resources {
+    /**
+     * Quickly get the URL of an image in the src directory after packing
+     * 
+     * @author Liang Hu
+     * @param imgFullName
+     * @return
+     */
     public static URL getImgByName(String imgFullName) {
         return Resources.class.getClassLoader().getResource("resources/img/" + imgFullName);
     }
 
+    /**
+     * Extract the specified resource file to the current running directory
+     * 
+     * 
+     * @author Liang Hu
+     * @param fileName
+     */
     public static void extractFile(String fileName) {
         String filePath = "resources/data/" + fileName;
         InputStream is = Resources.class.getClassLoader().getResourceAsStream(filePath);
@@ -30,6 +44,11 @@ public class Resources {
         }
     }
 
+    /**
+     * Extract all data files to the current running directory
+     * 
+     * @author Liang Hu
+     */
     public static void extractData() {
         File folder = new File("resources/data");
         if (!folder.exists() && !folder.isDirectory()) {
@@ -45,6 +64,12 @@ public class Resources {
 
     }
 
+    /**
+     * Reads the contents of the specified file as String
+     * 
+     * @param fileName
+     * @return
+     */
     public static String readDataToString(String fileName) {
         String encoding = "UTF-8";
         String fileURL = "resources/data/" + fileName;
@@ -69,6 +94,12 @@ public class Resources {
         }
     }
 
+    /**
+     * Write the String data to the specified file
+     * 
+     * @param fileName
+     * @return
+     */
     public static boolean writeStringData(String fileName, String data) {
         String fileURL = "resources/data/" + fileName;
         File file = new File(fileURL);

@@ -33,10 +33,25 @@ public class MainFrame extends JFrame implements ActionListener {
     private String operatingBookingNo;
     private DataService dataService = new DataService();
 
+    /**
+     * Go to the specified page panel without param
+     * 
+     * @author Liang Hu
+     * @param nowPanel    now page panel
+     * @param targetPanel target page panel
+     */
     public void goPanel(Panels nowPanel, Panels targetPanel) {
         goPanel(nowPanel, targetPanel, new JSONObject());
     }
 
+    /**
+     * Go to the specified page panel with param
+     * 
+     * @author Liang Hu
+     * @param nowPanel    now page panel
+     * @param targetPanel target page panel
+     * @param param       JSON params
+     */
     public void goPanel(Panels nowPanel, Panels targetPanel, JSONObject param) {
 
         // TODO: 如果有可能的话做成滑动的切换效果？
