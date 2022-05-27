@@ -14,6 +14,12 @@ import main.entity.ExtraService;
 import main.entity.Flight;
 import main.entity.Person;
 
+/**
+ * Data reading/finding and writing classes for the entire program
+ *
+ * @author Liang Hu
+ * @version 3.0
+ */
 public class DataService {
     private List<Person> allPerson;
     private List<Flight> allFlight;

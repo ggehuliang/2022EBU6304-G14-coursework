@@ -1,7 +1,20 @@
 package main.utils;
 
+/**
+ * Type definition class
+ *
+ * @author Liang Hu
+ * @version 2.0
+ */
 public class Typings {
-    public enum Panels{
+
+    /**
+     * Pages panels enum
+     *
+     * @author Liang Hu
+     * @version 2.0
+     */
+    public enum Panels {
         WELCOME,
         CODE_INPUT,
         FLIGHT_INFO,

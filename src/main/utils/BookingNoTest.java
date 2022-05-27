@@ -5,6 +5,12 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
+/**
+ * TDD for booking no format verify
+ *
+ * @author Liang Hu
+ * @version 1.0
+ */
 public class BookingNoTest {
 
 	@Test

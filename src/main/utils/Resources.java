@@ -4,6 +4,12 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Resources reading/finding and writing classes for the entire program
+ *
+ * @author Liang Hu
+ * @version 2.0
+ */
 public class Resources {
     /**
      * Quickly get the URL of an image in the src directory after packing

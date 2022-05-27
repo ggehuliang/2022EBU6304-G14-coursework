@@ -14,6 +14,12 @@ import javax.swing.JPanel;
 import main.MainFrame;
 import main.utils.Typings.Panels;
 
+/**
+ * Entrance page
+ *
+ * @author Jiangshan Wang
+ * @version 1.0
+ */
 public class FirstPanel extends BasePanel implements ActionListener {
     private MainFrame mainFrame;
     private JPanel jp1, jp2, P1, P2;
@@ -36,7 +42,7 @@ public class FirstPanel extends BasePanel implements ActionListener {
         jp2.setOpaque(false);
         jb1 = new JButton("Check In!");
         jb1.setFont(new Font("", Font.BOLD, 25));
-        jb1.setForeground(new Color(255,100,100, 255));
+        jb1.setForeground(new Color(255, 100, 100, 255));
         jb1.addActionListener(this);
         jb1.setActionCommand("Check In!");
         jb1.setOpaque(false);
@@ -44,7 +50,6 @@ public class FirstPanel extends BasePanel implements ActionListener {
         jb2 = new JButton("Admin login");
         jb2.setBackground(new Color(0, 0, 0, 150));
 
-        
         jb2.addActionListener(this);
         jb2.setActionCommand("Admin login");
 

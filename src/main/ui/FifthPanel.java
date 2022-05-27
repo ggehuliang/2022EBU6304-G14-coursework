@@ -23,6 +23,13 @@ import main.entity.MealPlanStruct;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
 
+
+/**
+ * Meal selection page
+ *
+ * @author Lifan Liu
+ * @version 1.0
+ */
 public class FifthPanel extends BasePanel implements ActionListener {
     private JButton back, go, start;
     private JPanel P1, P2, P3, P4;

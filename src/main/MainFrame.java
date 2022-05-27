@@ -26,6 +26,14 @@ import main.utils.DataService;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
 
+/**
+ * The entire program window, different pages and data reading and writing are
+ * included in this class as properties and methods for easy normalization of
+ * calling
+ * 
+ * @author Liang Hu
+ * @version 2.0
+ */
 public class MainFrame extends JFrame implements ActionListener {
 
     private MainFrame mainFrame;

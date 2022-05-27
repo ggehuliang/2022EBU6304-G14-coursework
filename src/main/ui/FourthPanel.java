@@ -31,6 +31,12 @@ import main.entity.SeatPlanStruct;
 import main.utils.Resources;
 import main.utils.Typings.Panels;
 
+/**
+ * Seat selection page
+ *
+ * @author Lifan Liu
+ * @version 1.0
+ */
 public class FourthPanel extends BasePanel implements ActionListener {
     private JButton back;
     private JButton go;
