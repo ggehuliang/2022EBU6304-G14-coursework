@@ -133,12 +133,12 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
         PL4 = new JLabel("Step 04");
         PL4.setBounds(650, 672, 450, 25);
         PL4.setFont(new java.awt.Font("Dialog", 1, 16));
-        PL4.setForeground(Color.black);
+        PL4.setForeground(Color.pink);
         this.add(PL4);
         PLL = new JLabel("Confirming");
         PLL.setBounds(650, 693, 450, 25);
         PLL.setFont(new java.awt.Font("Dialog", 0, 13));
-        PLL.setForeground(Color.black);
+        PLL.setForeground(Color.pink);
         this.add(PLL);
         this.add(P8);
         
@@ -158,7 +158,10 @@ public class ConfirmingPanel extends BasePanel implements ActionListener {
      * information
      */
     public void onCalled() {
-
+        if(inforArea != null){
+         this.remove(inforArea);
+        }
+        
         System.out.println("来到了值机信息页面");
         CheckinInfoStruct checkinInfo = mainFrame.getDataService()
                 .getBookingByBookingNo(mainFrame.getOperatingBookingNo());

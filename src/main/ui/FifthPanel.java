@@ -138,13 +138,13 @@ public class FifthPanel extends BasePanel implements ActionListener {
         PL3 = new JLabel("Step 03");
         PL3.setBounds(510, 672, 450, 25);
         PL3.setFont(new java.awt.Font("Dialog", 1, 16));
-        PL3.setForeground(Color.black);
+        PL3.setForeground(Color.pink);
         this.add(PL3);
 
         PLL = new JLabel("Make a meal plan");
         PLL.setBounds(510, 693, 450, 25);
         PLL.setFont(new java.awt.Font("Dialog", 0, 13));
-        PLL.setForeground(Color.black);
+        PLL.setForeground(Color.pink);
         this.add(PLL);
         this.add(P7);
 

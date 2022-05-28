@@ -46,8 +46,8 @@ public class FourthPanel extends BasePanel implements ActionListener {
     private JLabel L1, L2, L3, L4, box1;
     private JTextField F1, F2;
     private JCheckBox box;
-    private int y1 = 370, chooseno = 5;
-    private String str, seatTName;
+    private int y1 = 370, chooseno = 5,chooseno1,LR;
+    private String str, seatTName,classify;
 
     private ArrayList<String> seatcheckbox = new ArrayList<String>();
     private ArrayList<String> seatprice = new ArrayList<String>();
@@ -146,12 +146,12 @@ public class FourthPanel extends BasePanel implements ActionListener {
         PL2 = new JLabel("Step 02");
         PL2.setBounds(370, 672, 450, 25);
         PL2.setFont(new java.awt.Font("Dialog", 1, 16));
-        PL2.setForeground(Color.black);
+        PL2.setForeground(Color.pink);
         this.add(PL2);
         PLL = new JLabel("Make a seating plan");
         PLL.setBounds(370, 693, 450, 25);
         PLL.setFont(new java.awt.Font("Dialog", 0, 13));
-        PLL.setForeground(Color.black);
+        PLL.setForeground(Color.pink);
         this.add(PLL);
         this.add(P6);
 
@@ -183,12 +183,12 @@ public class FourthPanel extends BasePanel implements ActionListener {
         L1.setForeground(Color.white);
         this.add(L1);
 
-        L2 = new JLabel("Class:");
+        L2 = new JLabel("Classify:");
         L2.setFont(new java.awt.Font("Dialog", 1, 30));
         L2.setBounds(50, 170, 700, 50);
         this.add(L2);
 
-        L3 = new JLabel("Line  :");
+        L3 = new JLabel("SeatNo:");
         L3.setFont(new java.awt.Font("Dialog", 1, 30));
         L3.setBounds(50, 240, 700, 50);
         this.add(L3);
@@ -201,13 +201,13 @@ public class FourthPanel extends BasePanel implements ActionListener {
         F1 = new JTextField("");
         F1.setText("----");
         F1.setFont(new java.awt.Font("Dialog", 1, 25));
-        F1.setBounds(150, 175, 100, 35);
+        F1.setBounds(190, 175, 150, 35);
         this.add(F1);
 
         F2 = new JTextField("");
         F2.setText("----");
         F2.setFont(new java.awt.Font("Dialog", 1, 25));
-        F2.setBounds(150, 250, 100, 35);
+        F2.setBounds(190, 250, 100, 35);
         this.add(F2);
 
         this.setForeground(Color.white);
@@ -231,19 +231,26 @@ public class FourthPanel extends BasePanel implements ActionListener {
     }
 
     public void onCalled() {
-
+        P41.removeAll();
+        P42.removeAll();
+        
         this.repaint();
         System.out.println("来到选座页");
         SF1 sf1 = new SF1();
         System.out.println(sf1.find("5A", seatName1));
-
+        
         CheckinInfoStruct booking = mainFrame.getDataService().getBookingByBookingNo(mainFrame.getOperatingBookingNo());
-
         Flight flightinfo = mainFrame.getDataService().getFlightById(booking.getFlightNo());
-
         List<String> occupiedSeat = flightinfo.getOccupiedSeat();
-
         List<ExtraService> seatlist = mainFrame.getDataService().getSeatServicesByFlightId(booking.getFlightNo());
+    
+        SeatPlanStruct seatPlan = booking.getSeatPlan();
+
+        classify = seatPlan.getClassify();
+        System.out.println(seatPlan.getSeatNo());
+        
+        F1.setText(classify);
+        
         this.repaint();
         seatcheckbox.clear();
         seatprice.clear();
@@ -299,6 +306,13 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 }
             }
 
+            if (seatTName != null && LR == 1) {
+                int a = sf1.find(seatTName, seatName1);
+                seatbutton1[a].setIcon(new ImageIcon(Resources.getImgByName("green.png"))); 
+                chooseno1 = a;   
+                System.out.println(chooseno+"--****-"+chooseno1);  
+            }
+
             seatbutton1[i].setPreferredSize(new Dimension(53, 53));
             seatbutton1[i].setHorizontalTextPosition(JButton.CENTER);
             seatbutton1[i].setFont(new Font("Times New Roman", Font.BOLD, 10));
@@ -327,6 +341,14 @@ public class FourthPanel extends BasePanel implements ActionListener {
                         seatbutton2[a] = new JButton(seatName2[a], new ImageIcon(Resources.getImgByName("red.png")));
                     }
                 }
+            }
+
+            if (seatTName != null && LR == 2) {
+                int a = sf1.find(seatTName, seatName2);
+                seatbutton2[a].setIcon(new ImageIcon(Resources.getImgByName("green.png"))); 
+                
+                chooseno1 = a;       
+                System.out.println(chooseno+"--****-"+chooseno1);
             }
             seatbutton2[i].setPreferredSize(new Dimension(53, 53));
             seatbutton2[i].setHorizontalTextPosition(JButton.CENTER);
@@ -363,6 +385,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 CheckinInfoStruct booking = mainFrame.getDataService()
                         .getBookingByBookingNo(mainFrame.getOperatingBookingNo());
                 SeatPlanStruct seatSelected = new SeatPlanStruct();
+                seatSelected.setClassify(classify);
                 seatSelected.setSeatNo(seatTName);
                 seatSelected.setExtraService(extraService);
                 // JSONObject
@@ -381,10 +404,13 @@ public class FourthPanel extends BasePanel implements ActionListener {
         }
 
         if (e.getActionCommand().substring(0, 1).equals("#")) {
+            this.repaint();
 
-
+            System.out.println(chooseno+"---"+chooseno1);
             seatbutton1[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
-            seatbutton2[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));      
+            seatbutton2[chooseno].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
+            seatbutton1[chooseno1].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));
+            seatbutton2[chooseno1].setIcon(new ImageIcon(Resources.getImgByName("blue.png")));       
 
             if (e.getActionCommand().substring(1, 2).equals("1")) {
                 seatTName = null;
@@ -399,10 +425,11 @@ public class FourthPanel extends BasePanel implements ActionListener {
                 CheckinInfoStruct booking = mainFrame.getDataService()
                         .getBookingByBookingNo(mainFrame.getOperatingBookingNo());
                 Flight flightinfo = mainFrame.getDataService().getFlightById(booking.getFlightNo());
+
                 List<String> occupiedSeat = flightinfo.getOccupiedSeat();
+
                 for (String JJ : occupiedSeat) {
                     if (seatName1[i].equals(JJ)) {
-                        System.out.println(JJ);
 
                         JOptionPane.showMessageDialog(null,
                                 "This seat has been selected.", "Please reselect your seat",
@@ -411,11 +438,14 @@ public class FourthPanel extends BasePanel implements ActionListener {
                                 seatTName = null;
                                 break;
                     } else {
+                        this.repaint();
+                        
                         seatbutton1[i].setIcon(new ImageIcon(Resources.getImgByName("green.png")));
                         seatTName = seatName1[i];
 
-                        F1.setText(seatTName.substring(0, 1));
-                        F2.setText(seatTName.substring(1, 2));
+                        
+                        F2.setText(seatTName.substring(0, 2));
+                        LR = 1;
                     }
 
                 }
@@ -442,9 +472,8 @@ public class FourthPanel extends BasePanel implements ActionListener {
                     } else {
                         seatbutton2[i].setIcon(new ImageIcon(Resources.getImgByName("green.png")));
                         seatTName = seatName2[i];
-
-                        F1.setText(seatTName.substring(0, 1));
-                        F2.setText(seatTName.substring(1, 2));
+                        F2.setText(seatTName.substring(0, 2));
+                        LR = 2;
                     }
 
                 }
@@ -452,7 +481,7 @@ public class FourthPanel extends BasePanel implements ActionListener {
             }
         
        
-
+            System.out.println(chooseno+"***"+chooseno1);
         this.repaint();
 
         }
