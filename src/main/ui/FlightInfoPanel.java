@@ -45,7 +45,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
     private MainFrame mainFrame;
     private JLabel title, jl1, jl2, jl3, jl4, jl5, jl6;
     private JPanel jp1, jp2, jp3, P1, P2, L;
-    private JPanel P5, P6, P7, P8, P9, P10;
+    private JPanel P5, P6, P7, P8, P9, P10,PB;
     private JLabel PL1, PL2, PL3, PL4, PLL;
 
     public FlightInfoPanel(MainFrame mainFrame) {
@@ -135,12 +135,12 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
         PL1 = new JLabel("Step 01");
         PL1.setBounds(230, 672, 450, 25);
         PL1.setFont(new java.awt.Font("Dialog", 1, 16));
-        PL1.setForeground(Color.black);
+        PL1.setForeground(Color.pink);
         this.add(PL1);
         PLL = new JLabel("Log in");
         PLL.setBounds(230, 693, 450, 25);
         PLL.setFont(new java.awt.Font("Dialog", 0, 13));
-        PLL.setForeground(Color.black);
+        PLL.setForeground(Color.pink);
         this.add(PLL);
         this.add(P5);
 
@@ -175,9 +175,16 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
         this.add(P8);
 
         L = new JPanel();
-        L.setBounds(195, 140, 80, 5);
+        L.setBounds(195, 160, 80, 5);
         L.setBackground(Color.WHITE);
         this.add(L);
+
+        PB = new JPanel();
+        PB.setBounds(10, 120, 225, 625);
+        PB.setBackground(Color.pink);
+        PB.setOpaque(false);
+        this.add(PB);
+
         // ----------------------------------------------------------------------------------------------
     }
 
@@ -189,6 +196,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
      * @Return: Nothing
      */
     public void onCalled(JSONObject param) {
+        PB.removeAll();
         System.out.println("来到航班信息页");
         BookingNum = param.getString("booking_num");
         SurName = param.getString("surname");
@@ -210,6 +218,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
             JButton[] jb = new JButton[Array.size()];
             JPanel[] jp = new JPanel[Array.size()];
             
+            
 
             for (i = 0; i < Array.size(); i++) {
                 String BNS = Array.get(i).getBookingNo();
@@ -223,11 +232,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 jp[i].setOpaque(false);
                 jp[i].add(jb[i]);
 
-             
-               
-
-
-                this.add(jp[i]);
+                PB.add(jp[i]);
                 jb[i].setText(
                         "<html>" + "BookingNum: " + "<br>" + BNS + "<br>" + "FlightNo: " + "<br>" + FNS
                                 + "</html>");
@@ -240,7 +245,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                             String a = e.getActionCommand().substring(1, 2);
                             int b = Integer.parseInt(a);
                             System.out.println(b);
-                            L.setBounds(195, 140 + b*130, 80, 5);
+                            L.setBounds(195, 160 + b*90, 80, 5);
 
                         }
                         JSONObject mealSelected = JSON.parseObject("{\"booking_num\":\"" + BNS + "\",\"surname\":\""
@@ -273,7 +278,7 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
                 
 
                 jp[i].add(jb[i]);
-                this.add(jp[i]);
+                PB.add(jp[i]);
                 jb[i].setText(
                         "<html>" + "BookingNum: " + "<br>" + BNS + "<br>" + "FlightNo: " + "<br>" + FNS + "</html>");
                 jb[i].addActionListener(new ActionListener() {

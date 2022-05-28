@@ -103,12 +103,12 @@ public class SecondPanel extends BasePanel implements ActionListener {
 		PL1 = new JLabel("Step 01");
 		PL1.setBounds(230, 672, 450, 25);
 		PL1.setFont(new java.awt.Font("Dialog", 1, 16));
-		PL1.setForeground(Color.black);
+		PL1.setForeground(Color.pink);
 		this.add(PL1);
 		PLL = new JLabel("Log in");
 		PLL.setBounds(230, 693, 450, 25);
 		PLL.setFont(new java.awt.Font("Dialog", 0, 13));
-		PLL.setForeground(Color.black);
+		PLL.setForeground(Color.pink);
 		this.add(PLL);
 		this.add(P5);
 

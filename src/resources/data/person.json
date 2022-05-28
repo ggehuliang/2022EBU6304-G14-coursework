@@ -46,6 +46,7 @@
         "bookingNo": "AB8888",
         "flightNo": "AB1235",
         "date": "2022-1-11",
+        "seatPlan": { "classify": "First Class", "seatNo": "", "extraService": [""] },
         "checkinFinished": false
       }
     ]
