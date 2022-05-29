@@ -19,6 +19,7 @@
         "bookingNo": "AB66666",
         "flightNo": "AB1235",
         "date": "2021-1-15",
+        "checkinFinished": false,
         "seatPlan": { "classify": "First Class", "seatNo": "5A", "extraService": ["Extra large seats"] },
         "mealPlan": { "classify": "Halal", "extraService": ["Healthy chicken soup"] },
         "payment": { "creditCardNo": "1145141919810", "password": "114514" }
@@ -27,6 +28,7 @@
         "bookingNo": "AB6666",
         "flightNo": "AB1236",
         "date": "2021-1-21",
+        "checkinFinished": false,
         "seatPlan": { "classify": "First Class", "seatNo": "5A", "extraService": ["Extra large seats"] },
         "mealPlan": { "classify": "Halal", "extraService": ["Healthy chicken soup"] },
         "payment": { "creditCardNo": "1145141919810", "password": "114514" }
@@ -44,7 +46,7 @@
     "checkinInfo": [
       {
         "bookingNo": "AB8888",
-        "flightNo": "AB1235",
+        "flightNo": "AB1234",
         "date": "2022-1-11",
         "seatPlan": { "classify": "First Class", "seatNo": "", "extraService": [""] },
         "checkinFinished": false

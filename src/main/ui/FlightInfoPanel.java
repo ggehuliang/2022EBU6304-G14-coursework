@@ -325,6 +325,11 @@ public class FlightInfoPanel extends BasePanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Next")) {
+            if(mainFrame.getDataService().getBookingByBookingNo(BookingNum).isCheckinFinished()){
+                JOptionPane.showMessageDialog(null, "This booking number has already been checked in.\n if you have any questions, please contact the staff",
+							"Already finished check in", JOptionPane.ERROR_MESSAGE);
+					return;
+            }
             System.out.println("--------------------------------");
             System.out.println(BookingNum);
             System.out.println("--------------------------------");
